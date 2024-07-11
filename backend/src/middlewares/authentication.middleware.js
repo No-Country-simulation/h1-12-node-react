@@ -5,7 +5,8 @@ export const authenticationMiddleware = (req, res, next) => {
     const token = req.cookies.token;
     if (token) {
         const user = validateAccessToken(token)
-        req.user = user; // de ahora en más la información del usuario autenticado está en req.user
+        req.user = user;
+        console.log(user)
         next();
     } else {
         throw new HttpError('Missing credentials')

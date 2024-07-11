@@ -1,17 +1,28 @@
 import { cookieConfig } from "../config/cookies.config.js"
 import { AuthService } from "../services/auth.service.js"
+import { UsersService } from "../services/users.service.js"
+import { isValidPassword } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
+import { HttpError } from "../utils/http-error.util.js"
 import { generateAccessToken } from "../utils/jwt.util.js"
 
 export class AuthController {
 
     constructor(){
         this.authService = new AuthService()
+        this.usersService = new UsersService()
     }
 
     login = async (req, res, next) => {
+        const { username, password } = req.body
         try {
-            res.send(usersList)
+            const user = await this.usersService.getByUsername(username)
+            if(!isValidPassword(user, password)){
+                throw new HttpError('Bad credentials', HTTP_CODES.UNAUTHORIZED)
+            }
+            const token = generateAccessToken(user)
+            res.cookie('token', token, cookieConfig) 
+            res.status(HTTP_CODES.SUCCESS).send(user)
         } catch (error) {
             next(error)
         }
@@ -21,15 +32,31 @@ export class AuthController {
         try {
             const { email, password } = req.body
             const user = await this.authService.createPatient(email, password)
-            const token = generateAccessToken(user) // al token habría que pasarle solo los datos no sensibles del usuario
-            res.cookie('token', token, cookieConfig) // seteo la cookie con el nombre token, el contenido de este, y la configuración de seguridad
+            const token = generateAccessToken(user)
+            res.cookie('token', token, cookieConfig) 
             res.status(HTTP_CODES.CREATED).json(user)
         } catch (error) {
             next(error)
         }
     }
 
-    registerDoctor = async (req, res, next) => {
+    registerProfessional = async (req, res, next) => {
+        try {
+            res.send()
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    registerHealthInsurance = async (req, res, next) => {
+        try {
+            res.send()
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    registerInstitution = async (req, res, next) => {
         try {
             res.send()
         } catch (error) {
@@ -38,9 +65,9 @@ export class AuthController {
     }
 
     // solo para hacer pruebas de autenticación
-    privateContent = async (req, res, next) => {
+    currentUser = async (req, res, next) => {
         try {
-            res.send(req.user)
+            res.status(HTTP_CODES.SUCCESS).send(req.user)
         } catch (error) {
             next(error)
         }
