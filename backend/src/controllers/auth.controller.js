@@ -28,37 +28,13 @@ export class AuthController {
         }
     }
 
-    registerPatient = async (req, res, next) => {
+    register = async (req, res, next) => {
         try {
-            const { email, password } = req.body
-            const user = await this.authService.createPatient(email, password)
+            const payload = req.body
+            const user = await this.authService.createUser(payload)
             const token = generateAccessToken(user)
             res.cookie('token', token, cookieConfig) 
             res.status(HTTP_CODES.CREATED).json(user)
-        } catch (error) {
-            next(error)
-        }
-    }
-
-    registerProfessional = async (req, res, next) => {
-        try {
-            res.send()
-        } catch (error) {
-            next(error)
-        }
-    }
-
-    registerHealthInsurance = async (req, res, next) => {
-        try {
-            res.send()
-        } catch (error) {
-            next(error)
-        }
-    }
-
-    registerInstitution = async (req, res, next) => {
-        try {
-            res.send()
         } catch (error) {
             next(error)
         }

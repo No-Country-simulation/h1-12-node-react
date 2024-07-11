@@ -1,14 +1,14 @@
-import { users, roles } from "../mocks/data.mock.js"
+import { users, roles, patients, professionals } from "../mocks/data.mock.js"
 import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
-const usersList = users
-const rolesList = roles
-
 export class AuthService {
-    createPatient = async(email, password) => {
-        if(!email || !password){
+
+    // este método crea al usuario, y llama a los otros métodos según el rol
+    createUser = async(payload) => {
+        const  { email, password, first_name, last_name, dni, role } = payload
+        if(!email || !first_name || !last_name || !dni){
             throw new HttpError('missing data', HTTP_CODES.BAD_REQUEST)
         }
         const existingPatient = users.find(user => user.email === email)
@@ -17,37 +17,63 @@ export class AuthService {
         }
         const username = email.substring(0, email.indexOf('@'))
         const hashedPass = createHash(password)
-        const { id } = rolesList.find(role => role.role_name === 'patient')
+        const storedRole = roles.find(roleItem => roleItem.role_name === role)
         const newUser = {
-            id: usersList[usersList.length - 1].id + 1,
+            id: users[users.length - 1].id + 1,
             email,
             password: hashedPass,
             username,
-            role_id: id
+            first_name,
+            last_name,
+            dni,
+            role_id: storedRole.id,
+            updated_pass: false,
+            phone: null,
+            image: null,
+            locality: null,
+            province: null,
+            address: null,
         }
-        usersList.push(newUser)
+        users.push(newUser)
+        let result
+        switch (role) {
+            case 'patient':
+                result = await this.createPatient(newUser.id)
+                newUser.patient_data = result
+                break;
+            case 'professional':
+                result = await this.createProfessional(newUser.id)
+                console.log(result)
+                newUser.professional_data = result
+            default:
+                break;
+        }
         return newUser
     }
 
-    createProfessional = async(email, password) => {
-        if(!email || !password){
-            throw new HttpError('missing data', HTTP_CODES.BAD_REQUEST)
+    createPatient = async(user_id) => {
+        const newPatient = {
+            id: patients[patients.length - 1].id + 1,
+            user_id,
+            active_tratment: null,
+            health_insurance_id: null,
+            head_professional_id: null,
+            sex: null,
+            blood_factor: null,
+            birthdate: null
         }
-        const existingDoctor = users.find(user => user.email === email)
-        if(existingDoctor){
-            throw new HttpError('email already in use', HTTP_CODES.BAD_REQUEST)
+        patients.push(newPatient)
+        return newPatient
+    }
+
+    createProfessional = async(user_id) => {
+        const newProfessional = {
+            id: professionals[professionals.length - 1].id + 1,
+            user_id,
+            speciality_id: 1,
+            resgistration_number: 12345
         }
-        const username = email.substring(0, email.indexOf('@')) // hay que revisar lógica para evitar duplicados
-        const hashedPass = createHash(password)
-        const { id } = rolesList.find(role => role.role_name === 'professional')
-        const newUser = {
-            id: usersList[usersList.length - 1].id + 1,
-            email,
-            password: hashedPass,
-            username,
-            role_id: id
-        }
-        usersList.push(newUser)
-        return newUser
-    } 
+        patients.push(newProfessional)
+        return newProfessional
+    }
 }
