@@ -7,7 +7,9 @@ const authController = new AuthController()
 
 router.post('/login', authController.login)
 router.post('/register-patient', authController.registerPatient)
-router.post('/register-doctor', authController.registerDoctor)
-router.get('/private', authenticationMiddleware, authController.privateContent) // solo para hacer pruebas de autenticación
+router.post('/register-professional', authController.registerProfessional)
+router.post('/register-insurance', authController.registerHealthInsurance)
+router.post('/register-institution', authController.registerInstitution)
+router.get('/current', authenticationMiddleware, authController.currentUser) // solo para hacer pruebas de autenticación
 
 export default router
