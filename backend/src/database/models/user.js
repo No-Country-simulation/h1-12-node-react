@@ -1,16 +1,15 @@
-'use strict';
-const { Model } = require('sequelize');
+import { Model, DataTypes } from 'sequelize';
 
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    static associate(models) {
-      this.belongsTo(models.Role, {
-        foreignKey: 'role_id',
-        as: 'role'
-      });
-    }
+export class User extends Model {
+  static associate(models) {
+    this.belongsTo(models.Role, {
+      foreignKey: 'role_id',
+      as: 'role'
+    });
   }
+}
 
+export const initUser = (sequelize) => {
   User.init({
     id: {
       type: DataTypes.INTEGER,
@@ -51,6 +50,4 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'users',
     paranoid: true
   });
-
-  return User;
 };

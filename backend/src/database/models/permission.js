@@ -1,7 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
-const Permission = (sequelize, DataTypes) => {
-  class Permission extends Model {
+import { Model, DataTypes } from 'sequelize';
+  export class Permission extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -16,7 +14,10 @@ const Permission = (sequelize, DataTypes) => {
       });
     }
   }
-  Permission.init({
+
+
+  export const initPermission = (sequelize) => {
+    Permission.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -35,5 +36,3 @@ const Permission = (sequelize, DataTypes) => {
   });
   return Permission;
 };
-
-export default Permission;
