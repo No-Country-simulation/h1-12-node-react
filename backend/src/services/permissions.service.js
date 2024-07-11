@@ -1,36 +1,33 @@
-import { permissions } from "../mocks/data.mock.js"
+import { Permission } from "../database/models/permission.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
-const permissionsList = permissions
-
 export class PermissionsService {
     getAll = async () => {
-        return permissionsList
+        const specialities = await Permission.findAll()
+        return specialities
     }
 
     getById = async (pid) => {
-        const permission = await permissionsList.find(permission => permission.id === +pid)
+        const permission = await Permission.findByPk(+pid)
         if(!permission){
-            throw new HttpError('RPermission not found', HTTP_CODES.NOT_FOUND)
+            throw new HttpError('Permission not found', HTTP_CODES.NOT_FOUND)
         }
         return permission
     }
 
     create = async (payload) => {
-        const { permission } = payload
-        const newId = permissionsList[permissionsList.length - 1].id + 1
+        const { name } = payload
         const newPermission = {
-            id: newId,
-            permission
+            name
         }
-        permissionsList.push(newPermission)
-        return newPermission
+        const permission = await Permission.create(newPermission)
+        return permission
     }
 
     delete = async (pid) => {
-        const idx = permissionsList.findIndex(permission => permission.id === +pid)
-        permissionsList.splice(idx, 1)
-        return permissionsList
+        const permission = await this.getById(pid)
+        const deletedPermission = await permission.destroy()
+        return deletedPermission
     }
 }

@@ -41,10 +41,7 @@ export class RolesService {
     }
 
     delete = async (rid) => {
-        const role = await Role.findByPk(+rid)
-        if(!role){
-            throw new HttpError('Role not found', HTTP_CODES.NOT_FOUND)
-        }
+        const role = await this.getById(rid)
         const deletedRole = await role.destroy()
         return deletedRole
     }
