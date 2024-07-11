@@ -1,25 +1,35 @@
+import { Patient } from "../database/models/patient.js"
+import { Professional } from "../database/models/professional.js"
+import { Role } from "../database/models/role.js"
+import { User } from "../database/models/user.js"
 import { users, roles, patients, professionals } from "../mocks/data.mock.js"
 import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
+import { RolesService } from "./roles.service.js"
+import { UsersService } from "./users.service.js"
 
 export class AuthService {
 
+    constructor(){
+        this.rolesService = new RolesService()
+        this.usersService = new UsersService()
+    }
+
     // este método crea al usuario, y llama a los otros métodos según el rol
     createUser = async(payload) => {
-        const  { email, password, first_name, last_name, dni, role } = payload
+        const  { email, first_name, last_name, dni, role } = payload
         if(!email || !first_name || !last_name || !dni){
             throw new HttpError('missing data', HTTP_CODES.BAD_REQUEST)
         }
-        const existingPatient = users.find(user => user.email === email)
+        const existingPatient = await this.usersService.getByEmail(email)
         if(existingPatient){
             throw new HttpError('email already in use', HTTP_CODES.BAD_REQUEST)
         }
         const username = email.substring(0, email.indexOf('@'))
-        const hashedPass = createHash(password)
-        const storedRole = roles.find(roleItem => roleItem.role_name === role)
+        const hashedPass = createHash(dni)
+        const storedRole = await this.rolesService.getByName(role)
         const newUser = {
-            id: users[users.length - 1].id + 1,
             email,
             password: hashedPass,
             username,
@@ -34,16 +44,16 @@ export class AuthService {
             province: null,
             address: null,
         }
-        users.push(newUser)
+        // Agregar transacciones para corrobrar creación correcta del paciente, etc. antes de crear el usuario
+        const user = await User.create(newUser)
         let result
         switch (role) {
             case 'patient':
-                result = await this.createPatient(newUser.id)
+                result = await this.createPatient(user.id)
                 newUser.patient_data = result
                 break;
             case 'professional':
-                result = await this.createProfessional(newUser.id)
-                console.log(result)
+                result = await this.createProfessional(user.id)
                 newUser.professional_data = result
             default:
                 break;
@@ -53,7 +63,6 @@ export class AuthService {
 
     createPatient = async(user_id) => {
         const newPatient = {
-            id: patients[patients.length - 1].id + 1,
             user_id,
             active_tratment: null,
             health_insurance_id: null,
@@ -62,18 +71,17 @@ export class AuthService {
             blood_factor: null,
             birthdate: null
         }
-        patients.push(newPatient)
-        return newPatient
+        const patient = await Patient.create(newPatient)
+        return patient
     }
 
     createProfessional = async(user_id) => {
         const newProfessional = {
-            id: professionals[professionals.length - 1].id + 1,
             user_id,
             speciality_id: 1,
             resgistration_number: 12345
         }
-        patients.push(newProfessional)
-        return newProfessional
+        const professional = await Professional.create(newProfessional)
+        return professional
     }
 }

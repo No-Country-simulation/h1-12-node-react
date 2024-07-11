@@ -1,9 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Patients extends Model {
+import { Model, DataTypes } from 'sequelize';
+export class Patient extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id',
         as: 'user'
       })
-      this.belongsTo(models.Treatment, {
-        foreignKey: 'active_treatment',
-        as: 'active_treatment'
-      })
+      // this.belongsTo(models.Treatment, {
+      //   foreignKey: 'active_treatment',
+      //   as: 'active_treatment'
+      // })
       this.belongsTo(models.HealthInsurance, {
         foreignKey: 'health_insurance_id',
         as: 'health_insurance'
@@ -28,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
-  Patients.init({
+
+  export const initPatient = (sequelize) => {
+    Patient.init({
     user_id: DataTypes.INTEGER,
     active_treatment: DataTypes.INTEGER,
     health_insurance_id: DataTypes.INTEGER,
@@ -42,5 +40,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'patients',
     paranoid: true
   });
-  return Patients;
+  return Patient;
 };

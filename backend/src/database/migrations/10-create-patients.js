@@ -21,7 +21,7 @@ module.exports = {
       },
       active_treatment: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         // references: {
         //   model: 'treatments',
         //   key: 'id'
@@ -31,7 +31,7 @@ module.exports = {
       },
       health_insurance_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'health_insurances',
           key: 'id'
@@ -41,7 +41,7 @@ module.exports = {
       },
       head_professional_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'professionals',
           key: 'id'

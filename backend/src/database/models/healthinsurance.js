@@ -1,9 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class HealthInsurance extends Model {
+import { Model, DataTypes } from 'sequelize';
+
+export class HealthInsurance extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -16,17 +13,22 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
-  HealthInsurance.init({
-    user_id: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    contact_name: DataTypes.STRING,
-    contact_email: DataTypes.STRING,
-    contact_phone: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'HealthInsurance',
-    tableName: 'health_insurances',
-    paranoid: true
-  });
+
+  export const  initHealthInsurance = (sequelize) => {
+    HealthInsurance.init(
+      {
+        user_id: DataTypes.INTEGER,
+        name: DataTypes.STRING,
+        contact_name: DataTypes.STRING,
+        contact_email: DataTypes.STRING,
+        contact_phone: DataTypes.STRING
+      }, 
+      {
+        sequelize,
+        modelName: 'HealthInsurance',
+        tableName: 'health_insurances',
+        paranoid: true
+      }
+    );
   return HealthInsurance;
 };
