@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/env.config.js";
 
 export const generateAccessToken = (payload) => {
+    console.log(payload)
   return jwt.sign(payload , JWT_SECRET, { expiresIn: "1h" });
 }
 

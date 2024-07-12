@@ -8,5 +8,6 @@ const authController = new AuthController()
 router.post('/login', authController.login)
 router.post('/register', authController.register)
 router.get('/current', authenticationMiddleware, authController.currentUser) // solo para hacer pruebas de autenticación
+router.get('/logout', authController.logout)
 
 export default router
