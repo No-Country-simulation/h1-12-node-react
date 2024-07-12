@@ -8,11 +8,15 @@ const authController = new AuthController()
 
 router.post('/login', authController.login)
 router.post('/register', authController.register)
+
+router.post('/register-patient', 
+    authenticationMiddleware, 
+    authorizationMiddleware(['create-patient']),
+    authController.register)
 router.get('/logout', authController.logout)
 
 router.get('/current', 
     authenticationMiddleware, 
-    authorizationMiddleware(['test']), //aquí se pasan los permisos requeridos para esta ruta
     authController.currentUser
 )
 

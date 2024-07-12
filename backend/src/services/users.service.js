@@ -26,7 +26,8 @@ export class UsersService {
 
     getByEmail = async(email) => {
         const user = await User.findOne({ where: { email: email } })
-        return user.dataValues
+        console.log(user)
+        return user?.dataValues
     }
 
     createUser = async(payload) => {
