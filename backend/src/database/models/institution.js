@@ -21,13 +21,8 @@ export class Institution extends Model {
   export const initInstitution = (sequelize) =>{
     Institution.init({
       user_id: DataTypes.INTEGER,
-      name: DataTypes.STRING,
-      phone: DataTypes.STRING,
-      email: DataTypes.STRING,
-      type: DataTypes.STRING,
-      province: DataTypes.STRING,
-      locality: DataTypes.STRING,
-      address: DataTypes.STRING
+      institution_name: DataTypes.STRING,
+      institution_type: DataTypes.STRING,
     }, {
       sequelize,
       modelName: 'Institution',
