@@ -1,4 +1,3 @@
-import { HTTP_CODES } from "../utils/http-codes.util.js";
 import { HttpError } from "../utils/http-error.util.js";
 import { validateAccessToken } from "../utils/jwt.util.js";
 
@@ -7,8 +6,9 @@ export const authenticationMiddleware = (req, res, next) => {
     if (token) {
         const user = validateAccessToken(token)
         req.user = user;
+        console.log(user)
         next();
     } else {
-        throw new HttpError('Missing credentials', HTTP_CODES.UNAUTHORIZED)
+        throw new HttpError('Missing credentials')
     }
 } 

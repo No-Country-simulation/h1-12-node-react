@@ -1,3 +1,4 @@
+import { ADMIN_PASS, ADMIN_USERNAME } from "../../config/env.config.js";
 import { createHash } from "../../utils/bcrypt.util.js";
 
 export default [
@@ -5,8 +6,8 @@ export default [
         id: 1,
         role_id: 1,
         email: 'admin@default.com',
-        password: createHash('admin123'),
-        username: 'admin',
+        password: createHash(ADMIN_PASS),
+        username: ADMIN_USERNAME,
         first_name: 'admin',
         last_name: 'admin',
         phone: null,
