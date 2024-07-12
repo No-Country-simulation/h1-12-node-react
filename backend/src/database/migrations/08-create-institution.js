@@ -19,25 +19,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      name: {
+      institution_name: {
         type: Sequelize.STRING
       },
-      phone: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      type: {
-        type: Sequelize.STRING
-      },
-      province: {
-        type: Sequelize.STRING
-      },
-      locality: {
-        type: Sequelize.STRING
-      },
-      address: {
+      institution_type: {
         type: Sequelize.STRING
       },
       createdAt: {

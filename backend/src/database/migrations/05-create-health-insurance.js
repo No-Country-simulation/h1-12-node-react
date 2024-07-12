@@ -19,16 +19,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      contact_name: {
-        type: Sequelize.STRING
-      },
-      contact_email: {
-        type: Sequelize.STRING
-      },
-      contact_phone: {
+      insurance_name: {
         type: Sequelize.STRING
       },
       createdAt: {
