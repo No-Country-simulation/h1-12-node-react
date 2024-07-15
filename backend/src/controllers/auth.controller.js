@@ -31,10 +31,19 @@ export class AuthController {
     register = async (req, res, next) => {
         try {
             const payload = req.body
-            const user = await this.authService.createUser(payload)
+            const user = await this.authService.registerUser(payload)
             const token = generateAccessToken(user)
             res.cookie('token', token, cookieConfig) 
             res.status(HTTP_CODES.CREATED).json(user)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    logout = async (req, res, next) => {
+        try {
+            res.cookie('token', '', { maxAge: 0 });
+            res.status(200).json({ message: 'Logout successful' });
         } catch (error) {
             next(error)
         }

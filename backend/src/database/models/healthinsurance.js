@@ -18,10 +18,7 @@ export class HealthInsurance extends Model {
     HealthInsurance.init(
       {
         user_id: DataTypes.INTEGER,
-        name: DataTypes.STRING,
-        contact_name: DataTypes.STRING,
-        contact_email: DataTypes.STRING,
-        contact_phone: DataTypes.STRING
+        insurance_name: DataTypes.STRING,
       }, 
       {
         sequelize,
