@@ -12,6 +12,8 @@ dist/
 
 # Package lock
 /backend/package-lock.json
+/backend/.gitignore
+/backend/.git
 
 # Dependency directories
 /frontend/node_modules
