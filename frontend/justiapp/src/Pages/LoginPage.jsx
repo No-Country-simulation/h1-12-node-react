@@ -59,7 +59,7 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="flex justify-center items-center flex-col max-w-2xl p-6 ">
+    <section className="flex justify-center items-center h-screen flex-col max-w-2xl p-6 ">
       <div className="flex flex-col gap-6 justify-center items-center max-w-xs w-full p-4">
         <img className="max-w-72" src={justinaHeart} alt="logo" />
 
@@ -141,6 +141,12 @@ export default function LoginPage() {
         <p className="text-center text-sm mt-4">
           ¿Olvidaste contraseña?{" "}
           <Link to="/forgot-password" className="text-blue-500">
+            Click aquí
+          </Link>
+        </p>
+        <p className="text-center text-sm mt-4">
+          Como aun no hay contraseña, ve al home del administrador{" "}
+          <Link to="/homeadmin" className="text-blue-500">
             Click aquí
           </Link>
         </p>
