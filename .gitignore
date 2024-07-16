@@ -10,6 +10,9 @@ yarn-error.log*
 build/
 dist/
 
+# Package lock
+/backend/package-lock.json
+
 # Dependency directories
 /frontend/node_modules
 /backend/node_modules
@@ -22,10 +25,10 @@ dist/
 .env.production.local
 
 # Tailwind CSS
-tailwind.config.js
+#tailwind.config.js
 
 # DaisyUI
-daisyui.config.js
+#daisyui.config.js
 
 # Editor directories and files
 .idea/
