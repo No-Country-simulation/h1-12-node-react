@@ -51,4 +51,13 @@ export class UsersService {
         const user = await User.create(newUser)
         return user
     }
+
+    delete = async(uid) => {
+        const user = await User.findByPk(+uid)
+        if(!user){
+            throw new HttpError('User not found', HTTP_CODES.NOT_FOUND)
+        }
+        const deletedUser = await user.destroy()
+        return deletedUser
+    }
 }
