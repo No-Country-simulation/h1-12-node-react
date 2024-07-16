@@ -10,5 +10,5 @@ export const DB_PASSWORD = process.env.DB_PASSWORD;
 export const DB_NAME = process.env.DB_NAME;
 export const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 export const ADMIN_PASS = process.env.ADMIN_PASS;
-export const EMAIL_ADRESS = process.env.EMAIL_ADRESS;
+export const EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
 export const EMAIL_PASS = process.env.EMAIL_PASS;

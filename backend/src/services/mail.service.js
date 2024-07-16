@@ -1,12 +1,30 @@
-import { EMAIL, EMAIL_ADRESS } from "../config/env.config";
-import { gmailTransport } from "../config/mail.config";
+import { EMAIL_PASS, EMAIL_ADDRESS } from "../config/env.config.js";
+import { gmailTransport } from "../config/mail.config.js";
 
 export class MailsService {
   newUserNotification = async (payload) => {
+    let roleLabel;
+    switch (payload.role) {
+      case 'patient':
+        roleLabel = 'paciente'
+        break;
+      case 'professional':
+        roleLabel = 'profesional de la salud'
+        break;
+      case 'insurance':
+        roleLabel = 'obra social'
+        break;
+      case 'institution':
+        roleLabel = 'institución de salud'
+        break;
+      default:
+        roleLabel = 'usuario'
+        break;
+    }
     await gmailTransport.sendMail({
-      from: `Justina io <${EMAIL_ADRESS}>`,
+      from: `Justina io <${EMAIL_ADDRESS}>`,
       to: payload.email,
-      subject: `Has sido registrado como ${payload.role} en Justina io`,
+      subject: `Has sido registrado como ${roleLabel} en Justina io`,
       html: `
                 <html lang="en">
                     <head>
@@ -16,7 +34,7 @@ export class MailsService {
                     </head>
                     <body>
                         <div class="main-container">
-                            ${payload}
+                            ${JSON.stringify(payload)}
                         </div>
                     </body>
                 </html>

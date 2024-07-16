@@ -33,9 +33,8 @@ export class AuthController {
     try {
       const payload = req.body;
       const user = await this.authService.registerUser(payload);
-      await this.mailsService.newUserNotification(payload);
-      const token = generateAccessToken(user);
-      res.cookie("token", token, cookieConfig);
+      const mailSent = await this.mailsService.newUserNotification(payload);
+      console.log(mailSent)
       res.status(HTTP_CODES.CREATED).json(user);
     } catch (error) {
       next(error);

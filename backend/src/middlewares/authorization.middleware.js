@@ -24,6 +24,10 @@ export const authorizationMiddleware = (requiredPermissions) => {
               }]
             }]
         })
+
+        if (!userRole) {
+          throw new HttpError('Permissions managment error', HTTP_CODES.INTERNAL_SERVER_ERROR)
+        }
         
         const userPermissions = [];
         userRole.dataValues.role.dataValues.permissions.forEach(permission => {
