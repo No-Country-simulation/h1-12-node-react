@@ -65,7 +65,7 @@ export default function LoginPage() {
 
         <form className="flex gap-4 w-full flex-col justify-center items-center">
           <h1 className="text-center font-roboto text-xl font-semibold text-gray-700">
-            Log In
+            iniciar sesión
           </h1>
           <label className="form-control w-full max-w-xs">
             <div className="label">
