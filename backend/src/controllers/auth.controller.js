@@ -33,8 +33,7 @@ export class AuthController {
     try {
       const payload = req.body;
       const user = await this.authService.registerUser(payload);
-      const mailSent = await this.mailsService.newUserNotification(payload);
-      console.log(mailSent)
+      await this.mailsService.newUserNotification(payload);
       res.status(HTTP_CODES.CREATED).json(user);
     } catch (error) {
       next(error);
