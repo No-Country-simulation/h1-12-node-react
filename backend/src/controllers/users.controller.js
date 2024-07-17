@@ -26,16 +26,6 @@ export class UsersController {
         }
     }
 
-    createUser = async (req, res, next) => {
-        const payload = req.body
-        try {
-            const user = await this.usersService.create(payload)
-            res.status(HTTP_CODES.CREATED).send(user)
-        } catch (error) {
-            next(error)
-        }
-    }
-
     deleteUser = async (req, res, next) => {
         const { uid } = req.params
         try {

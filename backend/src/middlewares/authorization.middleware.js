@@ -37,7 +37,7 @@ export const authorizationMiddleware = (requiredPermissions) => {
         const hasPermission = requiredPermissions.every(permission => userPermissions.includes(permission));
 
         if (!hasPermission) {
-            throw new HttpError('Does not have the required permissions', HTTP_CODES.FORBIDDEN)
+            throw new HttpError('Does not have the required permissions: ' + requiredPermissions, HTTP_CODES.FORBIDDEN)
         }
         next();
 
