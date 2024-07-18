@@ -10,10 +10,17 @@ router.get('/',
     authenticationMiddleware,
     authorizationMiddleware(["get-users"]),
     usersController.getAllUsers)
+
 router.get('/:uid', 
     authenticationMiddleware,
     authorizationMiddleware(["get-user"]),
     usersController.getUserById)
+
+router.patch('/:uid/update-password', 
+    authenticationMiddleware,
+    authorizationMiddleware(["update-user"]),
+    usersController.updateUserPassword)
+
 router.delete('/:uid',
     authenticationMiddleware,
     authorizationMiddleware(["delete-user"]),

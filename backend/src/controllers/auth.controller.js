@@ -22,8 +22,7 @@ export class AuthController {
         throw new HttpError("Bad credentials", HTTP_CODES.UNAUTHORIZED);
       }
       const token = generateAccessToken(user);
-      res.cookie("token", token, cookieConfig);
-      res.status(HTTP_CODES.SUCCESS).send(user);
+      res.status(HTTP_CODES.SUCCESS).send({user, token});
     } catch (error) {
       next(error);
     }
@@ -35,15 +34,6 @@ export class AuthController {
       const user = await this.authService.registerUser(payload);
       await this.mailsService.newUserNotification(payload);
       res.status(HTTP_CODES.CREATED).json(user);
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  logout = async (req, res, next) => {
-    try {
-      res.cookie("token", "", { maxAge: 0 });
-      res.status(200).json({ message: "Logout successful" });
     } catch (error) {
       next(error);
     }

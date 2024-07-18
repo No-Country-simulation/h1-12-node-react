@@ -18,9 +18,21 @@ export class UsersController {
 
     getUserById = async (req, res, next) => {
         const { uid } = req.params
+        const payload = req.body
         try {
             const user = await this.usersService.getById(uid)
             res.status(HTTP_CODES.SUCCESS).send(user)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    updateUserPassword = async (req, res, next) => {
+        const { uid } = req.params
+        const { password }= req.body
+        try {
+            const updatedUser = await this.usersService.updatePassword(uid, password)
+            res.status(HTTP_CODES.SUCCESS).send(updatedUser)
         } catch (error) {
             next(error)
         }

@@ -1,9 +1,6 @@
 import { Role } from "../database/models/role.js"
-import { roles } from "../mocks/data.mock.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
-
-const rolesList = roles
 
 export class RolesService {
     getAll = async () => {
