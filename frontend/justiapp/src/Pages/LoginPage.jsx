@@ -6,19 +6,78 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
   //autenticación
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
 
+  const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [isTyped, setIsTyped] = useState(false);
-  const [errors, setErrors] = useState({ username: "", password: "" });
+  // const [errors, setErrors] = useState({ username: "", password: "" });
+  // Maneja el envío del formulario y realiza la autenticación
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { username, password } = credentials;
+
+    if (username && password && !errors.username && !errors.password) {
+      try {
+        await login({ username, password });
+        navigate("/homeadmin");
+      } catch (error) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+        }));
+      }
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "Por favor, completa todos los campos correctamente.",
+      }));
+    }
+  };
 
   const navigate = useNavigate();
 
+  // Maneja los cambios en los campos de entrada y valida la entrada
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+    validateInput(name, value);
+  };
+
+  const validateInput = (name, value) => {
+    let errorMessage = "";
+
+    if (name === "username") {
+      const trimmedValue = value.slice(0, 15);
+      if (!trimmedValue) {
+        errorMessage = "El usuario es requerido";
+      } else if (
+        !/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(trimmedValue)
+      ) {
+        errorMessage =
+          "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
+      }
+    } else if (name === "password") {
+      setIsTyped(value.length > 0);
+      if (!value) {
+        errorMessage = "La contraseña es requerida";
+      } else if (value.length < 8 || value.length > 15) {
+        errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
+      } else if (!/[a-z]/.test(value)) {
+        errorMessage = "La contraseña debe tener al menos una minúscula";
+      }
+    }
+
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+  };
+
+  /*
   const handleUsernameChange = (e) => {
     const value = e.target.value.slice(0, 15); // Recortar si excede 15 caracteres
-    setUsername(value);
 
     let errorMessage = "";
     if (!value) {
@@ -36,7 +95,7 @@ export default function LoginPage() {
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
-    setPassword(value);
+
     setIsTyped(value.length > 0);
 
     let errorMessage = "";
@@ -53,45 +112,11 @@ export default function LoginPage() {
       password: errorMessage,
     }));
   };
-
+  
+*/
+  // Alterna la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        "https://backend-y8ns.onrender.com/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include", // Esto asegura que las cookies se envíen y reciban
-          body: JSON.stringify({ username, password }),
-        }
-      );
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Response data:", responseData);
-        const tokenCookie = response.headers.get("Set-Cookie");
-        console.log(tokenCookie);
-        const token = tokenCookie
-          ? tokenCookie.split("=")[1].split(";")[0]
-          : null;
-
-        if (token) {
-          console.log("Login successful");
-          login(token); // Actualiza el AuthContext con el token
-
-          navigate("/homeadmin"); // Redirige a la página de inicio del administrador
-        }
-      } else {
-        console.error("No se pudo obtener el token desde la cookie");
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
   };
 
   return (
@@ -107,7 +132,7 @@ export default function LoginPage() {
           </span>
         </div>
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit}
           className="flex gap-4 w-full flex-col justify-center items-center"
         >
           <label className="form-control w-full max-w-xs ">
@@ -118,9 +143,10 @@ export default function LoginPage() {
             </div>
             <input
               type="text"
-              value={username}
-              onChange={handleUsernameChange}
-              placeholder="Escribe aquí"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              placeholder="Escribe tu usuario"
               className="input input-bordered w-full max-w-xs truncate text-sm font-normal leading-5 border border-black rounded-md bg-white p-2"
             />
             {errors.username && (
@@ -133,11 +159,12 @@ export default function LoginPage() {
             </div>
             <label className="input self-stretch px-4 py-3.5 bg-white rounded-md border border-zinc-900 justify-start items-center gap-1.5 inline-flex">
               <input
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
                 type={showPassword ? "text" : "password"}
-                className="bg grow w-full max-w-xs truncate text-sm font-normal leading-5 text-gray-400"
-                value={password}
                 placeholder="Enter your password"
-                onChange={handlePasswordChange}
+                className="bg grow w-full max-w-xs truncate text-sm font-normal leading-5 text-gray-400"
               />
               {isTyped && (
                 <svg

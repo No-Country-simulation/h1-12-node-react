@@ -1,40 +1,74 @@
-//AuthContext.jsx
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const AuthContext = createContext();
+// Crear el contexto
+const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(null);
+const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState({ token: null });
   const navigate = useNavigate();
-  console.log(auth);
+
+  // Función para manejar el login y almacenar el token
+  const login = async (credentials) => {
+    try {
+      const response = await fetch(
+        "https://backend-y8ns.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data.token);
+
+        setAuth({ token: data.token });
+        localStorage.setItem("token", data.token);
+
+        navigate("/homeadmin");
+      } else {
+        // Manejar error de autenticación aquí
+        console.error("Error de autenticación:", data.message);
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+    }
+  };
+
+  // Función para manejar el logout
+  const logout = () => {
+    setAuth({ token: null });
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  // Verificar si hay un token almacenado en localStorage al montar el componente
   useEffect(() => {
-    const cookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("token="));
-    const token = cookie ? cookie.split("=")[1] : null;
-    console.log(token);
+    const token = localStorage.getItem("token");
     if (token) {
       setAuth({ token });
+      if (
+        window.location.pathname === "/" ||
+        window.location.pathname === "/login"
+      ) {
+        navigate("/homeadmin");
+      }
     } else {
       navigate("/");
     }
   }, [navigate]);
-
-  const login = (token) => {
-    setAuth({ token });
-    navigate("/homeadmin");
-  };
-
-  const logout = () => {
-    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    setAuth(null);
-    navigate("/");
-  };
+  // Verificar si el usuario está autenticado
+  const isAuthenticated = () => !!auth.token;
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export { AuthContext, AuthProvider };

@@ -5,7 +5,6 @@ import HomeAdmin from "./Pages/HomeAdmin";
 import LoginPage from "./Pages/LoginPage";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./Components/PrivateRoute";
-import MaintenanceNotice from "./Pages/MaintenanceNotice ";
 
 function App() {
   return (
