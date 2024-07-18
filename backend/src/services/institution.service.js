@@ -8,7 +8,7 @@ export class InstitutionsService {
     constructor(){}
 
     createInstitution = async({ user_id, institution_name, institution_type }) => {
-        if(!institution_name || ! institution_type){
+        if(!institution_name || !institution_type){
             throw new HttpError('missing data', HTTP_CODES.BAD_REQUEST)
         }
         const newInstitution = {
