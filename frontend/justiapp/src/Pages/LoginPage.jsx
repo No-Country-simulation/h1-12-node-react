@@ -1,17 +1,83 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//LoginPage.jsx
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import justinaHeart from "../images/justinaHeart.svg";
+import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  //autenticación
+  const { login } = useContext(AuthContext);
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [isTyped, setIsTyped] = useState(false);
-  const [errors, setErrors] = useState({ username: "", password: "" });
+  // const [errors, setErrors] = useState({ username: "", password: "" });
+  // Maneja el envío del formulario y realiza la autenticación
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { username, password } = credentials;
 
+    if (username && password && !errors.username && !errors.password) {
+      try {
+        await login({ username, password });
+        navigate("/homeadmin");
+      } catch (error) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+        }));
+      }
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "Por favor, completa todos los campos correctamente.",
+      }));
+    }
+  };
+
+  const navigate = useNavigate();
+
+  // Maneja los cambios en los campos de entrada y valida la entrada
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+    validateInput(name, value);
+  };
+
+  const validateInput = (name, value) => {
+    let errorMessage = "";
+
+    if (name === "username") {
+      const trimmedValue = value.slice(0, 15);
+      if (!trimmedValue) {
+        errorMessage = "El usuario es requerido";
+      } else if (
+        !/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(trimmedValue)
+      ) {
+        errorMessage =
+          "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
+      }
+    } else if (name === "password") {
+      setIsTyped(value.length > 0);
+      if (!value) {
+        errorMessage = "La contraseña es requerida";
+      } else if (value.length < 8 || value.length > 15) {
+        errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
+      } else if (!/[a-z]/.test(value)) {
+        errorMessage = "La contraseña debe tener al menos una minúscula";
+      }
+    }
+
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+  };
+
+  /*
   const handleUsernameChange = (e) => {
     const value = e.target.value.slice(0, 15); // Recortar si excede 15 caracteres
-    setUsername(value);
 
     let errorMessage = "";
     if (!value) {
@@ -29,7 +95,7 @@ export default function LoginPage() {
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
-    setPassword(value);
+
     setIsTyped(value.length > 0);
 
     let errorMessage = "";
@@ -37,15 +103,8 @@ export default function LoginPage() {
       errorMessage = "La contraseña es requerida";
     } else if (value.length < 8 || value.length > 15) {
       errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
-    } else if (!/[A-Z]/.test(value)) {
-      errorMessage = "La contraseña debe tener al menos una mayúscula";
     } else if (!/[a-z]/.test(value)) {
       errorMessage = "La contraseña debe tener al menos una minúscula";
-    } else if (!/[0-9]/.test(value)) {
-      errorMessage = "La contraseña debe tener al menos un número";
-    } else if (!/[!#$%&'*+\-/?=^_{|}~]/.test(value)) {
-      errorMessage =
-        "La contraseña debe tener al menos un carácter especial (! # $ % & ' * + - / = ? ^ _ { | } ~)";
     }
 
     setErrors((prevErrors) => ({
@@ -53,7 +112,9 @@ export default function LoginPage() {
       password: errorMessage,
     }));
   };
-
+  
+*/
+  // Alterna la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -61,23 +122,31 @@ export default function LoginPage() {
   return (
     <section className="flex justify-center items-center h-screen flex-col max-w-2xl p-6 ">
       <div className="flex flex-col gap-6 justify-center items-center max-w-xs w-full p-4">
-        <img className="max-w-72" src={justinaHeart} alt="logo" />
-
-        <form className="flex gap-4 w-full flex-col justify-center items-center">
-          <h1 className="text-center font-roboto text-xl font-semibold text-gray-700">
-            iniciar sesión
+        <img className="w-2/3" src={justinaHeart} alt="logo" />
+        <div className="flex flex-col w-80 text-center">
+          <h1 className="text-indigo-600 text-2xl font-black font-lato">
+            Te damos la bienvenida
           </h1>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
+          <span className="text-gray-700 text-base font-normal font-lato">
+            Ingresá tus datos para comenzar
+          </span>
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="flex gap-4 w-full flex-col justify-center items-center"
+        >
+          <label className="form-control w-full max-w-xs ">
+            <div className="label  ">
               <span className="label-text text-xs font-normal leading-tight text-gray-700">
                 Usuario
               </span>
             </div>
             <input
               type="text"
-              value={username}
-              onChange={handleUsernameChange}
-              placeholder="Escribe aquí"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              placeholder="Escribe tu usuario"
               className="input input-bordered w-full max-w-xs truncate text-sm font-normal leading-5 border border-black rounded-md bg-white p-2"
             />
             {errors.username && (
@@ -88,13 +157,14 @@ export default function LoginPage() {
                 Contraseña
               </span>
             </div>
-            <label className="input input-bordered flex items-center gap-2 border border-black rounded-md bg-white p-2">
+            <label className="input self-stretch px-4 py-3.5 bg-white rounded-md border border-zinc-900 justify-start items-center gap-1.5 inline-flex">
               <input
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
                 type={showPassword ? "text" : "password"}
-                className="grow w-full max-w-xs truncate text-sm font-normal leading-5 text-gray-400"
-                value={password}
                 placeholder="Enter your password"
-                onChange={handlePasswordChange}
+                className="bg grow w-full max-w-xs truncate text-sm font-normal leading-5 text-gray-400"
               />
               {isTyped && (
                 <svg
@@ -138,18 +208,23 @@ export default function LoginPage() {
             Ingresar
           </button>
         </form>
-        <p className="text-center text-sm mt-4">
-          ¿Olvidaste contraseña?{" "}
-          <Link to="/forgot-password" className="text-blue-500">
-            Click aquí
-          </Link>
-        </p>
-        <p className="text-center text-sm mt-4">
-          Como aun no hay contraseña, ve al home del administrador{" "}
-          <Link to="/homeadmin" className="text-blue-500">
-            Click aquí
-          </Link>
-        </p>
+
+        <div className="w-80 h-3.5 flex-col justify-center items-center gap-6 inline-flex">
+          <div className="flex-col justify-center items-center gap-2 flex">
+            <div className="w-80 text-center">
+              <span className="text-stone-700 text-xs font-normal font-roboto">
+                ¿Olvidaste contraseña?
+              </span>
+              <span className="text-neutral-800 text-xs font-normal font-roboto"></span>
+              <Link
+                to="/"
+                className="text-gray-700 text-xs font-bold font-roboto"
+              >
+                Click aquí
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
