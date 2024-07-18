@@ -1,5 +1,7 @@
-import React from "react";
+//HomeAdmin.jsx me
+import React, { useContext } from "react";
 import Navbar from "../Components/Navbar";
+import { AuthContext } from "../context/AuthContext";
 
 const cardsData = [
   {
@@ -39,7 +41,9 @@ const cardsData = [
   },
 ];
 
-export default function HomeAdmin() {
+export default function HomeAdmin(props) {
+  console.log(props.auth);
+  const { logout } = useContext(AuthContext);
   return (
     <>
       <Navbar />
@@ -53,6 +57,12 @@ export default function HomeAdmin() {
             <p className="w-52 text-neutral-800 text-xl font-bold font-['Lato'] leading-normal">
               ¿Qué querés hacer hoy?
             </p>
+            <button
+              onClick={logout}
+              className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+            >
+              Logout
+            </button>
             <div className="flex flex-wrap  justify-center max-w-7xl p-6  gap-2">
               {cardsData.map((card, index) => (
                 <div

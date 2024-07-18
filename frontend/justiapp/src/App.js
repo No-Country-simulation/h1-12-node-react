@@ -1,20 +1,27 @@
+//App.js
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomeAdmin from "./Pages/HomeAdmin";
 import LoginPage from "./Pages/LoginPage";
-import ForgotPasswordPage from "./Components/ForgotPasswordPage";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/homeadmin" element={<HomeAdmin />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route
+          path="/homeadmin"
+          element={
+            <PrivateRoute>
+              <HomeAdmin />
+            </PrivateRoute>
+          }
+        />
+        {/* Agrega más rutas protegidas de la misma manera */}
+      </Routes>
+    </AuthProvider>
   );
 }
 

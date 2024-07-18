@@ -17,9 +17,9 @@ export class SpecialitiesService {
     }
 
     create = async (payload) => {
-        const { name } = payload
+        const { speciality_name } = payload
         const newSpeciality = {
-            name
+            speciality_name
         }
         const speciality = await Speciality.create(newSpeciality)
         return speciality

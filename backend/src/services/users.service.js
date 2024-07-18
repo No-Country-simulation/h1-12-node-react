@@ -1,4 +1,5 @@
 import { User } from "../database/models/user.js"
+import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
@@ -49,6 +50,20 @@ export class UsersService {
         }
         // Agregar transacciones para corrobrar creación correcta del paciente, etc. antes de crear el usuario
         const user = await User.create(newUser)
+        return user
+    }
+
+    updatePassword = async(uid, password) => {
+        if(!password){
+            throw new HttpError('New password required', HTTP_CODES.BAD_REQUEST)
+        }
+        const user = await User.findByPk(uid)
+        if(!user){
+            throw new HttpError('User not found', HTTP_CODES.NOT_FOUND)
+        }
+        const hashedPass = createHash(password)
+        user.password = hashedPass;
+        await user.save()
         return user
     }
 

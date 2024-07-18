@@ -36,8 +36,6 @@ router.post(
   authController.register
 );
 
-router.get("/logout", authController.logout);
-
 router.get("/current", authenticationMiddleware, authController.currentUser);
 
 export default router;
