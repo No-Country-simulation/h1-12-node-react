@@ -18,7 +18,6 @@ export class UsersController {
 
     getUserById = async (req, res, next) => {
         const { uid } = req.params
-        const payload = req.body
         try {
             const user = await this.usersService.getById(uid)
             res.status(HTTP_CODES.SUCCESS).send(user)

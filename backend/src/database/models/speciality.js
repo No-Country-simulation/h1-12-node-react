@@ -15,7 +15,7 @@ import { Model, DataTypes } from 'sequelize';
   }
   export const initSpeciality = (sequelize) => {
     Speciality.init({
-    name: DataTypes.STRING
+    speciality_name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Speciality',

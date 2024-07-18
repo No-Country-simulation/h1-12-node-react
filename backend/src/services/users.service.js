@@ -27,7 +27,6 @@ export class UsersService {
 
     getByEmail = async(email) => {
         const user = await User.findOne({ where: { email: email } })
-        console.log(user)
         return user?.dataValues
     }
 
@@ -48,7 +47,6 @@ export class UsersService {
             province: null,
             address: null,
         }
-        // Agregar transacciones para corrobrar creación correcta del paciente, etc. antes de crear el usuario
         const user = await User.create(newUser)
         return user
     }
@@ -63,6 +61,7 @@ export class UsersService {
         }
         const hashedPass = createHash(password)
         user.password = hashedPass;
+        user.updated_pass = true;
         await user.save()
         return user
     }
