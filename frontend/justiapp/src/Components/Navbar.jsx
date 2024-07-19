@@ -6,8 +6,8 @@ import BigHeart from "../images/BigHeart.svg";
 export default function Navbar() {
   return (
     <div className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="navbar">
+      <div className="p-2 ">
+        <div className="navbar max-w-6xl ">
           <div className="navbar-start">
             <div className="dropdown">
               <div

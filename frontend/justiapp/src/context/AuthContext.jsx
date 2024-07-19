@@ -24,8 +24,6 @@ const AuthProvider = ({ children }) => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log(data.token);
-
         setAuth({ token: data.token });
         localStorage.setItem("token", data.token);
 
