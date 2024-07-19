@@ -34,7 +34,7 @@ export class AuthService {
         if(existingUser){
             throw new HttpError('email already in use', HTTP_CODES.BAD_REQUEST)
         }
-        const username = email.substring(0, email.indexOf('@'))
+        const username = email.substring(0, email.indexOf('@')).toUpperCase()
         const hashedPass = createHash(v4())
         const storedRole = await this.rolesService.getByName(role)
         const user = await this.usersService.createUser({ email, username, password: hashedPass, first_name, last_name, dni, role_id: storedRole.id })

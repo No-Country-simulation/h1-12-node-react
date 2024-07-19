@@ -18,7 +18,7 @@ export class UsersService {
     }
 
     getByUsername = async(username) => {
-        const user = await User.findOne({ where: { username: username } })
+        const user = await User.findOne({ where: { username: username.toUpperCase() } })
         if(!user){
             throw new HttpError('User not found', HTTP_CODES.NOT_FOUND)
         }

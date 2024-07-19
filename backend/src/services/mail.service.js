@@ -23,9 +23,11 @@ export class MailsService {
         break;
     }
 
-    let template = fs.readFileSync("mail-templates/template-1.html", "utf-8");
+    let template = fs.readFileSync("src/mail-templates/template-1.html", "utf-8");
 
     template = template.replace(/{{roleLabel}}/g, roleLabel);
+    template = template.replace(/{{email}}/g, payload.email);
+    template = template.replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}` );
 
     await gmailTransport.sendMail({
       from: `Justina io <${EMAIL_ADDRESS}>`,
