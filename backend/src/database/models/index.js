@@ -12,6 +12,7 @@ import { initPermission, Permission } from "./permission.js";
 import { initProfessional, Professional } from "./professional.js";
 import { initRolesPermissions, RolesPermissions } from "./rolespermissions.js";
 import { initSpeciality, Speciality } from "./speciality.js";
+import { initPathology } from "./pathology.js";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -34,6 +35,7 @@ initPermission(sequelize);
 initProfessional(sequelize);
 initRolesPermissions(sequelize);
 initSpeciality(sequelize);
+initPathology(sequelize);
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User });

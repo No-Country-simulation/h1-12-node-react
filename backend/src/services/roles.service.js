@@ -9,7 +9,7 @@ export class RolesService {
     }
 
     getById = async (rid) => {
-        const role = await Role.findByPk(+rid)
+        const role = await Role.findByPk(rid)
         if(!role){
             throw new HttpError('Role not found', HTTP_CODES.NOT_FOUND)
         }

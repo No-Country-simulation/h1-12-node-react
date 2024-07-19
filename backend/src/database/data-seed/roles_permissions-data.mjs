@@ -64,7 +64,11 @@ export default [
     { role_id: 3, permission_id: 25, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 3, permission_id: 31, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 3, permission_id: 33, createdAt: new Date(), updatedAt: new Date() },
-
+    { role_id: 3, permission_id: 40, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 41, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 42, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 43, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 44, createdAt: new Date(), updatedAt: new Date() },
 
     // Permisos de la obra social
     { role_id: 4, permission_id: 1, createdAt: new Date(), updatedAt: new Date() },

@@ -42,4 +42,11 @@ export default [
     { id: 37, permission: 'delete-permission', createdAt: new Date(), updatedAt: new Date() },
     { id: 38, permission: 'delete-speciality', createdAt: new Date(), updatedAt: new Date() },
     { id: 39, permission: 'delete-user', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 40, permission: 'get-pathologies', createdAt: new Date(), updatedAt: new Date() },
+    { id: 41, permission: 'get-pathology', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 42, permission: 'create-pathology', createdAt: new Date(), updatedAt: new Date() },
+    { id: 43, permission: 'update-pathology', createdAt: new Date(), updatedAt: new Date() },
+    { id: 44, permission: 'delete-pathology', createdAt: new Date(), updatedAt: new Date() },
 ]
