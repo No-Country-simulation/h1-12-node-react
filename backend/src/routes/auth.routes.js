@@ -10,7 +10,7 @@ const authController = new AuthController();
 
 router.post(
   "/login",
-  validationMiddleware([loginSchema]),
+  // validationMiddleware([loginSchema]),
   authController.login
 );
 
