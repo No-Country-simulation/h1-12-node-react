@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes } from "sequelize";
 
 export class Role extends Model {
   /**
@@ -8,35 +8,38 @@ export class Role extends Model {
    */
   static associate(models) {
     this.hasMany(models.User, {
-      foreignKey: 'role_id',
-      as: 'users'
+      foreignKey: "role_id",
+      as: "users",
     });
     this.belongsToMany(models.Permission, {
-      through: 'roles_permissions',
-      foreignKey: 'role_id',
-      otherKey: 'permission_id',
-      as: 'permissions'
+      through: "roles_permissions",
+      foreignKey: "role_id",
+      otherKey: "permission_id",
+      as: "permissions",
     });
   }
 }
 
-export const initRole = (sequelize) =>{
-   Role.init({
-     id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
+export const initRole = (sequelize) => {
+  Role.init(
+    {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      role_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
     },
-    role_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+    {
+      sequelize,
+      modelName: "Role",
+      tableName: "roles",
     }
-  }, {
-    sequelize,
-    modelName: 'Role',
-    tableName: 'roles'
-  });
+  );
   return Role;
-}
+};

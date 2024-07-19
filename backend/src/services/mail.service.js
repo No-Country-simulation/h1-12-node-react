@@ -1,5 +1,6 @@
-import { EMAIL_PASS, EMAIL_ADDRESS } from "../config/env.config.js";
+import { EMAIL_ADDRESS } from "../config/env.config.js";
 import { gmailTransport } from "../config/mail.config.js";
+import fs from "fs";
 
 export class MailsService {
   newUserNotification = async (payload) => {
@@ -21,24 +22,16 @@ export class MailsService {
         roleLabel = 'usuario'
         break;
     }
+
+    let template = fs.readFileSync("mail-templates/template-1.html", "utf-8");
+
+    template = template.replace(/{{roleLabel}}/g, roleLabel);
+
     await gmailTransport.sendMail({
       from: `Justina io <${EMAIL_ADDRESS}>`,
       to: payload.email,
       subject: `Has sido registrado como ${roleLabel} en Justina io`,
-      html: `
-                <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Document</title>
-                    </head>
-                    <body>
-                        <div class="main-container">
-                            ${JSON.stringify(payload)}
-                        </div>
-                    </body>
-                </html>
-            `,
+      html: template,
     });
   };
 
