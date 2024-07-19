@@ -127,6 +127,7 @@ export default function LoginPage() {
           <h1 className="text-indigo-600 text-2xl font-black font-lato">
             Te damos la bienvenida
           </h1>
+          <span>holi</span>
           <span className="text-gray-700 text-base font-normal font-lato">
             Ingresá tus datos para comenzar
           </span>
