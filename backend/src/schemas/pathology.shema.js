@@ -8,6 +8,6 @@ export const pidParam = z.object({
 
 export const pqueryParam = z.object({
     params: z.object({
-        pquery: z.string().regex(/^\d+$/, "PQuery must be a numeric string"),
+        pquery: z.string().min(3, "Pquery must be at least 3 characters long"),
     })
   });
