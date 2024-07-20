@@ -17,3 +17,4 @@ export const passwordSchema = z.object({
         .regex(/[!#$%&'*+\-/=?^_{|}~]/, "Password must contain at least one special character from the set ! # $ % & ' * + - / = ? ^ _ { | } ~")
     })
   });
+

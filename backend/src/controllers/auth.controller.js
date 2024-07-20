@@ -1,4 +1,3 @@
-import { cookieConfig } from "../config/cookies.config.js";
 import { AuthService } from "../services/auth.service.js";
 import { MailsService } from "../services/mail.service.js";
 import { UsersService } from "../services/users.service.js";

@@ -26,6 +26,20 @@ export class UsersController {
         }
     }
 
+    updateUser = async(req, res, next) => {
+        const { uid } = req.params
+        const payload = req.body
+        if(req.file && req.file.path){
+            payload.image = req.file.path
+        }
+        try {
+            const updatedUser = await this.usersService.update(uid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedUser)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     updateUserPassword = async (req, res, next) => {
         const user = req.user 
         const { password }= req.body

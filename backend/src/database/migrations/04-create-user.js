@@ -61,9 +61,6 @@ module.exports = {
       updated_pass: {
         type: Sequelize.BOOLEAN
       },
-      birthdate: {
-        type: Sequelize.DATE
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

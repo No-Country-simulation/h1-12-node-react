@@ -44,7 +44,6 @@ export const initUser = (sequelize) => {
       locality: DataTypes.STRING,
       address: DataTypes.STRING,
       updated_pass: DataTypes.BOOLEAN,
-      birthdate: DataTypes.DATE,
     },
     {
       sequelize,

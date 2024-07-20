@@ -48,4 +48,10 @@ export default [
     { id: 42, permission: 'create-pathology', createdAt: new Date(), updatedAt: new Date() },
     { id: 43, permission: 'update-pathology', createdAt: new Date(), updatedAt: new Date() },
     { id: 44, permission: 'delete-pathology', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 45, permission: 'get-medications', createdAt: new Date(), updatedAt: new Date() },
+    { id: 46, permission: 'get-medication', createdAt: new Date(), updatedAt: new Date() },
+    { id: 47, permission: 'create-medication', createdAt: new Date(), updatedAt: new Date() },
+    { id: 48, permission: 'update-medication', createdAt: new Date(), updatedAt: new Date() },
+    { id: 49, permission: 'delete-medication', createdAt: new Date(), updatedAt: new Date() },
 ]

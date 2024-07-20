@@ -17,3 +17,6 @@ export const ADMIN_PASS = process.env.ADMIN_PASS;
 export const EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
 export const EMAIL_PASS = process.env.EMAIL_PASS;
 export const FRONT_LINK = process.env.FRONT_LINK;
+export const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME
+export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY
+export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET
