@@ -12,7 +12,8 @@ import { initPermission, Permission } from "./permission.js";
 import { initProfessional, Professional } from "./professional.js";
 import { initRolesPermissions, RolesPermissions } from "./rolespermissions.js";
 import { initSpeciality, Speciality } from "./speciality.js";
-import { initPathology } from "./pathology.js";
+import { initPathology, Pathology } from "./pathology.js";
+import { initMedication, Medication } from "./medication.js";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -36,6 +37,7 @@ initProfessional(sequelize);
 initRolesPermissions(sequelize);
 initSpeciality(sequelize);
 initPathology(sequelize);
+initMedication(sequelize);
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User });
@@ -49,6 +51,7 @@ RolesPermissions.associate({});
 Speciality.associate({ Professional });
 User.associate({ Role });
 
+
 export {
   sequelize,
   User,
@@ -61,4 +64,6 @@ export {
   Professional,
   RolesPermissions,
   Speciality,
+  Pathology,
+  Medication
 };
