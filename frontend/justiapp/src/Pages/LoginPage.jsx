@@ -75,45 +75,6 @@ export default function LoginPage() {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
   };
 
-  /*
-  const handleUsernameChange = (e) => {
-    const value = e.target.value.slice(0, 15); // Recortar si excede 15 caracteres
-
-    let errorMessage = "";
-    if (!value) {
-      errorMessage = "El usuario es requerido";
-    } else if (!/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(value)) {
-      errorMessage =
-        "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
-    }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      username: errorMessage,
-    }));
-  };
-
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-
-    setIsTyped(value.length > 0);
-
-    let errorMessage = "";
-    if (!value) {
-      errorMessage = "La contraseña es requerida";
-    } else if (value.length < 8 || value.length > 15) {
-      errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
-    } else if (!/[a-z]/.test(value)) {
-      errorMessage = "La contraseña debe tener al menos una minúscula";
-    }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: errorMessage,
-    }));
-  };
-  
-*/
   // Alterna la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -212,10 +173,11 @@ export default function LoginPage() {
 
         <div className="w-80 h-3.5 flex-col justify-center items-center gap-6 inline-flex">
           <div className="flex-col justify-center items-center gap-2 flex">
-            <div className="w-80 text-center">
+            <div className="flex w-full gap-1 text-center">
               <span className="text-stone-700 text-xs font-normal font-roboto">
                 ¿Olvidaste contraseña?
               </span>
+
               <span className="text-neutral-800 text-xs font-normal font-roboto"></span>
               <Link
                 to="/"
@@ -230,3 +192,42 @@ export default function LoginPage() {
     </section>
   );
 }
+/*
+  const handleUsernameChange = (e) => {
+    const value = e.target.value.slice(0, 15); // Recortar si excede 15 caracteres
+
+    let errorMessage = "";
+    if (!value) {
+      errorMessage = "El usuario es requerido";
+    } else if (!/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(value)) {
+      errorMessage =
+        "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      username: errorMessage,
+    }));
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+
+    setIsTyped(value.length > 0);
+
+    let errorMessage = "";
+    if (!value) {
+      errorMessage = "La contraseña es requerida";
+    } else if (value.length < 8 || value.length > 15) {
+      errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
+    } else if (!/[a-z]/.test(value)) {
+      errorMessage = "La contraseña debe tener al menos una minúscula";
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      password: errorMessage,
+    }));
+  };
+  
+*/

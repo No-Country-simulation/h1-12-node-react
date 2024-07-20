@@ -2,93 +2,89 @@
 import React, { useContext } from "react";
 import Navbar from "../Components/Navbar";
 import { AuthContext } from "../context/AuthContext";
+import CardContainer from "../Components/CardContainer";
 
-const cardsData = [
+const cardData = [
   {
-    title: "Profesional de salud",
-    action: "Crear",
-    description: "Información sobre profesionales de salud",
-    image:
-      "https://plus.unsplash.com/premium_photo-1682141106314-d471655e316b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: 1,
+    bgColor: "bg-cyan-800",
+    title: "Crear\nprofesional\nde la salud",
+    description: "Asegúrate de tener los datos",
   },
   {
-    title: "Paciente",
-    action: "Crear",
-    description: "Información sobre pacientes",
-    image:
-      "https://plus.unsplash.com/premium_photo-1667511034915-3fb9af8927ca?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: 2,
+    bgColor: "bg-emerald-600",
+    title: "Crear\nprestador\nde salud",
+    description: "Asegúrate de tener los datos",
   },
   {
-    title: "Prestador de la salud",
-    action: "Crear",
-    description: "Información sobre prestadores de salud",
-    image:
-      "https://images.unsplash.com/photo-1615631648086-325025c9e51e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: 3,
+    bgColor: "bg-pink-700",
+    title: "Crear\npaciente",
+    description: "Asegúrate de tener los datos",
   },
   {
-    title: "Institución de salud",
-    action: "Crear",
-    description: "Información sobre instituciones de salud",
-    image:
-      "https://plus.unsplash.com/premium_photo-1682130157004-057c137d96d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Ver usuarios creados",
-    action: "Ver",
-    description: "Ver lista de usuarios creados",
-    image:
-      "https://plus.unsplash.com/premium_photo-1661331604078-add96f12ab49?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: 4,
+    bgColor: "bg-sky-500",
+    title: "Crear\ninstitución\nde salud",
+    description: "Asegúrate de tener los datos",
   },
 ];
 
 export default function HomeAdmin(props) {
-  console.log(props.auth);
-  const { logout } = useContext(AuthContext);
   return (
     <>
       <Navbar />
-
-      <main className="flex flex-col pt-16 max-w-7xl">
-        <div className="flex p-2 ">
-          <div className="flex flex-col  items-center">
-            <h1 className="w-52 text-neutral-800 text-xl font-bold font-['Lato'] leading-normal">
-              Hola Andrés
-            </h1>
-            <p className="w-52 text-neutral-800 text-xl font-bold font-['Lato'] leading-normal">
-              ¿Qué querés hacer hoy?
-            </p>
-            <button
-              onClick={logout}
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-            >
-              Logout
-            </button>
-            <div className="flex flex-wrap  justify-center max-w-7xl p-6  gap-2">
-              {cardsData.map((card, index) => (
-                <div
-                  key={index}
-                  className="card bg-base-100 max-w-xs shadow-xl"
-                >
-                  <div className="card-body flex">
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      className="w-1/2 h-1/2 object-cover mr-4"
-                    />
-                    <div>
-                      <h2 className="card-title">{card.title}</h2>
-                      <p>{card.description}</p>
-                      <div className="card-actions justify-end">
-                        <button className="btn btn-primary w-full h-14 px-4 py-3.5 bg-gray-700 border-gray-700">
-                          {card.action}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+      <main className="flex  bg-slate-200  items-center justify-center pt-24 w-full  ">
+        <div className=" sm:max-w-6xl w-11/12 flex flex-col justify-center items-center bg-white rounded-xl shadow-lg">
+          <div className="w-11/12 p-4 rounded-lg border-2 border-sky-900/90 flex flex-col justify-center items-start gap-4">
+            <div className=" w-full flex justify-start items-center gap-4">
+              <div className="avatar  w-14 h-14 relative rounded-full border-2 border-sky-900/90">
+                <div className=" w-full h-full object-cover rounded-full ">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                 </div>
-              ))}
+              </div>
+
+              <div className=" flex flex-col justify-start items-start gap-2">
+                <div className="text-xl font-bold font-lato">
+                  <span className="text-fuchsia-900">¡Hola</span>
+                  <span className="text-gray-700"> </span>
+                  <span className="text-fuchsia-900">José!</span>
+                </div>
+                <div className="opacity-80 text-gray-700 text-sm font-normal font-open-sans">
+                  ¿Qué querés hacer hoy?
+                </div>
+              </div>
             </div>
           </div>
+          <div className="conainer bg-yellow-300 sm:max-w-6xl w-11/12 flex justify-around">
+            <ul className="menu menu-horizontal px-1">
+              <li>
+                <details className="p-2  bg-indigo-600 rounded-lg justify-center items-center inline-flex">
+                  <summary className="text-white text-sm font-normal font-['Open Sans'] leading-tight tracking-tight">
+                    Registrar usuario
+                  </summary>
+                  <ul className="bg-base-100 rounded-t-none z-10 p-2">
+                    <li>
+                      <a>Profesional de la salud</a>
+                    </li>
+                    <li>
+                      <a>institucion de salud</a>
+                    </li>
+                    <li>
+                      <a>Paciente</a>
+                    </li>
+                  </ul>
+                </details>
+              </li>
+            </ul>
+            <button className=" bg-sky-500 rounded-lg justify-center items-center gap-2 inline-flex">
+              <p className="text-center text-white text-sm font-normal font-['Open Sans'] leading-tight tracking-tight">
+                Usuarios creados
+              </p>
+            </button>
+          </div>
+          <CardContainer cardData={cardData} />
         </div>
       </main>
     </>

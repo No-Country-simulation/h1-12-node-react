@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import Heart from "../images/justinaHeart2.svg";
+import { AuthContext } from "../context/AuthContext";
+
 import justina from "../images/justinaio_logo (1).svg";
 import BigHeart from "../images/BigHeart.svg";
 
 export default function Navbar() {
+  const { logout } = useContext(AuthContext);
+
+  /*   */
+
   return (
     <div className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="navbar">
+      <div className="p-2 ">
+        <div className="navbar max-w-6xl ">
           <div className="navbar-start">
             <div className="dropdown">
               <div
@@ -34,12 +40,12 @@ export default function Navbar() {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
-                <li>
-                  <a>Cerrar sesión</a>
-                </li>
-                <li>
-                  <a>hacia otra página</a>
-                </li>
+                <button
+                  onClick={logout}
+                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+                >
+                  Logout
+                </button>
                 <li>
                   <a>hacia otra página</a>
                 </li>
