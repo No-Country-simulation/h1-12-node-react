@@ -11,24 +11,28 @@ const usersController = new UsersController()
 router.get('/', 
     authenticationMiddleware,
     authorizationMiddleware(["get-users"]),
-    usersController.getAllUsers)
+    usersController.getAllUsers
+)
 
 router.get('/:uid', 
     validationMiddleware([uidParam]),
     authenticationMiddleware,
     authorizationMiddleware(["get-user"]),
-    usersController.getUserById)
+    usersController.getUserById
+)
 
-router.patch('/:uid/update-password', 
-    validationMiddleware([uidParam, passwordSchema]),
+router.patch('/update-password', 
+    validationMiddleware([passwordSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["update-user"]),
-    usersController.updateUserPassword)
+    usersController.updateUserPassword
+)
 
 router.delete('/:uid',
     validationMiddleware([uidParam]),
     authenticationMiddleware,
     authorizationMiddleware(["delete-user"]),
-    usersController.deleteUser)
+    usersController.deleteUser
+)
 
 export default router

@@ -1,6 +1,10 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+const envFile = process.env.NODE_ENV === 'development' ? '.env.dev' : '.env'
+dotenv.config({ path: envFile });
+
+console.log(`NODE_ENV: ${process.env.NODE_ENV || 'production'}`);
+console.log(`Using environment file: ${envFile}`);
 
 export const PORT = process.env.PORT || 3001;
 export const JWT_SECRET = process.env.JWT_SECRET;
@@ -12,3 +16,4 @@ export const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 export const ADMIN_PASS = process.env.ADMIN_PASS;
 export const EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
 export const EMAIL_PASS = process.env.EMAIL_PASS;
+export const FRONT_LINK = process.env.FRONT_LINK;

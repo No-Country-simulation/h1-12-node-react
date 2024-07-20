@@ -3,7 +3,7 @@ import { AuthController } from "../controllers/auth.controller.js";
 import { authenticationMiddleware } from "../middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../middlewares/authorization.middleware.js";
 import { validationMiddleware } from "../middlewares/validation.middleware.js";
-import { loginSchema, registerInstitutionSchema, registerInsuranceSchema, registerPatientSchema, registerProfessionalSchema } from "../schemas/auth.schema.js";
+import { loginSchema, recoverPasswordSchema, registerInstitutionSchema, registerInsuranceSchema, registerPatientSchema, registerProfessionalSchema } from "../schemas/auth.schema.js";
 
 const router = Router();
 const authController = new AuthController();
@@ -49,6 +49,12 @@ router.post(
 router.get("/current", 
   authenticationMiddleware, 
   authController.currentUser
+);
+
+router.post(
+  "/recover-password",
+  validationMiddleware([recoverPasswordSchema]),
+  authController.recoverPassword
 );
 
 export default router;

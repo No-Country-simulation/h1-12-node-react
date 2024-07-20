@@ -26,6 +26,9 @@ export class UsersService {
     }
 
     getByEmail = async(email) => {
+        if(!email){
+            throw new HttpError('missing email address', HTTP_CODES.BAD_REQUEST)
+        }
         const user = await User.findOne({ where: { email: email } })
         return user?.dataValues
     }

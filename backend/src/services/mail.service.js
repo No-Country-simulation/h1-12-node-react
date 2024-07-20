@@ -1,6 +1,9 @@
-import { EMAIL_ADDRESS } from "../config/env.config.js";
+import { EMAIL_ADDRESS, FRONT_LINK } from "../config/env.config.js";
 import { gmailTransport } from "../config/mail.config.js";
 import fs from "fs";
+import { HTTP_CODES } from "../utils/http-codes.util.js";
+import { HttpError } from "../utils/http-error.util.js";
+import { generateAccessToken } from "../utils/jwt.util.js";
 
 export class MailsService {
   newUserNotification = async (payload) => {
@@ -23,11 +26,12 @@ export class MailsService {
         break;
     }
 
-    let template = fs.readFileSync("src/mail-templates/template-1.html", "utf-8");
+    let template = fs.readFileSync("src/mail-templates/welcome.template.html", "utf-8");
 
-    template = template.replace(/{{roleLabel}}/g, roleLabel);
-    template = template.replace(/{{email}}/g, payload.email);
-    template = template.replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}` );
+    template = template
+      .replace(/{{roleLabel}}/g, roleLabel)
+      .replace(/{{email}}/g, payload.email)
+      .replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}` );
 
     await gmailTransport.sendMail({
       from: `Justina io <${EMAIL_ADDRESS}>`,
@@ -37,12 +41,24 @@ export class MailsService {
     });
   };
 
-  passwordRestoration = async () => {
-    await gmailTransport.sendMail({
-      from: "",
-      to: "",
-      subject: "",
-      html: "",
+  passwordRestoration = async (email, user) => {
+    console.log(user)
+
+    const token = generateAccessToken(user)
+    const link = `${FRONT_LINK}/reset-password?token=${token}`
+
+    let template = fs.readFileSync("src/mail-templates/password-recovering.template.html", "utf-8");
+    template = template
+      .replace(/{{full_name}}/g, `${user.first_name} ${user.last_name}` )
+      .replace(/{{email}}/g, email)
+      .replace(/{{link}}/g, link);
+
+    const emailSent = await gmailTransport.sendMail({
+      from: `Justina io <${EMAIL_ADDRESS}>`,
+      to: email,
+      subject: "Recuperación de contraseña",
+      html: template,
     });
+    return emailSent
   };
 }

@@ -27,10 +27,10 @@ export class UsersController {
     }
 
     updateUserPassword = async (req, res, next) => {
-        const { uid } = req.params
+        const user = req.user 
         const { password }= req.body
         try {
-            const updatedUser = await this.usersService.updatePassword(uid, password)
+            const updatedUser = await this.usersService.updatePassword(user.id, password)
             res.status(HTTP_CODES.SUCCESS).send(updatedUser)
         } catch (error) {
             next(error)

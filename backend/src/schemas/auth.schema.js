@@ -54,3 +54,9 @@ export const registerInstitutionSchema = z.object({
     institution_type: z.string()
   }),
 });
+
+export const recoverPasswordSchema = z.object({
+  body: z.object({
+    email: z.string().email()
+  }),
+});
