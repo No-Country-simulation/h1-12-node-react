@@ -32,8 +32,8 @@ export class AuthController {
     const payload = req.body;
     try {
       const user = await this.authService.registerUser(payload);
-      await this.mailsService.newUserNotification(payload);
-      res.status(HTTP_CODES.CREATED).json(user);
+      await this.mailsService.newUserNotification(payload, user);
+      res.status(HTTP_CODES.CREATED).json({payload, user});
     } catch (error) {
       next(error);
     }
