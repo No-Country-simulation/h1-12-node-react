@@ -1,4 +1,4 @@
-import { HealthInsurance } from "../database/models/healthinsurance.js"
+import { HealthInsurance } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 

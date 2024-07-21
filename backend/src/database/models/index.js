@@ -14,16 +14,20 @@ import { initRolesPermissions, RolesPermissions } from "./rolespermissions.js";
 import { initSpeciality, Speciality } from "./speciality.js";
 import { initPathology, Pathology } from "./pathology.js";
 import { initMedication, Medication } from "./medication.js";
+import config from "../config/config.js";
+const env = process.env.NODE_ENV || "development";
+const configEnv = config[env];
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: "mysql",
-  }
-);
+const sequelize = new Sequelize(configEnv.database, configEnv.username, configEnv.password, {
+  host: configEnv.host,
+  dialect: configEnv.dialect,
+  timezone: configEnv.timezone,
+  dialectOptions: configEnv.dialectOptions,
+  migrationStorage: configEnv.migrationStorage,
+  migrationStorageTableName: configEnv.migrationStorageTableName,
+  seedStorage: configEnv.seedStorage,
+  seedStorageTableName: configEnv.seedStorageTableName,
+});
 
 // Inicializar los modelos
 initUser(sequelize);

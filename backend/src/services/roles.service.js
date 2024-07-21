@@ -1,4 +1,4 @@
-import { Role } from "../database/models/role.js"
+import { Role } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 

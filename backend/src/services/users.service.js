@@ -1,5 +1,5 @@
-import { Role } from "../database/models/role.js"
-import { User } from "../database/models/user.js"
+import { Role } from "../database/models/index.js"
+import { User } from "../database/models/index.js"
 import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"

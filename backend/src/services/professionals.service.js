@@ -1,4 +1,4 @@
-import { Professional } from "../database/models/professional.js"
+import { Professional } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 

@@ -44,11 +44,11 @@ export default [
     { role_id: 1, permission_id: 42, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 1, permission_id: 43, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 1, permission_id: 44, createdAt: new Date(), updatedAt: new Date() },
-    { role_id: 2, permission_id: 45, createdAt: new Date(), updatedAt: new Date() },
-    { role_id: 2, permission_id: 46, createdAt: new Date(), updatedAt: new Date() },
-    { role_id: 2, permission_id: 47, createdAt: new Date(), updatedAt: new Date() },
-    { role_id: 2, permission_id: 48, createdAt: new Date(), updatedAt: new Date() },
-    { role_id: 2, permission_id: 49, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 45, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 46, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 47, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 48, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 49, createdAt: new Date(), updatedAt: new Date() },
 
     // Permisos del paciente
     { role_id: 2, permission_id: 9, createdAt: new Date(), updatedAt: new Date() },

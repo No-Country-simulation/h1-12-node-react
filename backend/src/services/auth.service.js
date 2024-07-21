@@ -1,8 +1,3 @@
-import { HealthInsurance } from "../database/models/healthinsurance.js"
-import { Institution } from "../database/models/institution.js"
-import { Patient } from "../database/models/patient.js"
-import { Professional } from "../database/models/professional.js"
-import { User } from "../database/models/user.js"
 import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
