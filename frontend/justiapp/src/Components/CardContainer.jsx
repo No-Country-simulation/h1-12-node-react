@@ -31,7 +31,7 @@ const Card = ({ bgColor, title, description }) => (
 );
 
 const CardContainer = ({ cardData }) => (
-  <div className="bg-yellow-100 flex w-11/12 flex-wrap  justify-center p-2 gap-5">
+  <div className=" flex w-11/12 flex-wrap  justify-center p-2 gap-5">
     {cardData.map((card) => (
       <Card
         key={card.id}

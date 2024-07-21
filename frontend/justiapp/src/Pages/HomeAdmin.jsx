@@ -1,5 +1,7 @@
 //HomeAdmin.jsx me
 import React, { useContext } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import RegisterUserForm from "../Pages/MaintenanceNotice ";
 import Navbar from "../Components/Navbar";
 import { AuthContext } from "../context/AuthContext";
 import CardContainer from "../Components/CardContainer";
@@ -8,25 +10,25 @@ const cardData = [
   {
     id: 1,
     bgColor: "bg-mynaval",
-    title: "Crear\nprofesional\nde la salud",
+    title: "Registrar\nprofesional\nde la salud",
     description: "Asegúrate de tener los datos",
   },
   {
     id: 2,
     bgColor: "bg-mygreen",
-    title: "Crear\nprestador\nde salud",
+    title: "Registrar\nprestador\nde salud",
     description: "Asegúrate de tener los datos",
   },
   {
     id: 3,
     bgColor: "bg-mypink",
-    title: "Crear\npaciente",
+    title: "Registrar\npaciente",
     description: "Asegúrate de tener los datos",
   },
   {
     id: 4,
     bgColor: "bg-sky00",
-    title: "Crear\ninstitución\nde salud",
+    title: "Registrar\ninstitución\nde salud",
     description: "Asegúrate de tener los datos",
   },
 ];
@@ -69,19 +71,23 @@ export default function HomeAdmin(props) {
                   </summary>
                   <ul class="bg-base-100 rounded-t-none z-10 p-2">
                     <li class="w-full">
-                      <a>Profesional de la salud</a>
+                      <Link to="/homeadmin/register-professional">
+                        Profesional de la salud
+                      </Link>
                     </li>
                     <li class="w-full">
-                      <a>Institución de salud</a>
+                      <Link to="/homeadmin/register-institution">
+                        Institución de salud
+                      </Link>
                     </li>
                     <li class="w-full">
-                      <a>Paciente</a>
+                      <Link to="/homeadmin/register-patient">Paciente</Link>
                     </li>
                   </ul>
                 </details>
               </li>
             </ul>
-            <button class=" btn btn-xs border-none bg-sky-500 flex-1 rounded-lg flex justify-center items-center h-12">
+            <button class=" btn btn-primary btn-xs border-none bg-sky-500 flex-1 rounded-lg flex justify-center items-center h-12">
               <span class="text-center p-0 text-white text-sm font-normal font-sans leading-tight tracking-tight">
                 Usuarios creados
               </span>
