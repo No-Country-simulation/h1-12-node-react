@@ -7,25 +7,25 @@ import CardContainer from "../Components/CardContainer";
 const cardData = [
   {
     id: 1,
-    bgColor: "bg-cyan-800",
+    bgColor: "bg-mynaval",
     title: "Crear\nprofesional\nde la salud",
     description: "Asegúrate de tener los datos",
   },
   {
     id: 2,
-    bgColor: "bg-emerald-600",
+    bgColor: "bg-mygreen",
     title: "Crear\nprestador\nde salud",
     description: "Asegúrate de tener los datos",
   },
   {
     id: 3,
-    bgColor: "bg-pink-700",
+    bgColor: "bg-mypink",
     title: "Crear\npaciente",
     description: "Asegúrate de tener los datos",
   },
   {
     id: 4,
-    bgColor: "bg-sky-500",
+    bgColor: "bg-sky00",
     title: "Crear\ninstitución\nde salud",
     description: "Asegúrate de tener los datos",
   },
@@ -36,12 +36,15 @@ export default function HomeAdmin(props) {
     <>
       <Navbar />
       <main className="flex  bg-slate-200  items-center justify-center pt-24 w-full  ">
-        <div className=" sm:max-w-6xl w-11/12 flex flex-col justify-center items-center bg-white rounded-xl shadow-lg">
-          <div className="w-11/12 p-4 rounded-lg border-2 border-sky-900/90 flex flex-col justify-center items-start gap-4">
+        <div className="sm:max-w-6xl pt-8  w-11/12 flex flex-col justify-center items-center bg-white rounded-xl shadow-lg">
+          <div className="w-11/12 p-4 rounded-lg border-2 border-fuchsia-900 flex flex-col justify-center items-start gap-4">
             <div className=" w-full flex justify-start items-center gap-4">
-              <div className="avatar  w-14 h-14 relative rounded-full border-2 border-sky-900/90">
+              <div className="avatar   w-14 h-14 relative rounded-full border-2  border-fuchsia-900">
                 <div className=" w-full h-full object-cover rounded-full ">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  <img
+                    alt="avatar"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  />
                 </div>
               </div>
 
@@ -57,33 +60,34 @@ export default function HomeAdmin(props) {
               </div>
             </div>
           </div>
-          <div className="conainer bg-yellow-300 sm:max-w-6xl w-11/12 flex justify-around">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <details className="p-2  bg-indigo-600 rounded-lg justify-center items-center inline-flex">
-                  <summary className="text-white text-sm font-normal font-['Open Sans'] leading-tight tracking-tight">
+          <div class="container sm:max-w-6xl w-11/12 flex justify-between  items-center">
+            <ul class="menu flex-1  menu-horizontal ">
+              <li class="w-full">
+                <details class="w-full  bg-mycustomblue rounded-lg flex justify-center items-center h-12">
+                  <summary class="text-white text-sm font-normal font-sans leading-tight tracking-tight">
                     Registrar usuario
                   </summary>
-                  <ul className="bg-base-100 rounded-t-none z-10 p-2">
-                    <li>
+                  <ul class="bg-base-100 rounded-t-none z-10 p-2">
+                    <li class="w-full">
                       <a>Profesional de la salud</a>
                     </li>
-                    <li>
-                      <a>institucion de salud</a>
+                    <li class="w-full">
+                      <a>Institución de salud</a>
                     </li>
-                    <li>
+                    <li class="w-full">
                       <a>Paciente</a>
                     </li>
                   </ul>
                 </details>
               </li>
             </ul>
-            <button className=" bg-sky-500 rounded-lg justify-center items-center gap-2 inline-flex">
-              <p className="text-center text-white text-sm font-normal font-['Open Sans'] leading-tight tracking-tight">
+            <button class=" btn btn-xs border-none bg-sky-500 flex-1 rounded-lg flex justify-center items-center h-12">
+              <span class="text-center p-0 text-white text-sm font-normal font-sans leading-tight tracking-tight">
                 Usuarios creados
-              </p>
+              </span>
             </button>
           </div>
+
           <CardContainer cardData={cardData} />
         </div>
       </main>

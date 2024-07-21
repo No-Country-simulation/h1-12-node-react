@@ -1,5 +1,5 @@
 const Card = ({ bgColor, title, description }) => (
-  <div className={`max-w-32 p-4 ${bgColor} rounded-xl`}>
+  <div className={`w-5/12 flex flex-col gap-3 py-3 px-4 ${bgColor} rounded-xl`}>
     <div className=" flex flex-col  ">
       <div className=" flex flex-col  ">
         <h1 className="  text-white text-base font-bold font-lato leading-tight">
@@ -10,7 +10,7 @@ const Card = ({ bgColor, title, description }) => (
     <div className=" text-white text-sm font-normal font-sans leading-none">
       {description}
     </div>
-    <button className="btn outl">
+    <button className="btn btn-circle btn-xs border-none">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -31,7 +31,7 @@ const Card = ({ bgColor, title, description }) => (
 );
 
 const CardContainer = ({ cardData }) => (
-  <div className="flex flex-wrap sm:max-w-xs max-w-96 justify-center p-2 gap-5">
+  <div className="bg-yellow-100 flex w-11/12 flex-wrap  justify-center p-2 gap-5">
     {cardData.map((card) => (
       <Card
         key={card.id}

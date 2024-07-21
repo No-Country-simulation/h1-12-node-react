@@ -4,10 +4,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* Clase personalizada para el botón primario */
-.btn-custom-primary {
-  @apply btn w-80 h-14 px-4 py-3.5 bg-gray-700 text-white border border-gray-700 rounded-lg flex justify-center items-center gap-2;
+@layer components {
+  .btn-custom-primary {
+    @apply btn w-80 h-14 px-4 py-3.5 bg-gray-700 text-white border border-gray-700 rounded-lg flex justify-center items-center gap-2;
+  }
 }
+
 
 body, #root {
   display: flex;
