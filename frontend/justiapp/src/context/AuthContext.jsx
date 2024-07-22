@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await fetch(
-        "https://backend-y8ns.onrender.com/api/auth/login",
+        "https://h1-12-node-react.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {
