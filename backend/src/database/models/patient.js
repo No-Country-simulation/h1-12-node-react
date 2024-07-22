@@ -10,10 +10,6 @@ export class Patient extends Model {
       foreignKey: "user_id",
       as: "user",
     });
-    // this.belongsTo(models.Treatment, {
-    //   foreignKey: 'active_treatment',
-    //   as: 'active_treatment'
-    // })
     this.belongsTo(models.HealthInsurance, {
       foreignKey: "health_insurance_id",
       as: "health_insurance",

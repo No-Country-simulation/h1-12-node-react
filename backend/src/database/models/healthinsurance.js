@@ -11,6 +11,12 @@ export class HealthInsurance extends Model {
       foreignKey: "user_id",
       as: "user",
     });
+    this.belongsToMany(models.Professional, {
+      through: "insurance_professionals",
+      foreignKey: "health_insurance_id",
+      otherKey: "professional_id",
+      as: "professionals",
+    });
   }
 }
 

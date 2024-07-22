@@ -1,10 +1,5 @@
 import { Model, DataTypes } from "sequelize";
 export class Professional extends Model {
-  /**
-   * Helper method for defining associations.
-   * This method is not a part of Sequelize lifecycle.
-   * The `models/index` file will call this method automatically.
-   */
   static associate(models) {
     this.belongsTo(models.User, {
       foreignKey: "user_id",
@@ -17,6 +12,24 @@ export class Professional extends Model {
     this.hasMany(models.Patient, {
       foreignKey: "head_professional_id",
       as: "patients",
+    });
+    this.belongsToMany(models.Institution, {
+      through: "institution_professionals",
+      foreignKey: "professional_id",
+      otherKey: "institution_id",
+      as: "institutions",
+    });
+    this.belongsToMany(models.Treatment, {
+      through: "treatment_professionals",
+      foreignKey: "professional_id",
+      otherKey: "treatment_id",
+      as: "treatments",
+    });
+    this.belongsToMany(models.HealthInsurance, {
+      through: "insurance_professionals",
+      foreignKey: "professional_id",
+      otherKey: "health_insurance_id",
+      as: "insurances",
     });
   }
 }

@@ -19,16 +19,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      active_treatment: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        // references: {
-        //   model: 'treatments',
-        //   key: 'id'
-        // },
-        // onUpdate: 'CASCADE',
-        // onDelete: 'CASCADE'
-      },
       health_insurance_id: {
         type: Sequelize.INTEGER,
         allowNull: true,

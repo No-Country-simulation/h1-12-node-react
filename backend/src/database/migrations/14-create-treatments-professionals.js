@@ -11,9 +11,21 @@ module.exports = {
       },
       treatment_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Treatments',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       professional_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Professionals',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       incorporation_date: {
           type: Sequelize.DATE,

@@ -2,44 +2,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('roles_permissions', {
+    await queryInterface.createTable('insurance_professionals', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      role_id: {
+      health_insurance_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'roles',
+          model: 'health_insurances',
           key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      permission_id: {
+      professional_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'permissions',
+          model: 'professionals',
           key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('roles_permissions');
+    await queryInterface.dropTable('insurance_professionals');
   }
 };

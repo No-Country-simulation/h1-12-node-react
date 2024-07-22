@@ -26,7 +26,6 @@ export class PatientsService {
         }
         const newPatient = {
             user_id,
-            active_tratment: null,
             health_insurance_id: null,
             head_professional_id: null,
             sex: null,
@@ -41,8 +40,8 @@ export class PatientsService {
         if(!pid){
             throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }
-        const { sex, blood_factor, birthdate, active_treatment } = payload
-        if(!sex && !blood_factor && !birthdate &&!active_treatment){
+        const { sex, blood_factor, birthdate } = payload
+        if(!sex && !blood_factor && !birthdate){
             return
         }
         const patient = await this.getById(+pid)
@@ -54,9 +53,6 @@ export class PatientsService {
         }
         if(birthdate){
             patient.birthdate = new Date(birthdate)
-        }
-        if(active_treatment){
-            patient.active_treatment = +active_treatment
         }
         const updatedPatient = await patient.save()
         return updatedPatient

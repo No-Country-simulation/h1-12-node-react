@@ -9,6 +9,12 @@ export class Treatment extends Model {
       foreignKey: "pathology_id",
       as: "pathology",
     });
+    this.belongsToMany(models.Professional, {
+      through: "institution_treatments",
+      foreignKey: "institution_id",
+      otherKey: "treatment_id",
+      as: "treatments",
+    });
   }
 }
 
@@ -29,7 +35,7 @@ export const initTreatment = (sequelize) => {
           allowNull: false,
           type: DataTypes.INTEGER,
         },
-        cylce: { 
+        cycle: { 
           type: DataTypes.ENUM,
           values: ['created', 'current', 'finished'],
           allowNull: false,
