@@ -3,7 +3,7 @@ import { MedicationsController } from '../controllers/medications.controller.js'
 import { authenticationMiddleware } from '../middlewares/authentication.middleware.js'
 import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
-import { midParam, mqueryParam } from '../schemas/medication.schema.js'
+import { midParam, mqueryParam, mdrugParam } from '../schemas/medication.schema.js'
 
 const router = Router()
 const medicationsController = new MedicationsController()
@@ -26,6 +26,13 @@ router.get('/:mid',
     authenticationMiddleware,
     authorizationMiddleware(["get-medication"]),
     medicationsController.getMedicationById
+)
+
+router.get('/drug/:mdrug',
+    validationMiddleware([mdrugParam]),
+    authenticationMiddleware,
+    authorizationMiddleware(["get-medications"]),
+    medicationsController.getMedicationByDrug
 )
 
 export default router
