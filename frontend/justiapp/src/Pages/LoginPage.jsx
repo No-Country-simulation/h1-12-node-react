@@ -1,8 +1,9 @@
 //LoginPage.jsx
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import justinaHeart from "../images/justinaHeart.svg";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 export default function LoginPage() {
   //autenticación
@@ -11,43 +12,76 @@ export default function LoginPage() {
     username: "",
     password: "",
   });
+  const navigate = useNavigate();
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    form: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [isTyped, setIsTyped] = useState(false);
-  // const [errors, setErrors] = useState({ username: "", password: "" });
-  // Maneja el envío del formulario y realiza la autenticación
+  const [isTyped, setIsTyped] = useState({
+    username: false,
+    password: false,
+  });
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
+  const [lockTimeout, setLockTimeout] = useState(null);
+
+  useEffect(() => {
+    if (loginAttempts >= 5) {
+      setIsLocked(true);
+      const timeoutId = setTimeout(() => {
+        setIsLocked(false);
+        setLoginAttempts(0);
+      }, 60000); // Bloquear durante 1 minuto
+      setLockTimeout(timeoutId);
+    }
+    return () => clearTimeout(lockTimeout);
+  }, [loginAttempts]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = credentials;
+
+    // Limpiar errores anteriores
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      form: "",
+    }));
+
+    if (isLocked) return; // No permitir enviar el formulario si está bloqueado
 
     if (username && password && !errors.username && !errors.password) {
       try {
         await login({ username, password });
         navigate("/homeadmin");
       } catch (error) {
+        console.log(error);
+        setLoginAttempts((prevAttempts) => prevAttempts + 1);
         setErrors((prevErrors) => ({
           ...prevErrors,
-          form: "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+          form:
+            error.message ||
+            "Error al iniciar sesión. Por favor, verifica tus credenciales.",
         }));
       }
     } else {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        form: "Por favor, completa todos los campos correctamente.",
+        form:
+          username && password
+            ? ""
+            : "Por favor, completa todos los campos correctamente.",
       }));
     }
   };
 
-  const navigate = useNavigate();
-
-  // Maneja los cambios en los campos de entrada y valida la entrada
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
     validateInput(name, value);
   };
-
   const validateInput = (name, value) => {
     let errorMessage = "";
 
@@ -164,10 +198,14 @@ export default function LoginPage() {
           </label>
           <button
             type="submit"
+            disabled={isLocked}
             className="w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151]"
           >
             Ingresar
           </button>
+          {errors.form && (
+            <div className="text-xs text-red-500 mt-1">{errors.form}</div>
+          )}
         </form>
 
         <div className="w-80 h-3.5 flex-col justify-center items-center gap-6 inline-flex">
@@ -192,41 +230,61 @@ export default function LoginPage() {
   );
 }
 /*
-  const handleUsernameChange = (e) => {
-    const value = e.target.value.slice(0, 15); // Recortar si excede 15 caracteres
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { username, password } = credentials;
 
-    let errorMessage = "";
-    if (!value) {
-      errorMessage = "El usuario es requerido";
-    } else if (!/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(value)) {
-      errorMessage =
-        "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
+    if (username && password && !errors.username && !errors.password) {
+      try {
+        await login({ username, password });
+        navigate("/homeadmin");
+      } catch (error) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          form: "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+        }));
+      }
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "Por favor, completa todos los campos correctamente.",
+      }));
     }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      username: errorMessage,
-    }));
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
 
-    setIsTyped(value.length > 0);
+  // Maneja los cambios en los campos de entrada y valida la entrada
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+    validateInput(name, value);
+  };
 
+  const validateInput = (name, value) => {
     let errorMessage = "";
-    if (!value) {
-      errorMessage = "La contraseña es requerida";
-    } else if (value.length < 8 || value.length > 15) {
-      errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
-    } else if (!/[a-z]/.test(value)) {
-      errorMessage = "La contraseña debe tener al menos una minúscula";
+
+    if (name === "username") {
+      console.log(value);
+      const trimmedValue = value.slice(0, 15);
+      if (!trimmedValue) {
+        errorMessage = "El usuario es requerido";
+      } else if (
+        !/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(trimmedValue)
+      ) {
+        errorMessage =
+          "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
+      }
+    } else if (name === "password") {
+      setIsTyped(value.length > 0);
+      if (!value) {
+        errorMessage = "La contraseña es requerida";
+      } else if (value.length < 8 || value.length > 15) {
+        errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
+      } else if (!/[a-z]/.test(value)) {
+        errorMessage = "La contraseña debe tener al menos una minúscula";
+      }
     }
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: errorMessage,
-    }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
   };
-  
 */
