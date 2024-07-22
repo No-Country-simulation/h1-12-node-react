@@ -30,10 +30,7 @@ export class TreatmentsService {
             await this.pathologiesService.getById(+pathology_id)
         }
         if(patient_id){
-            await this.patientsService.getById(+patient_id)
-        }
-        if(patient.dataValues.active_treatment){
-            throw new HttpError('Patient has a current treatment', HTTP_CODES.BAD_REQUEST)
+            await this.patientsService.getById(patient_id)
         }
         const newTreatment = {
             pathology_id: +pathology_id,
@@ -44,16 +41,15 @@ export class TreatmentsService {
             finish_date
         }
         const treatment = await Treatment.create(newTreatment)
-        await this.patientsService.updatePatient(patient_id, {active_treatment: treatment.id})
         return treatment
     }
 
     update = async(tid, payload) => {
         const { pathology_id, cycle, status, finish_date } = payload
-        const treatment = await this.getById(+tid)
+        const treatment = await this.getById(tid)
         if(pathology_id){
-            await this.pathologiesService.getById(+pathology_id)
-            treatment.pathology_id = +pathology_id
+            await this.pathologiesService.getById(pathology_id)
+            treatment.pathology_id = pathology_id
         }
         if(cycle){
             treatment.cycle = cycle

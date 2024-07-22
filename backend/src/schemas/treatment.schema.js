@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const tidParam = z.object({
   params: z.object({
-    tid: z.string().regex(/^\d+$/, "TID must be a numeric string"),
+    tid: z.string().regex(/^\d+$/, "TID must be a numeric string").refine((val) => {
+      const number = parseInt(val, 10);
+      return number >= 1;
+    }, "TID must be greater than or equal to 1")
   })
 });
 

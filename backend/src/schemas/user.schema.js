@@ -2,7 +2,10 @@ import { string, z } from "zod";
 
 export const uidParam = z.object({
   params: z.object({
-    uid: z.string().regex(/^\d+$/, "UID must be a numeric string"),
+    uid: z.string().regex(/^\d+$/, "UID must be a numeric string").refine((val) => {
+      const number = parseInt(val, 10);
+      return number >= 1;
+    }, "UID must be greater than or equal to 1")
   })
 });
 

@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const pidParam = z.object({
   params: z.object({
-    pid: z.string().regex(/^\d+$/, "PID must be a numeric string"),
+    pid: z.string().regex(/^\d+$/, "PID must be a numeric string").refine((val) => {
+      const number = parseInt(val, 10);
+      return number >= 1;
+    }, "PID must be greater than or equal to 1")
   })
 });
 
