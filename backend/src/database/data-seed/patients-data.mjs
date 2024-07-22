@@ -3,7 +3,6 @@ export default [
         id: 1,
         health_insurance_id: 1,
         user_id: 2,
-        active_treatment: null,
         head_professional_id: null,
         sex: null,
         blood_factor: null,

@@ -24,4 +24,12 @@ export class MedicationsService {
         }
         return medication
     }
+
+    getByDrug = async (mdrug) => {
+        const medication = await Medication.findAll({ where: { drug: mdrug } })
+        if(!medication){
+            throw new HttpError('Medication not found', HTTP_CODES.NOT_FOUND)
+        }
+        return medication
+    }
 }

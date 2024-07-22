@@ -36,4 +36,14 @@ export class MedicationsController {
         }
     }
 
+    getMedicationByDrug = async (req, res, next) => {
+        const { mdrug } = req.params
+        try {
+            const medication = await this.medicationsService.getByDrug(mdrug)
+            res.status(HTTP_CODES.SUCCESS).send(medication)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

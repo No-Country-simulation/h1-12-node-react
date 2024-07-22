@@ -14,3 +14,9 @@ export const mqueryParam = z.object({
         mquery: z.string().min(3, "Mquery must be at least 3 characters long"),
     })
   });
+
+export const mdrugParam = z.object({
+  params: z.object({
+    mdrug: z.string().min(3, "Mdrug must be at least 3 characters long")
+  })
+})
