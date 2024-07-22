@@ -46,12 +46,12 @@ initMedication(sequelize);
 initTreatment(sequelize)
 
 // Configurar las asociaciones
-HealthInsurance.associate({ User });
+HealthInsurance.associate({ User, Professional });
 Institution.associate({ User, Professional });
 InstitutionProfessionals.associate({});
 Patient.associate({ User, HealthInsurance, Professional });
 Permission.associate({ Role });
-Professional.associate({ User, Speciality, Patient });
+Professional.associate({ User, Speciality, Patient, HealthInsurance, Treatment, Institution });
 Role.associate({ User, Permission });
 RolesPermissions.associate({});
 Speciality.associate({ Professional });
