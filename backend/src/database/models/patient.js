@@ -45,7 +45,7 @@ export const initPatient = (sequelize) => {
       sequelize,
       modelName: "Patient",
       tableName: "patients",
-      paranoid: true,
+      paranoid: false,
     }
   );
   return Patient;

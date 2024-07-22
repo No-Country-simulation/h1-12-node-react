@@ -30,7 +30,7 @@ export const initHealthInsurance = (sequelize) => {
       sequelize,
       modelName: "HealthInsurance",
       tableName: "health_insurances",
-      paranoid: true,
+      paranoid: false,
     }
   );
   return HealthInsurance;

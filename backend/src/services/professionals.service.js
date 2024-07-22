@@ -35,10 +35,10 @@ export class ProfessionalsService {
         const professional = await this.findByUserId(uid)
 
         if(registration_number){
-            professional.registration_number = +registration_number
+            professional.registration_number = registration_number
         }
         if(speciality_id){
-            professional.speciality_id = +speciality_id
+            professional.speciality_id = speciality_id
         }
         const updatedProfessional = await professional.save()
         return updatedProfessional

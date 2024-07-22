@@ -49,7 +49,7 @@ export const initUser = (sequelize) => {
       sequelize,
       modelName: "User",
       tableName: "users",
-      paranoid: true,
+      paranoid: false,
     }
   );
 };
