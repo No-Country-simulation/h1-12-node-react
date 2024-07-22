@@ -6,6 +6,14 @@ export class PatientsService {
 
     constructor(){}
 
+    getById = async (pid) => {
+        const patient = await Patient.findByPk(+pid)
+        if(!patient){
+            throw new HttpError('Patient not found', HTTP_CODES.NOT_FOUND)
+        }
+        return patient
+    }
+
     findByUserId = async(uid) => {
         const patient = await Patient.findOne({ where: { user_id: +uid } })
         return patient
@@ -29,16 +37,15 @@ export class PatientsService {
         return patient
     }
 
-    updatePatient = async(uid, payload) => {
-        if(!uid){
+    updatePatient = async(pid, payload) => {
+        if(!pid){
             throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }
-        const { sex, blood_factor, birthdate } = payload
-        if(!sex && !blood_factor && !birthdate){
+        const { sex, blood_factor, birthdate, active_treatment } = payload
+        if(!sex && !blood_factor && !birthdate &&!active_treatment){
             return
         }
-        const patient = await this.findByUserId(uid)
-
+        const patient = await this.getById(+pid)
         if(sex){
             patient.sex = sex
         }
@@ -47,6 +54,9 @@ export class PatientsService {
         }
         if(birthdate){
             patient.birthdate = new Date(birthdate)
+        }
+        if(active_treatment){
+            patient.active_treatment = +active_treatment
         }
         const updatedPatient = await patient.save()
         return updatedPatient

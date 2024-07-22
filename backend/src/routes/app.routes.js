@@ -6,6 +6,7 @@ import permissionsRoutes from './permissions.routes.js'
 import specialitiesRoutes from './specialities.routes.js'
 import pathologiesRoutes from './pathologies.routes.js'
 import medicationsRoutes from './medications.routes.js'
+import treatmentsRoutes from './treatments.routes.js'
 
 const router = Router()
 
@@ -16,6 +17,7 @@ router.use('/permissions', permissionsRoutes)
 router.use('/specialities', specialitiesRoutes)
 router.use('/pathologies', pathologiesRoutes)
 router.use('/medications', medicationsRoutes)
+router.use('/treatments', treatmentsRoutes)
 
 
 export default router

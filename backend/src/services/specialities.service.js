@@ -25,6 +25,14 @@ export class SpecialitiesService {
         return speciality
     }
 
+    update = async(rid, payload) => {
+        const { speciality_name } = payload
+        const speciality = await this.getById(rid)
+        speciality.speciality_name = speciality_name
+        const updatedSpecility = await speciality.save()
+        return updatedSpecility
+    }
+
     delete = async (sid) => {
         const speciality = await this.getById(sid)
         const deletedSpeciality = await speciality.destroy()

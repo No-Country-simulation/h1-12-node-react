@@ -36,6 +36,17 @@ export class SpecialitiesController {
         }
     }
 
+    updateSpeciality = async (req, res, next) => {
+        const payload = req.body
+        const { sid } = req.params
+        try {
+            const updatedSpecility = await this.specialitiesService.update(sid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedSpecility)
+        } catch (error) {
+            next(error)
+        } 
+    }
+
     deleteSpeciality = async (req, res, next) => {
         const { sid } = req.params
         try {

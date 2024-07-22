@@ -37,6 +37,14 @@ export class RolesService {
         return role
     }
 
+    update = async(rid, payload) => {
+        const { role_name } = payload
+        const role = await this.getById(rid)
+        role.role_name = role_name
+        const updatedRole = await role.save()
+        return updatedRole
+    }
+
     delete = async (rid) => {
         const role = await this.getById(rid)
         const deletedRole = await role.destroy()

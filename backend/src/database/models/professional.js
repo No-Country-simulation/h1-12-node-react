@@ -24,6 +24,12 @@ export class Professional extends Model {
 export const initProfessional = (sequelize) => {
   Professional.init(
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       user_id: DataTypes.INTEGER,
       speciality_id: DataTypes.INTEGER,
       registration_number: DataTypes.STRING,

@@ -12,3 +12,11 @@ export const createPermissionSchema = z.object({
         role_ids: z.array(z.number())
     })
 });
+
+
+export const updatedPermissionSchema = z.object({
+  body: z.object({
+      permission: z.string().optional(),
+      role_ids: z.array(z.number()).optional()
+  })
+});

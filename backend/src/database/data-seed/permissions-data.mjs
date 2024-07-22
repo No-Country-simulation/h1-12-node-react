@@ -54,4 +54,10 @@ export default [
     { id: 47, permission: 'create-medication', createdAt: new Date(), updatedAt: new Date() },
     { id: 48, permission: 'update-medication', createdAt: new Date(), updatedAt: new Date() },
     { id: 49, permission: 'delete-medication', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 50, permission: 'get-treatments', createdAt: new Date(), updatedAt: new Date() },
+    { id: 51, permission: 'get-treatment', createdAt: new Date(), updatedAt: new Date() },
+    { id: 52, permission: 'create-treatment', createdAt: new Date(), updatedAt: new Date() },
+    { id: 53, permission: 'update-treatment', createdAt: new Date(), updatedAt: new Date() },
+    { id: 54, permission: 'delete-treatment', createdAt: new Date(), updatedAt: new Date() },
 ]

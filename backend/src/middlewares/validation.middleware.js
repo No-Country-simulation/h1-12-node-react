@@ -1,5 +1,4 @@
 import { HTTP_CODES } from "../utils/http-codes.util.js";
-import { HttpError } from "../utils/http-error.util.js";
 import { z } from 'zod';
 
 export const validationMiddleware = (schemas) => (req, res, next) => {

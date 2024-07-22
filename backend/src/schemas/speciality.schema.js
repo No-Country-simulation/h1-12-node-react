@@ -11,3 +11,10 @@ export const createSpecialitySchema = z.object({
         speciality_name: z.string()
     })
 });
+
+
+export const updateSpecialitySchema = z.object({
+  body: z.object({
+      speciality_name: z.string().optional()
+  })
+});

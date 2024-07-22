@@ -3,7 +3,7 @@ import { UsersController } from '../controllers/users.controller.js'
 import { authenticationMiddleware } from '../middlewares/authentication.middleware.js'
 import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
-import { uidParam, passwordSchema } from '../schemas/user.schema.js'
+import { uidParam, passwordSchema, updateUserSchema } from '../schemas/user.schema.js'
 import { storage } from '../utils/storage.util.js'
 import multer from 'multer'
 
@@ -26,8 +26,8 @@ router.get('/:uid',
 )
 
 router.patch('/:uid', 
-    // validationMiddleware([userSchema]),
     upload.single('image'),
+    validationMiddleware([updateUserSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["update-user"]),
     usersController.updateUser
