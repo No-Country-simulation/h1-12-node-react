@@ -31,7 +31,7 @@ router.post('/',
 router.patch('/:sid', 
     validationMiddleware([sidParam, updateSpecialitySchema]),
     authenticationMiddleware,
-    authorizationMiddleware(["update-role"]),
+    authorizationMiddleware(["update-speciality"]),
     specialitiesController.updateSpeciality
 )
 

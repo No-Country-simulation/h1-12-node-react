@@ -1,5 +1,6 @@
 import { UsersService } from "../services/users.service.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
+import { HttpError } from "../utils/http-error.util.js"
 
 export class UsersController {
 
@@ -29,10 +30,12 @@ export class UsersController {
     updateUser = async(req, res, next) => {
         const { uid } = req.params
         const payload = req.body
-        if(req.file && req.file.path){
-            payload.image = req.file.path
-        }
         try {
+            if(!req.file || !req.file.path){
+                throw new HttpError('File missing', HTTP_CODES.INTERNAL_SERVER_ERROR)
+            }else{
+                payload.image = req.file.path
+            }
             const updatedUser = await this.usersService.update(uid, payload)
             res.status(HTTP_CODES.SUCCESS).send(updatedUser)
         } catch (error) {

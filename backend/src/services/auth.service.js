@@ -1,7 +1,7 @@
 import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
-import { InstitutionsService } from "./institution.service.js"
+import { InstitutionsService } from "./institutions.service.js"
 import { InsurancesService } from "./insurances.service.js"
 import { PatientsService } from "./patients.service.js"
 import { ProfessionalsService } from "./professionals.service.js"

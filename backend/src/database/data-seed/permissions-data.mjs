@@ -60,4 +60,10 @@ export default [
     { id: 52, permission: 'create-treatment', createdAt: new Date(), updatedAt: new Date() },
     { id: 53, permission: 'update-treatment', createdAt: new Date(), updatedAt: new Date() },
     { id: 54, permission: 'delete-treatment', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 55, permission: 'get-documents', createdAt: new Date(), updatedAt: new Date() },
+    { id: 56, permission: 'get-document', createdAt: new Date(), updatedAt: new Date() },
+    { id: 57, permission: 'create-document', createdAt: new Date(), updatedAt: new Date() },
+    { id: 58, permission: 'update-document', createdAt: new Date(), updatedAt: new Date() },
+    { id: 59, permission: 'delete-document', createdAt: new Date(), updatedAt: new Date() },
 ]

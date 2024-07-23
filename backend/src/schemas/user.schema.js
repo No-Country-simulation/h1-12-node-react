@@ -11,7 +11,6 @@ export const uidParam = z.object({
 
 export const updateUserSchema = z.object({
   body: z.object({
-    image: z.string().optional(),
     first_name: z.string().optional(),
     last_name: z.string().optional(),
     dni: z.string().min(7, 'DNI must contain at least 7 characters').max(9, 'DNI must contain less than 10 characters').optional(),

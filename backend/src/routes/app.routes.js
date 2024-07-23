@@ -7,6 +7,7 @@ import specialitiesRoutes from './specialities.routes.js'
 import pathologiesRoutes from './pathologies.routes.js'
 import medicationsRoutes from './medications.routes.js'
 import treatmentsRoutes from './treatments.routes.js'
+import documentsRoutes from './documents.routes.js'
 
 const router = Router()
 
@@ -18,6 +19,7 @@ router.use('/specialities', specialitiesRoutes)
 router.use('/pathologies', pathologiesRoutes)
 router.use('/medications', medicationsRoutes)
 router.use('/treatments', treatmentsRoutes)
+router.use('/documents', documentsRoutes)
 
 
 export default router
