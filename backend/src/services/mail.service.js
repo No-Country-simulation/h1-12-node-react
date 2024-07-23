@@ -35,6 +35,7 @@ export class MailsService {
       .replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}` )
       .replace(/{{link}}/g, link )
       .replace(/{{front-link}}/g, FRONT_LINK)
+      .replace(/{{username}}/g, user.username)
 
     await gmailTransport.sendMail({
       from: `Justina io <${EMAIL_ADDRESS}>`,
@@ -61,6 +62,7 @@ export class MailsService {
       .replace(/{{email}}/g, email)
       .replace(/{{link}}/g, link)
       .replace(/{{front-link}}/g,  FRONT_LINK)
+      .replace(/{{username}}/g, user.username)
 
     const emailSent = await gmailTransport.sendMail({
       from: `Justina io <${EMAIL_ADDRESS}>`,
