@@ -64,14 +64,10 @@ Role.associate({ User, Permission });
 RolesPermissions.associate({});
 Speciality.associate({ Professional });
 User.associate({ Role });
-Treatment.associate({ Patient, Pathology, Professional })
+Treatment.associate({ Patient, Pathology, Professional, Medication })
 Document.associate({ Treatment })
+Medication.associate({ Treatment })
 
-// Tablas intermedias
-InstitutionProfessionals.associate({});
-MedicationTreatments.associate({});
-RolesPermissions.associate({});
-InsuranceProfessionals.associate({});
 
 export {
   sequelize,
