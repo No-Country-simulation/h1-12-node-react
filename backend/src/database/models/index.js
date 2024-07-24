@@ -4,7 +4,7 @@ import { initRole, Role } from "./role.js";
 import { initHealthInsurance, HealthInsurance } from "./healthinsurance.js";
 import { initInstitution, Institution } from "./institution.js";
 import {
-  initInstitutionsProfessional,
+  initInstitutionProfessionals,
   InstitutionProfessionals,
 } from "./institutionprofessionals.js";
 import { initPatient, Patient } from "./patient.js";
@@ -17,6 +17,9 @@ import { initMedication, Medication } from "./medication.js";
 import config from "../config/config.js";
 import { initTreatment, Treatment } from "./treatment.js";
 import { initDocument, Document } from "./document.js";
+import { initMedicationTreatments, MedicationTreatments } from "./medicationtreatments.js";
+import { initInsuranceProfessionals, InsuranceProfessionals } from "./healthinsuranceprofessionals.js";
+import { initTreatmentProfessionals, TreatmentProfessionals } from "./treatmentprofessionals.js";
 const env = process.env.NODE_ENV || "development";
 const configEnv = config[env];
 
@@ -36,7 +39,7 @@ initUser(sequelize);
 initRole(sequelize);
 initHealthInsurance(sequelize);
 initInstitution(sequelize);
-initInstitutionsProfessional(sequelize);
+initInstitutionProfessionals(sequelize);
 initPatient(sequelize);
 initPermission(sequelize);
 initProfessional(sequelize);
@@ -44,13 +47,16 @@ initRolesPermissions(sequelize);
 initSpeciality(sequelize);
 initPathology(sequelize);
 initMedication(sequelize);
-initTreatment(sequelize)
-initDocument(sequelize)
+initTreatment(sequelize);
+initDocument(sequelize);
+initMedicationTreatments(sequelize);
+initInsuranceProfessionals(sequelize);
+initTreatmentProfessionals(sequelize);
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User, Professional });
 Institution.associate({ User, Professional });
-InstitutionProfessionals.associate({});
+
 Patient.associate({ User, HealthInsurance, Professional });
 Permission.associate({ Role });
 Professional.associate({ User, Speciality, Patient, HealthInsurance, Treatment, Institution });
@@ -61,6 +67,11 @@ User.associate({ Role });
 Treatment.associate({ Patient, Pathology, Professional })
 Document.associate({ Treatment })
 
+// Tablas intermedias
+InstitutionProfessionals.associate({});
+MedicationTreatments.associate({});
+RolesPermissions.associate({});
+InsuranceProfessionals.associate({});
 
 export {
   sequelize,
@@ -70,6 +81,7 @@ export {
   HealthInsurance,
   Institution,
   InstitutionProfessionals,
+  InsuranceProfessionals,
   Patient,
   Professional,
   RolesPermissions,
@@ -77,5 +89,7 @@ export {
   Pathology,
   Medication,
   Treatment,
-  Document
+  Document,
+  MedicationTreatments,
+  TreatmentProfessionals
 };

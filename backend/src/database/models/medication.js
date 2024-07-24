@@ -8,6 +8,12 @@ export class Medication extends Model {
      */
     static associate(models) {
       // define association here
+      this.belongsToMany(models.Treatment, {
+        through: "treatment_medications",
+        foreignKey: "medication_id",
+        otherKey: "treatment_id",
+        as: "treatments",
+      });
     }
   }
 export const initMedication = (sequelize) => {

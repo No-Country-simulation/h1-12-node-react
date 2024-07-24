@@ -1,9 +1,9 @@
 import { Model, DataTypes } from "sequelize";
 
-export class InsuranceProfessional extends Model {}
+export class InsuranceProfessionals extends Model {}
 
-export const initInsuranceProfessional = (sequelize) => {
-    InsuranceProfessional.init(
+export const initInsuranceProfessionals = (sequelize) => {
+    InsuranceProfessionals.init(
       {
         id: {
           allowNull: false,
@@ -20,9 +20,9 @@ export const initInsuranceProfessional = (sequelize) => {
       },
       {
         sequelize,
-        modelName: 'InsuranceProfessional',
+        modelName: 'InsuranceProfessionals',
         tableName: 'insurance_professionals',
       }
     );
-    return TreatmentProfessional;
+    return InsuranceProfessionals;
 };

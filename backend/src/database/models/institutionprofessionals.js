@@ -11,7 +11,7 @@ export class InstitutionProfessionals extends Model {
   }
 }
 
-export const initInstitutionsProfessional = (sequelize) => {
+export const initInstitutionProfessionals = (sequelize) => {
   InstitutionProfessionals.init(
     {
       institution_id: DataTypes.INTEGER,
