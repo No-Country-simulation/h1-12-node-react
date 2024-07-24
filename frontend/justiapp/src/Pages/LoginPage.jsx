@@ -3,62 +3,65 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import justinaHeart from "../images/justinaHeart.svg";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
 
 export default function LoginPage() {
   //autenticación
-  const { login } = useContext(AuthContext);
+  const { login, loginAttempts, isLocked } = useContext(AuthContext);
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
     username: "",
     password: "",
     form: "",
   });
+  //user interface
   const [showPassword, setShowPassword] = useState(false);
   const [isTyped, setIsTyped] = useState({
     username: false,
     password: false,
   });
-  const [loginAttempts, setLoginAttempts] = useState(0);
-  const [isLocked, setIsLocked] = useState(false);
-  const [lockTimeout, setLockTimeout] = useState(null);
+  //validaciones
+  //
+  const navigate = useNavigate();
+
+  /////////////////////////////////////////////////////////////
+  console.log(loginAttempts);
+  console.log(isLocked);
 
   useEffect(() => {
-    if (loginAttempts >= 5) {
-      setIsLocked(true);
-      const timeoutId = setTimeout(() => {
-        setIsLocked(false);
-        setLoginAttempts(0);
-      }, 60000); // Bloquear durante 1 minuto
-      setLockTimeout(timeoutId);
+    if (isLocked) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "Demasiados intentos fallidos. Por favor, intenta nuevamente más tarde.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "",
+      }));
     }
-    return () => clearTimeout(lockTimeout);
-  }, [loginAttempts]);
+  }, [isLocked]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = credentials;
 
-    // Limpiar errores anteriores
     setErrors((prevErrors) => ({
       ...prevErrors,
       form: "",
     }));
 
-    if (isLocked) return; // No permitir enviar el formulario si está bloqueado
+    if (isLocked) return;
 
     if (username && password && !errors.username && !errors.password) {
       try {
         await login({ username, password });
         navigate("/homeadmin");
       } catch (error) {
-        console.log(error);
-        setLoginAttempts((prevAttempts) => prevAttempts + 1);
         setErrors((prevErrors) => ({
           ...prevErrors,
           form:
@@ -69,19 +72,11 @@ export default function LoginPage() {
     } else {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        form:
-          username && password
-            ? ""
-            : "Por favor, completa todos los campos correctamente.",
+        form: "Por favor, completa todos los campos correctamente.",
       }));
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-    validateInput(name, value);
-  };
   const validateInput = (name, value) => {
     let errorMessage = "";
 
@@ -108,12 +103,20 @@ export default function LoginPage() {
 
     setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+    validateInput(name, value);
+  };
 
   // Alterna la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  /*const buttonClass =
+    loginAttempts > 5
+      ? "w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151] btn-disabled"
+      : "w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151]";*/
   return (
     <section className="flex justify-center items-center h-screen flex-col max-w-2xl p-6 ">
       <div className="flex flex-col gap-6 justify-center items-center max-w-xs w-full p-4">
@@ -198,7 +201,7 @@ export default function LoginPage() {
           </label>
           <button
             type="submit"
-            disabled={isLocked}
+            disabled={isLocked} // Deshabilitar el botón si se superan los intentos fallidos
             className="w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151]"
           >
             Ingresar
@@ -229,62 +232,3 @@ export default function LoginPage() {
     </section>
   );
 }
-/*
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { username, password } = credentials;
-
-    if (username && password && !errors.username && !errors.password) {
-      try {
-        await login({ username, password });
-        navigate("/homeadmin");
-      } catch (error) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          form: "Error al iniciar sesión. Por favor, verifica tus credenciales.",
-        }));
-      }
-    } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        form: "Por favor, completa todos los campos correctamente.",
-      }));
-    }
-  };
-
-
-  // Maneja los cambios en los campos de entrada y valida la entrada
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-    validateInput(name, value);
-  };
-
-  const validateInput = (name, value) => {
-    let errorMessage = "";
-
-    if (name === "username") {
-      console.log(value);
-      const trimmedValue = value.slice(0, 15);
-      if (!trimmedValue) {
-        errorMessage = "El usuario es requerido";
-      } else if (
-        !/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(trimmedValue)
-      ) {
-        errorMessage =
-          "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
-      }
-    } else if (name === "password") {
-      setIsTyped(value.length > 0);
-      if (!value) {
-        errorMessage = "La contraseña es requerida";
-      } else if (value.length < 8 || value.length > 15) {
-        errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
-      } else if (!/[a-z]/.test(value)) {
-        errorMessage = "La contraseña debe tener al menos una minúscula";
-      }
-    }
-
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
-  };
-*/
