@@ -15,7 +15,7 @@ export class Treatment extends Model {
       otherKey: "treatment_id",
       as: "treatments",
     });
-    this.belongsToMany(models.MedicationTreatments, {
+    this.belongsToMany(models.Medication, {
       through: "medication_treatments",
       foreignKey: "treatment_id",
       otherKey: "medication_id",

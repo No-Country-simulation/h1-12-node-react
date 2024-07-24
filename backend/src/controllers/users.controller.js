@@ -31,9 +31,7 @@ export class UsersController {
         const { uid } = req.params
         const payload = req.body
         try {
-            if(!req.file || !req.file.path){
-                throw new HttpError('File missing', HTTP_CODES.INTERNAL_SERVER_ERROR)
-            }else{
+            if(req.file && req.file.path){
                 payload.image = req.file.path
             }
             const updatedUser = await this.usersService.update(uid, payload)

@@ -28,10 +28,12 @@ export class DocumentsController {
 
     uploadDocument = async (req, res, next) => {
         const payload = req.body 
-        if(req.file && req.file.path){
-            payload.link = req.file.path
-        }
         try {
+            if(!req.file || !req.file.path){
+                throw new HttpError('File missing', HTTP_CODES.INTERNAL_SERVER_ERROR)
+            }else{
+                payload.link = req.file.path
+            }
             const document = await this.documentsService.create(payload)
             res.status(HTTP_CODES.CREATED).send(document)
         } catch (error) {

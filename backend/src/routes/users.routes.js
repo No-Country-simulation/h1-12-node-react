@@ -18,6 +18,13 @@ router.get('/',
     usersController.getAllUsers
 )
 
+router.patch('/update-password', 
+    validationMiddleware([passwordSchema]),
+    authenticationMiddleware,
+    authorizationMiddleware(["update-user"]),
+    usersController.updateUserPassword
+)
+
 router.get('/:uid', 
     validationMiddleware([uidParam]),
     authenticationMiddleware,
@@ -31,13 +38,6 @@ router.patch('/:uid',
     authenticationMiddleware,
     authorizationMiddleware(["update-user"]),
     usersController.updateUser
-)
-
-router.patch('/update-password', 
-    validationMiddleware([passwordSchema]),
-    authenticationMiddleware,
-    authorizationMiddleware(["update-user"]),
-    usersController.updateUserPassword
 )
 
 router.delete('/:uid',
