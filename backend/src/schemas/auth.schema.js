@@ -23,6 +23,7 @@ export const registerPatientSchema = z.object({
     first_name: z.string(),
     last_name: z.string(),
     role: z.literal("patient"),
+    dni: z.string().regex(/^(?:\d{7,8}|[XYZ]\d{6,7})$/, "DNI must be a valid Argentinean DNI")
   }),
 });
 
@@ -32,6 +33,7 @@ export const registerProfessionalSchema = z.object({
     first_name: z.string(),
     last_name: z.string(),
     role: z.literal("professional"),
+    dni: z.string().regex(/^(?:\d{7,8}|[XYZ]\d{6,7})$/, "DNI must be a valid Argentinean DNI")
   }),
 });
 
