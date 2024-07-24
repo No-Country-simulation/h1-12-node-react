@@ -34,7 +34,6 @@ export const initPatient = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      active_treatment: DataTypes.INTEGER,
       health_insurance_id: DataTypes.INTEGER,
       head_professional_id: DataTypes.INTEGER,
       sex: DataTypes.STRING,
