@@ -10,11 +10,11 @@ export class PathologiesService {
     }
 
     getByQuery = async (pquery) => {
-        const pathology = await Pathology.findAll({ where: { pathology_name: { [Op.like]: `%${pquery}%` } } })
-        if(!pathology){
+        const pathologies = await Pathology.findAll({ where: { pathology_name: { [Op.like]: `%${pquery}%` } } })
+        if(!pathologies){
             throw new HttpError('Pathologies not found', HTTP_CODES.NOT_FOUND)
         }
-        return pathology
+        return pathologies
     }
 
     getById = async (pid) => {
