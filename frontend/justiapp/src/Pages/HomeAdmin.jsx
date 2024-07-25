@@ -35,11 +35,12 @@ const cardData = [
 ];
 
 export default function HomeAdmin(props) {
+  const { logout } = useContext(AuthContext);
   return (
     <>
       <Navbar />
-      <main className="flex h-screen bg-slate-200  items-start justify-center pt-44  w-full  ">
-        <ul className="menu flex  max-sm:hidden  bg-white rounded-box max-w-56">
+      <main className="flex h-screen bg-slate-200   items-start justify-center  pt-20   max-sm:pt-28 w-full  ">
+        <ul className="menu min-h-full bg-white flex  max-sm:hidden   max-w-56">
           <li>
             <a>
               <svg
@@ -59,7 +60,7 @@ export default function HomeAdmin(props) {
               Inicio
             </a>
           </li>
-          <li>
+          <li className="bg-red-100">
             <a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,6 +117,9 @@ export default function HomeAdmin(props) {
               Mensajes
             </a>
           </li>
+          <li class="w-full">
+            <Link to="/homeadmin/UIcomponents">Componentes</Link>
+          </li>
           <li>
             <a>
               <svg
@@ -135,8 +139,14 @@ export default function HomeAdmin(props) {
               Configuración
             </a>
           </li>
+          <button
+            onClick={logout}
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Logout
+          </button>
         </ul>
-        <div className="sm:max-w-6xl pt-10  w-11/12 flex flex-col justify-center items-center bg-white rounded-xl shadow-lg">
+        <div className="sm:max-w-6xl pt-10   w-11/12  sm:h-full flex flex-col justify-center items-center bg-white rounded-none max-sm:rounded-xl shadow-lg">
           <div
             className="w-11/12 p-4 rounded-xl border-2 flex flex-col justify-center items-start gap-4"
             style={{

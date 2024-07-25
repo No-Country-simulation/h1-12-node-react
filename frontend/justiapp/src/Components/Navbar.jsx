@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Logo from "../images/logo.svg";
 import bell from "../images/bell-icon.svg";
+import barIcon from "../images/barsButton.svg";
 import userAvatar from "../images/jose.png";
 import Profile from "../images/Profile.svg";
 import { Link } from "react-router-dom";
@@ -16,9 +17,36 @@ export default function Navbar() {
       <div className="p-2 ">
         <div className="navbar max-w-6xl ">
           <div className="navbar-start">
-            <p className="flex sm:hidden text-center text-gray-800 text-2xl font-bold leading-6 break-words">
-              Home
-            </p>
+            <div className="bg-red-100 dropdown  dropdown-hover flex sm:hidden">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <img src={barIcon} alt="three barIcon" />
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content  bg-base-100 rounded-box z-[1] mt-10 w-52 p-2 shadow"
+              >
+                <li>
+                  <Link>Historia</Link>
+                </li>
+                <li>
+                  <Link>Mensajes</Link>
+                </li>
+                <li>
+                  <Link>Configuración</Link>
+                </li>
+
+                <button
+                  onClick={logout}
+                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+                >
+                  Logout
+                </button>
+              </ul>
+            </div>
             <a className=" flex max-sm:hidden btn btn-ghost text-xl">
               <img className="max-w-md h-9" src={Logo} alt="Heart Logo" />
             </a>
@@ -101,38 +129,6 @@ export default function Navbar() {
                 <li>
                   <a>Logout</a>
                 </li>
-              </ul>
-            </div>
-            <div className="dropdown ropdown-left dropdown-end flex sm:hidden">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle"
-              >
-                <img src={Profile} alt="profile" />
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content  bg-base-100 rounded-box z-[1] mt-10 w-52 p-2 shadow"
-              >
-                <li>
-                  <Link>Perfil</Link>
-                </li>
-                <li>
-                  <Link>Configuración</Link>
-                </li>
-                <li>
-                  <Link>Soporte</Link>
-                </li>
-                <li>
-                  <Link>Ayuda</Link>
-                </li>
-                <button
-                  onClick={logout}
-                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-                >
-                  Logout
-                </button>
               </ul>
             </div>
           </div>
