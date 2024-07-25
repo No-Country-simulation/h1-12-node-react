@@ -68,7 +68,7 @@ User.associate({ Role });
 Treatment.associate({ Patient, Pathology, Professional, Medication })
 Document.associate({ Treatment })
 Medication.associate({ Treatment })
-Intake({ MedicationTreatments })
+Intake.associate({ MedicationTreatments })
 
 
 export {

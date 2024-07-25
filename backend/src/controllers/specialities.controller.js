@@ -40,8 +40,8 @@ export class SpecialitiesController {
         const payload = req.body
         const { sid } = req.params
         try {
-            const updatedSpecility = await this.specialitiesService.update(sid, payload)
-            res.status(HTTP_CODES.SUCCESS).send(updatedSpecility)
+            const updatedSpeciality = await this.specialitiesService.update(sid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedSpeciality)
         } catch (error) {
             next(error)
         } 

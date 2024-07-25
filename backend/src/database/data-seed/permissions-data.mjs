@@ -66,4 +66,10 @@ export default [
     { id: 57, permission: 'create-document', createdAt: new Date(), updatedAt: new Date() },
     { id: 58, permission: 'update-document', createdAt: new Date(), updatedAt: new Date() },
     { id: 59, permission: 'delete-document', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 60, permission: 'get-intakes', createdAt: new Date(), updatedAt: new Date() },
+    { id: 61, permission: 'get-intake', createdAt: new Date(), updatedAt: new Date() },
+    { id: 62, permission: 'create-intake', createdAt: new Date(), updatedAt: new Date() },
+    { id: 63, permission: 'update-intake', createdAt: new Date(), updatedAt: new Date() },
+    { id: 64, permission: 'delete-intake', createdAt: new Date(), updatedAt: new Date() },
 ]

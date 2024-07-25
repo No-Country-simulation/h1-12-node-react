@@ -40,8 +40,8 @@ export class TreatmentsController {
         const payload = req.body
         const { tid } = req.params
         try {
-            const updatedSpecility = await this.treatmentsService.update(tid, payload)
-            res.status(HTTP_CODES.SUCCESS).send(updatedSpecility)
+            const updatedTreatment = await this.treatmentsService.update(tid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedTreatment)
         } catch (error) {
             next(error)
         } 
