@@ -20,6 +20,7 @@ import { initDocument, Document } from "./document.js";
 import { initMedicationTreatments, MedicationTreatments } from "./medicationtreatments.js";
 import { initInsuranceProfessionals, InsuranceProfessionals } from "./healthinsuranceprofessionals.js";
 import { initTreatmentProfessionals, TreatmentProfessionals } from "./treatmentprofessionals.js";
+import { initIntake, Intake } from "./intake.js";
 const env = process.env.NODE_ENV || "development";
 const configEnv = config[env];
 
@@ -52,11 +53,11 @@ initDocument(sequelize);
 initMedicationTreatments(sequelize);
 initInsuranceProfessionals(sequelize);
 initTreatmentProfessionals(sequelize);
+initIntake(sequelize)
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User, Professional });
 Institution.associate({ User, Professional });
-
 Patient.associate({ User, HealthInsurance, Professional });
 Permission.associate({ Role });
 Professional.associate({ User, Speciality, Patient, HealthInsurance, Treatment, Institution });
@@ -67,6 +68,7 @@ User.associate({ Role });
 Treatment.associate({ Patient, Pathology, Professional, Medication })
 Document.associate({ Treatment })
 Medication.associate({ Treatment })
+Intake({ MedicationTreatments })
 
 
 export {
@@ -87,5 +89,6 @@ export {
   Treatment,
   Document,
   MedicationTreatments,
-  TreatmentProfessionals
+  TreatmentProfessionals,
+  Intake
 };
