@@ -72,4 +72,7 @@ export default [
     { id: 62, permission: 'create-intake', createdAt: new Date(), updatedAt: new Date() },
     { id: 63, permission: 'update-intake', createdAt: new Date(), updatedAt: new Date() },
     { id: 64, permission: 'delete-intake', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 65, permission: 'get-services', createdAt: new Date(), updatedAt: new Date()},
+    { id: 66, permission: 'get-service', createdAt: new Date(), updatedAt: new Date() }
 ]
