@@ -1,5 +1,5 @@
-//AuthContext.jsx
-import React, { createContext, useState, useEffect, useRef } from "react";
+// AuthContext.jsx
+import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Crear el contexto
@@ -12,13 +12,8 @@ const AuthProvider = ({ children }) => {
     parseInt(localStorage.getItem("loginAttempts")) || 0
   );
   const [isLocked, setIsLocked] = useState(false);
-  const [lockTimeoutId, setLockTimeoutId] = useState(null); // Variable de estado para el ID del timeout
-  //para que si el usuario deja su  pestaña abierta y no cierra sesión
-  const inactivityTimeoutId = useRef(null);
-
-  // Tiempo de inactividad en milisegundos (por ejemplo, 15 minutos)
-  const INACTIVITY_TIME = 0.5 * 60 * 1000;
-
+  const [lockTimeoutId, setLockTimeoutId] = useState(null);
+  console.log(lockTimeoutId);
   // Función para manejar el login y almacenar el token
   const login = async (credentials) => {
     try {
@@ -35,13 +30,11 @@ const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-
         setAuth({ token: data.token });
         localStorage.setItem("token", data.token);
         setLoginAttempts(0);
         localStorage.setItem("loginAttempts", 0);
         navigate("/homeadmin");
-        resetInactivityTimeout();
       } else {
         // Manejar error de autenticación aquí
         handleFailedLogin();
@@ -58,7 +51,6 @@ const AuthProvider = ({ children }) => {
     setLoginAttempts((prevAttempts) => {
       const newAttempts = prevAttempts + 1;
       localStorage.setItem("loginAttempts", newAttempts);
-      //esto es nuevo
       if (newAttempts >= 3 && !isLocked) {
         // Solo activar el bloqueo si no está bloqueado
         setIsLocked(true);
@@ -75,17 +67,10 @@ const AuthProvider = ({ children }) => {
 
   // Función para manejar el logout
   const logout = () => {
+    console.log("cierre de sesión detectado");
     setAuth({ token: null });
     localStorage.removeItem("token");
     navigate("/");
-    //tiene que ver con el tiempo de inactividad
-    clearTimeout(inactivityTimeoutId.current);
-  };
-
-  // Función para resetear el timeout de inactividad
-  const resetInactivityTimeout = () => {
-    clearTimeout(inactivityTimeoutId.current);
-    inactivityTimeoutId.current = setTimeout(logout, INACTIVITY_TIME);
   };
 
   // Verificar si hay un token almacenado en localStorage al montar el componente
@@ -99,32 +84,35 @@ const AuthProvider = ({ children }) => {
       ) {
         navigate("/homeadmin");
       }
-      //esto tiene que ver con el tiempo de inactividad
-      resetInactivityTimeout();
     } else {
       navigate("/");
     }
   }, [navigate]);
 
-  // Manejo de cierre de sesión al cerrar o recargar la pestaña
-
+  // Manejo de cierre de sesión al cerrar pestaña
   useEffect(() => {
     const handleBeforeUnload = (event) => {
+      console.log("Evento beforeunload detectado");
       event.preventDefault();
-      logout();
-      event.returnValue = "";
+      // Indicar que la pestaña está cerrándose
+      localStorage.setItem("isClosing", "true");
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
-    // Limpieza del efecto
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      if (lockTimeoutId) {
-        clearTimeout(lockTimeoutId);
-      }
-      clearTimeout(inactivityTimeoutId.current);
     };
-  }, [lockTimeoutId]);
+  }, []);
+
+  useEffect(() => {
+    const isClosing = localStorage.getItem("isClosing");
+    if (isClosing === "true") {
+      // Limpiar el estado de cierre de sesión
+      localStorage.removeItem("isClosing");
+      logout();
+    }
+  }, []);
 
   // Manejo de sincronización entre pestañas
   useEffect(() => {
@@ -133,16 +121,8 @@ const AuthProvider = ({ children }) => {
         logout();
       } else if (event.key === "token" && event.newValue) {
         setAuth({ token: event.newValue });
-        resetInactivityTimeout();
       }
     };
-    /*const handleStorageChange = (event) => {
-  useEffect(() => {
-      if (event.key === "token" && !event.newValue) {
-        // Si el token ha sido eliminado en otra pestaña, hacer logout
-        logout();
-      }
-    };*/
 
     window.addEventListener("storage", handleStorageChange);
 
@@ -151,38 +131,8 @@ const AuthProvider = ({ children }) => {
       if (lockTimeoutId) {
         clearTimeout(lockTimeoutId);
       }
-      clearTimeout(inactivityTimeoutId.current);
     };
   }, [lockTimeoutId]);
-
-  // Limpiar el timeout si el componente se desmonta o se actualiza
-  /* useEffect(() => {
-    return () => {
-      if (lockTimeoutId) {
-        clearTimeout(lockTimeoutId);
-      }
-    };
-  }, [lockTimeoutId]);
-*/
-
-  // Manejo de inactividad del usuario
-  useEffect(() => {
-    const resetInactivityTimeout = () => {
-      clearTimeout(inactivityTimeoutId.current);
-      inactivityTimeoutId.current = setTimeout(logout, INACTIVITY_TIME);
-    };
-
-    const events = ["click", "mousemove", "keydown", "scroll", "touchstart"];
-    events.forEach((event) =>
-      window.addEventListener(event, resetInactivityTimeout)
-    );
-
-    return () => {
-      events.forEach((event) =>
-        window.removeEventListener(event, resetInactivityTimeout)
-      );
-    };
-  }, []);
 
   // Verificar si el usuario está autenticado
   const isAuthenticated = () => !!auth.token;
