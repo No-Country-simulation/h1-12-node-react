@@ -1,5 +1,5 @@
 //AuthContext.jsx
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Crear el contexto
@@ -13,6 +13,12 @@ const AuthProvider = ({ children }) => {
   );
   const [isLocked, setIsLocked] = useState(false);
   const [lockTimeoutId, setLockTimeoutId] = useState(null); // Variable de estado para el ID del timeout
+  //para que si el usuario deja su  pestaña abierta y no cierra sesión
+  const inactivityTimeoutId = useRef(null);
+
+  // Tiempo de inactividad en milisegundos (por ejemplo, 15 minutos)
+  const INACTIVITY_TIME = 0.5 * 60 * 1000;
+
   // Función para manejar el login y almacenar el token
   const login = async (credentials) => {
     try {
@@ -35,9 +41,9 @@ const AuthProvider = ({ children }) => {
         setLoginAttempts(0);
         localStorage.setItem("loginAttempts", 0);
         navigate("/homeadmin");
+        resetInactivityTimeout();
       } else {
         // Manejar error de autenticación aquí
-        console.log("fallo el login");
         handleFailedLogin();
       }
     } catch (error) {
@@ -72,6 +78,14 @@ const AuthProvider = ({ children }) => {
     setAuth({ token: null });
     localStorage.removeItem("token");
     navigate("/");
+    //tiene que ver con el tiempo de inactividad
+    clearTimeout(inactivityTimeoutId.current);
+  };
+
+  // Función para resetear el timeout de inactividad
+  const resetInactivityTimeout = () => {
+    clearTimeout(inactivityTimeoutId.current);
+    inactivityTimeoutId.current = setTimeout(logout, INACTIVITY_TIME);
   };
 
   // Verificar si hay un token almacenado en localStorage al montar el componente
@@ -85,19 +99,90 @@ const AuthProvider = ({ children }) => {
       ) {
         navigate("/homeadmin");
       }
+      //esto tiene que ver con el tiempo de inactividad
+      resetInactivityTimeout();
     } else {
       navigate("/");
     }
-  }, [navigate]); // Dependencia en navigate para evitar cambios innecesarios
+  }, [navigate]);
+
+  // Manejo de cierre de sesión al cerrar o recargar la pestaña
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      logout();
+      event.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    // Limpieza del efecto
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      if (lockTimeoutId) {
+        clearTimeout(lockTimeoutId);
+      }
+      clearTimeout(inactivityTimeoutId.current);
+    };
+  }, [lockTimeoutId]);
+
+  // Manejo de sincronización entre pestañas
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "token" && !event.newValue) {
+        logout();
+      } else if (event.key === "token" && event.newValue) {
+        setAuth({ token: event.newValue });
+        resetInactivityTimeout();
+      }
+    };
+    /*const handleStorageChange = (event) => {
+  useEffect(() => {
+      if (event.key === "token" && !event.newValue) {
+        // Si el token ha sido eliminado en otra pestaña, hacer logout
+        logout();
+      }
+    };*/
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      if (lockTimeoutId) {
+        clearTimeout(lockTimeoutId);
+      }
+      clearTimeout(inactivityTimeoutId.current);
+    };
+  }, [lockTimeoutId]);
 
   // Limpiar el timeout si el componente se desmonta o se actualiza
-  useEffect(() => {
+  /* useEffect(() => {
     return () => {
       if (lockTimeoutId) {
         clearTimeout(lockTimeoutId);
       }
     };
   }, [lockTimeoutId]);
+*/
+
+  // Manejo de inactividad del usuario
+  useEffect(() => {
+    const resetInactivityTimeout = () => {
+      clearTimeout(inactivityTimeoutId.current);
+      inactivityTimeoutId.current = setTimeout(logout, INACTIVITY_TIME);
+    };
+
+    const events = ["click", "mousemove", "keydown", "scroll", "touchstart"];
+    events.forEach((event) =>
+      window.addEventListener(event, resetInactivityTimeout)
+    );
+
+    return () => {
+      events.forEach((event) =>
+        window.removeEventListener(event, resetInactivityTimeout)
+      );
+    };
+  }, []);
 
   // Verificar si el usuario está autenticado
   const isAuthenticated = () => !!auth.token;
