@@ -123,19 +123,19 @@ export class UsersService {
         switch (userRole) {
             case 'patient':
                 updatedSpecificRole = await this.patientsService.updatePatient(updatedUser.id, payload)
-                updatedUser.patient_data = updatedSpecificRole.dataValues
+                updatedUser.patient_data = updatedSpecificRole
                 break;
             case 'professional':
                 updatedSpecificRole = await this.professionalsService.updateProfessional(updatedUser.id, payload)
-                updatedUser.professional_data = updatedSpecificRole.dataValues
+                updatedUser.professional_data = updatedSpecificRole
                 break
             case 'insurance':
                 updatedSpecificRole = await this.insurancesService.updateInsurance(updatedUser.id, payload)
-                updatedUser.insurance_data = updatedSpecificRole.dataValues
+                updatedUser.insurance_data = updatedSpecificRole
                 break
             case 'institution':
                 updatedSpecificRole = await this.institutionsService.updateInstitution(updatedUser.id, payload)
-                updatedUser.institution_data = updatedSpecificRole.dataValues
+                updatedUser.institution_data = updatedSpecificRole
                 break
             default:
                 break;

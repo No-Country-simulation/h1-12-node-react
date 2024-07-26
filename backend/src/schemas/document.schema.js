@@ -21,16 +21,36 @@ export const createDocumentSchema = z.object({
         const number = parseInt(val, 10);
         return number >= 1;
       }, "Treatment ID must be greater than or equal to 1"),
-    date: z.date().optional(),
+      date: z
+      .string()
+      .refine(
+        (value) => {
+          const date = new Date(value);
+          return !isNaN(date.getTime());
+        },
+        {
+          message: "Must be a valid date",
+        }
+      ).optional(),
     description: z.string().optional(),
-    type: z.enum(["prescription", "other"]).optional(),
+    type: z.enum(["prescription", "license", "other"]).optional(),
   }),
 });
 
 export const updateDocumentSchema = z.object({
   body: z.object({
-    date: z.date().optional(),
+    date: z
+      .string()
+      .refine(
+        (value) => {
+          const date = new Date(value);
+          return !isNaN(date.getTime());
+        },
+        {
+          message: "Must be a valid date",
+        }
+      ).optional(),
     description: z.string().optional(),
-    type: z.enum(["prescription", "other"]).optional(),
+    type: z.enum(["prescription", "license", "other"]).optional(),
   }),
 });

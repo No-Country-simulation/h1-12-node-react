@@ -1,10 +1,10 @@
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import { v2 as cloudinary } from 'cloudinary';
 
-export const storage = new CloudinaryStorage({
+export const imageStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-      folder: process.env.NODE_ENV === 'development' ? 'dev' : 'uploads',
+      folder: process.env.NODE_ENV === 'development' ? 'dev/images' : 'uploads/images',
       allowed_formats: ['jpg', 'jpeg', 'png', 'pdf'],
       transformation: [
         {
@@ -15,4 +15,12 @@ export const storage = new CloudinaryStorage({
         },
       ],
     },
+});
+
+export const documentStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: process.env.NODE_ENV === 'development' ? 'dev/documents' : 'uploads/documents',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'pdf'],
+  },
 });

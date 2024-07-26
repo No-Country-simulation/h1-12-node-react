@@ -1,5 +1,6 @@
 import { DocumentsService } from "../services/documents.service.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
+import { HttpError } from "../utils/http-error.util.js"
 
 export class DocumentsController {
 
@@ -30,7 +31,7 @@ export class DocumentsController {
         const payload = req.body 
         try {
             if(!req.file || !req.file.path){
-                throw new HttpError('File missing', HTTP_CODES.INTERNAL_SERVER_ERROR)
+                throw new HttpError('File missing', HTTP_CODES.BAD_REQUEST)
             }else{
                 payload.link = req.file.path
             }
@@ -45,7 +46,7 @@ export class DocumentsController {
         const { did } = req.params
         const payload = req.body
         if(req.file && req.file.path){
-            payload.image = req.file.path
+            payload.link = req.file.path
         }
         try {
             const updatedDocument = await this.documentsService.update(did, payload)

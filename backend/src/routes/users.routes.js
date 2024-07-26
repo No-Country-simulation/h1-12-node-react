@@ -4,12 +4,13 @@ import { authenticationMiddleware } from '../middlewares/authentication.middlewa
 import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
 import { uidParam, passwordSchema, updateUserSchema } from '../schemas/user.schema.js'
-import { storage } from '../utils/storage.util.js'
+import { imageStorage } from '../utils/storage.util.js'
 import multer from 'multer'
+import { multerErrorMiddleware } from '../middlewares/multer-error.middleware.js'
 
 const router = Router()
 const usersController = new UsersController()
-const upload = multer({ storage: storage });
+const upload = multer({ storage: imageStorage });
 
 
 router.get('/', 
@@ -34,6 +35,7 @@ router.get('/:uid',
 
 router.patch('/:uid', 
     upload.single('image'),
+    multerErrorMiddleware,
     validationMiddleware([updateUserSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["update-user"]),

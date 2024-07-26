@@ -5,11 +5,22 @@ import { authorizationMiddleware } from '../middlewares/authorization.middleware
 import { createDocumentSchema, didParam, updateDocumentSchema } from '../schemas/document.schema.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
 import multer from 'multer'
-import { storage } from '../utils/storage.util.js'
+import { documentStorage } from '../utils/storage.util.js'
+import { HttpError } from '../utils/http-error.util.js'
+import { multerErrorMiddleware } from '../middlewares/multer-error.middleware.js'
 
 const router = Router()
 const documentsController = new DocumentsController()
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: documentStorage,
+    limits: { fileSize: 2 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+      if (!['image/jpeg', 'image/png', 'application/pdf'].includes(file.mimetype)) {
+        return cb(new HttpError('Invalid file type. Only JPEG, PNG and PDF files are allowed.', 400), false);
+      }
+      cb(null, true);
+    },
+  });
 
 router.get('/',  
     authenticationMiddleware,
@@ -25,7 +36,8 @@ router.get('/:did',
 )
 
 router.post('/',  
-    upload.single('image'), 
+    upload.single('document'), 
+    multerErrorMiddleware,
     validationMiddleware([createDocumentSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["create-document"]),
@@ -33,7 +45,8 @@ router.post('/',
 )
 
 router.patch('/:did', 
-    upload.single('image'),
+    upload.single('document'),
+    multerErrorMiddleware,
     validationMiddleware([didParam, updateDocumentSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["update-document"]),
