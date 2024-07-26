@@ -1,4 +1,4 @@
-//AuthContext.jsx
+// AuthContext.jsx
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,8 @@ const AuthProvider = ({ children }) => {
     parseInt(localStorage.getItem("loginAttempts")) || 0
   );
   const [isLocked, setIsLocked] = useState(false);
-  const [lockTimeoutId, setLockTimeoutId] = useState(null); // Variable de estado para el ID del timeout
+  const [lockTimeoutId, setLockTimeoutId] = useState(null);
+  console.log(lockTimeoutId);
   // Función para manejar el login y almacenar el token
   const login = async (credentials) => {
     try {
@@ -29,7 +30,6 @@ const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-
         setAuth({ token: data.token });
         localStorage.setItem("token", data.token);
         setLoginAttempts(0);
@@ -37,7 +37,6 @@ const AuthProvider = ({ children }) => {
         navigate("/homeadmin");
       } else {
         // Manejar error de autenticación aquí
-        console.log("fallo el login");
         handleFailedLogin();
       }
     } catch (error) {
@@ -52,7 +51,6 @@ const AuthProvider = ({ children }) => {
     setLoginAttempts((prevAttempts) => {
       const newAttempts = prevAttempts + 1;
       localStorage.setItem("loginAttempts", newAttempts);
-      //esto es nuevo
       if (newAttempts >= 3 && !isLocked) {
         // Solo activar el bloqueo si no está bloqueado
         setIsLocked(true);
@@ -69,6 +67,7 @@ const AuthProvider = ({ children }) => {
 
   // Función para manejar el logout
   const logout = () => {
+    console.log("cierre de sesión detectado");
     setAuth({ token: null });
     localStorage.removeItem("token");
     navigate("/");
@@ -88,11 +87,47 @@ const AuthProvider = ({ children }) => {
     } else {
       navigate("/");
     }
-  }, [navigate]); // Dependencia en navigate para evitar cambios innecesarios
+  }, [navigate]);
 
-  // Limpiar el timeout si el componente se desmonta o se actualiza
+  // Manejo de cierre de sesión al cerrar pestaña
   useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      console.log("Evento beforeunload detectado");
+      event.preventDefault();
+      // Indicar que la pestaña está cerrándose
+      localStorage.setItem("isClosing", "true");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    const isClosing = localStorage.getItem("isClosing");
+    if (isClosing === "true") {
+      // Limpiar el estado de cierre de sesión
+      localStorage.removeItem("isClosing");
+      logout();
+    }
+  }, []);
+
+  // Manejo de sincronización entre pestañas
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "token" && !event.newValue) {
+        logout();
+      } else if (event.key === "token" && event.newValue) {
+        setAuth({ token: event.newValue });
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
       if (lockTimeoutId) {
         clearTimeout(lockTimeoutId);
       }

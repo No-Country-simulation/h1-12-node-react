@@ -161,7 +161,7 @@ export default function LoginPage() {
                 value={credentials.password}
                 onChange={handleChange}
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                placeholder="Ingresa tu contraseña"
                 className="bg grow w-full max-w-xs truncate border-none text-sm font-normal leading-5 text-gray-400"
               />
               {isTyped && (
