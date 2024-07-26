@@ -32,6 +32,16 @@ module.exports = {
       registration_number: {
         type: Sequelize.STRING
       },
+      jurisdiction_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'jurisdictions',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -39,7 +49,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {
