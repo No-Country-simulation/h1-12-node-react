@@ -1,10 +1,15 @@
-import { Jurisdiction, Professional } from "../database/models/index.js"
+import { Professional } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
+import { JurisdictionsService } from "./jurisdictions.service.js"
+import { SpecialitiesService } from "./specialities.service.js"
 
 export class ProfessionalsService {
 
-    constructor(){}
+    constructor(){
+        this.jurisdictionsService = new JurisdictionsService()
+        this.specialitiesService = new SpecialitiesService()
+    }
 
     findByUserId = async(uid) => {
         const professional = await Professional.findOne({ where: { user_id: +uid } })
@@ -42,8 +47,10 @@ export class ProfessionalsService {
             professional.jurisdiction_id = jurisdiction_id
         }
         if(speciality_id){
+            await this.specialitiesService.getById(speciality_id)
             professional.speciality_id = speciality_id
         }
+        console.log(professional)
         const updatedProfessional = await professional.save()
         return updatedProfessional
     }

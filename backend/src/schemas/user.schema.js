@@ -42,8 +42,27 @@ export const updateUserSchema = z.object({
         }
       )
       .optional(),
-    registration_number: z.number().optional(),
-    speciality_id: z.number().optional(),
+    registration_number: z
+    .string()
+    .regex(/^\d+$/, "REGISTRATION NUMBER must be a numeric string")
+    .refine((val) => {
+      const number = parseInt(val, 10);
+      return number >= 1;
+    }, "Treatment ID must be greater than or equal to 1").optional(),
+    speciality_id: z
+    .string()
+    .regex(/^\d+$/, "Speciality ID must be a numeric string")
+    .refine((val) => {
+      const number = parseInt(val, 10);
+      return number >= 1;
+    }, "Speciality ID must be greater than or equal to 1").optional(),
+    jurisdiction_id: z
+    .string()
+    .regex(/^\d+$/, "JURISDICTION ID must be a numeric string")
+    .refine((val) => {
+      const number = parseInt(val, 10);
+      return number >= 1;
+    }, "Speciality ID must be greater than or equal to 1").optional(),
     insurance_name: z.string().optional(),
     institution_name: z.string().optional(),
   }),
