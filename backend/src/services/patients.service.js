@@ -7,7 +7,8 @@ export class PatientsService {
     constructor(){}
 
     getById = async (pid) => {
-        const patient = await Patient.findByPk(+pid)
+        const patient = await Patient.findByPk(pid)
+        console.log(patient)
         if(!patient){
             throw new HttpError('Patient not found', HTTP_CODES.NOT_FOUND)
         }
@@ -36,15 +37,18 @@ export class PatientsService {
         return patient
     }
 
-    updatePatient = async(pid, payload) => {
-        if(!pid){
+    updatePatient = async(uid, payload) => {
+        if(!uid){
             throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }
         const { sex, blood_factor, birthdate } = payload
         if(!sex && !blood_factor && !birthdate){
             return
         }
-        const patient = await this.getById(+pid)
+        const patient = await this.findByUserId(uid)
+        if(!patient){
+            throw new HttpError('Patient not found', HTTP_CODES.NOT_FOUND)
+        }
         if(sex){
             patient.sex = sex
         }
