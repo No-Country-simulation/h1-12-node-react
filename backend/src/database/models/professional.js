@@ -31,6 +31,10 @@ export class Professional extends Model {
       otherKey: "health_insurance_id",
       as: "insurances",
     });
+    this.belongsTo(models.Jurisdiction, {
+      foreignKey: "jurisdiction_id",
+      as: "jurisdiction",
+    });
   }
 }
 
@@ -46,6 +50,7 @@ export const initProfessional = (sequelize) => {
       user_id: DataTypes.INTEGER,
       speciality_id: DataTypes.INTEGER,
       registration_number: DataTypes.STRING,
+      jurisdiction_id: DataTypes.INTEGER
     },
     {
       sequelize,

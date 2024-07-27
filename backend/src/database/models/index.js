@@ -24,6 +24,7 @@ import { initIntake, Intake } from "./intake.js";
 import { initService, Service } from "./service.js";
 import { initSubCategory, SubCategory } from "./subcategory.js";
 import { initCategory, Category } from "./category.js";
+import { initJurisdiction, Jurisdiction } from "./jurisdiction.js";
 const env = process.env.NODE_ENV || "development";
 const configEnv = config[env];
 
@@ -60,13 +61,14 @@ initIntake(sequelize);
 initService(sequelize);
 initSubCategory(sequelize);
 initCategory(sequelize);
+initJurisdiction(sequelize);
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User, Professional });
 Institution.associate({ User, Professional });
 Patient.associate({ User, HealthInsurance, Professional });
 Permission.associate({ Role });
-Professional.associate({ User, Speciality, Patient, HealthInsurance, Treatment, Institution });
+Professional.associate({ User, Speciality, Patient, HealthInsurance, Treatment, Institution, Jurisdiction });
 Role.associate({ User, Permission });
 RolesPermissions.associate({});
 Speciality.associate({ Professional });
@@ -100,5 +102,6 @@ export {
   Intake,
   Service,
   SubCategory,
-  Category
+  Category,
+  Jurisdiction
 };
