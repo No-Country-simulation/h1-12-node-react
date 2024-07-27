@@ -26,4 +26,14 @@ export class ServicesController {
         }
     }
 
+    getServicesByQuery = async (req, res, next) => {
+        const { squery } = req.params
+        try {
+            const services = await this.servicesService.getByQuery(squery)
+            res.status(HTTP_CODES.SUCCESS).send(services)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
