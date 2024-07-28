@@ -12,8 +12,16 @@ export const ridParam = z.object({
   }),
 });
 
-export const roleSchema = z.object({
+export const createRoleSchema = z.object({
   body: z.object({
-    role_name: z.string(),
+    role_name: z.string().min(2, 'ROLE NAME must have a minimum of 2 characters'),
+    permission_ids: z.array(z.number(),' PERMISSION_IDS must be an array of numbers')
+  }),
+});
+
+export const updateRoleSchema = z.object({
+  body: z.object({
+    role_name: z.string().min(2, 'ROLE NAME must have a minimum of 2 characters').optional(),
+    permission_ids: z.array(z.number(),' PERMISSION_IDS must be an array of numbers').optional()
   }),
 });

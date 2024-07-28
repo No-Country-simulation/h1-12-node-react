@@ -47,6 +47,17 @@ export class TreatmentsController {
         } 
     }
 
+    addMedicationToTreament = async (req, res, next) => {
+        const payload = req.body
+        const { tid, mid } = req.params
+        try {
+            const updatedTreatment = await this.treatmentsService.addMedicaton(tid, mid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedTreatment)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     deleteTreatment = async (req, res, next) => {
         const { tid } = req.params
         try {

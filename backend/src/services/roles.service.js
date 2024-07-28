@@ -1,4 +1,4 @@
-import { Role } from "../database/models/index.js"
+import { Permission, Role } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
@@ -25,22 +25,45 @@ export class RolesService {
     }
 
     create = async (payload) => {
-        const { role_name } = payload
+        const { role_name, permission_ids } = payload
         const existingRole = await Role.findOne({ where: { role_name: role_name } })
         if(existingRole){
             throw new HttpError('Role already created', HTTP_CODES.BAD_REQUEST)
         }
+        if(!permission_ids || !permission_ids.length){
+            throw new HttpError('Must assign one permission at least', HTTP_CODES.BAD_REQUEST)
+        }
+        const permissions = await Permission.findAll({
+            where: {
+              id: permission_ids,
+            },
+        });
         const newRole = {
             role_name
         }
-        const role = Role.create(newRole)
+        const role = await Role.create(newRole)
+        await role.setPermissions(permissions)
         return role
     }
 
     update = async(rid, payload) => {
-        const { role_name } = payload
+        const { role_name, permission_ids } = payload
         const role = await this.getById(rid)
-        role.role_name = role_name
+        if(role_name){
+            role.role_name = role_name
+            const existingRole = await Role.findOne({ where: { role_name: role_name } })
+            if(existingRole && existingRole.id !== role.id){
+                throw new HttpError('Role name already created', HTTP_CODES.BAD_REQUEST)
+            }
+        }
+        if(permission_ids && permission_ids.length){
+            const permissions = await Permission.findAll({
+                where: {
+                  id: permission_ids,
+                },
+            });
+            await role.setPermissions(permissions)
+        }
         const updatedRole = await role.save()
         return updatedRole
     }
