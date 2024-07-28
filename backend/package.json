@@ -7,7 +7,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/app.js",
     "dev": "cross-env NODE_ENV=development node --watch src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node src/app.js"
   },
   "keywords": [],
   "author": "",
