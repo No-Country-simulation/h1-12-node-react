@@ -3,7 +3,7 @@ import { RolesController } from '../controllers/roles.controller.js'
 import { authenticationMiddleware } from '../middlewares/authentication.middleware.js'
 import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
-import { ridParam, roleSchema } from '../schemas/role.schema.js'
+import { createRoleSchema, ridParam, updateRoleSchema } from '../schemas/role.schema.js'
 
 const router = Router()
 const rolesController = new RolesController()
@@ -22,14 +22,14 @@ router.get('/:rid',
 )
 
 router.post('/', 
-    validationMiddleware([roleSchema]),
+    validationMiddleware([createRoleSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["create-role"]),
     rolesController.createRole
 )
 
 router.patch('/:rid', 
-    validationMiddleware([ridParam, roleSchema]),
+    validationMiddleware([ridParam, updateRoleSchema]),
     authenticationMiddleware,
     authorizationMiddleware(["update-role"]),
     rolesController.updateRole
