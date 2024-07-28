@@ -3,7 +3,7 @@ import { UsersController } from '../controllers/users.controller.js'
 import { authenticationMiddleware } from '../middlewares/authentication.middleware.js'
 import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
-import { uidParam, passwordSchema, updateUserSchema } from '../schemas/user.schema.js'
+import { uidParam, passwordSchema, updateUserSchema, pidParam } from '../schemas/user.schema.js'
 import { imageStorage } from '../utils/storage.util.js'
 import multer from 'multer'
 import { multerErrorMiddleware } from '../middlewares/multer-error.middleware.js'
@@ -47,6 +47,13 @@ router.delete('/:uid',
     authenticationMiddleware,
     authorizationMiddleware(["delete-user"]),
     usersController.deleteUser
+)
+
+router.get('/history/:uid',
+    validationMiddleware([pidParam]),
+    authenticationMiddleware,
+    authorizationMiddleware(["get-patient-history"]),
+    usersController.getUserHistory
 )
 
 export default router

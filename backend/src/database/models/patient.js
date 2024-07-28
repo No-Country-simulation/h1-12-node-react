@@ -14,10 +14,20 @@ export class Patient extends Model {
       foreignKey: "health_insurance_id",
       as: "health_insurance",
     });
-    this.belongsTo(models.Professional, {
-      foreignKey: "head_professional_id",
-      as: "head_professional",
+    this.belongsToMany(models.Professional, {
+      through: models.PatientProfessionals,
+      foreignKey: "patient_id",
+      otherKey: "professional_id",
+      as: "professionals",
     });
+    this.hasMany(models.PatientProfessionals, {
+      foreignKey: "patient_id",
+      as: "patient_professionals",
+    })
+    this.hasMany(models.Treatment, {
+      foreignKey: "patient_id",
+      as: "treatments",
+    })
   }
 }
 

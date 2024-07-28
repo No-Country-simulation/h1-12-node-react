@@ -7,12 +7,15 @@ export class Medication extends Model {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
       this.belongsToMany(models.Treatment, {
-        through: "treatment_medications",
+        through: models.MedicationTreatments,
         foreignKey: "medication_id",
         otherKey: "treatment_id",
         as: "treatments",
+      });
+      this.hasMany(models.MedicationTreatments, {
+        foreignKey: "medication_id",
+        as: "medication_treatments",
       });
     }
   }

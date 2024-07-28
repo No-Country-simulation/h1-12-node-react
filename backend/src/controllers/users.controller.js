@@ -62,4 +62,14 @@ export class UsersController {
         }
     }
 
+    getUserHistory = async (req, res, next) => {
+        const { uid } = req.params
+        try {
+            const history = await this.usersService.getHistory(uid)
+            res.status(HTTP_CODES.SUCCESS).send(history)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

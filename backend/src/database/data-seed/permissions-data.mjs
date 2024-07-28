@@ -81,4 +81,6 @@ export default [
     { id: 69, permission: 'create-notification', createdAt: new Date(), updatedAt: new Date() },
     { id: 70, permission: 'update-notification', createdAt: new Date(), updatedAt: new Date() },
     { id: 71, permission: 'delete-notification', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 72, permission: 'get-patient-history', createdAt: new Date(), updatedAt: new Date() }
 ]

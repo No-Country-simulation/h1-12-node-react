@@ -12,6 +12,19 @@ export const uidParam = z.object({
   }),
 });
 
+export const pidParam = z.object({
+  params: z.object({
+    pid: z
+      .string()
+      .regex(/^\d+$/, "PID must be a numeric string")
+      .refine((val) => {
+        const number = parseInt(val, 10);
+        return number >= 1;
+      }, "PID must be greater than or equal to 1"),
+  }),
+});
+
+
 export const updateUserSchema = z.object({
   body: z.object({
     first_name: z.string().optional(),

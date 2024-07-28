@@ -14,19 +14,19 @@ export class Professional extends Model {
       as: "patients",
     });
     this.belongsToMany(models.Institution, {
-      through: "institution_professionals",
+      through: models.InstitutionProfessionals,
       foreignKey: "professional_id",
       otherKey: "institution_id",
       as: "institutions",
     });
     this.belongsToMany(models.Treatment, {
-      through: "treatment_professionals",
+      through: models.TreatmentProfessionals,
       foreignKey: "professional_id",
       otherKey: "treatment_id",
       as: "treatments",
     });
     this.belongsToMany(models.HealthInsurance, {
-      through: "insurance_professionals",
+      through: models.InsuranceProfessionals,
       foreignKey: "professional_id",
       otherKey: "health_insurance_id",
       as: "insurances",
@@ -35,6 +35,22 @@ export class Professional extends Model {
       foreignKey: "jurisdiction_id",
       as: "jurisdiction",
     });
+    this.hasMany(models.TreatmentProfessionals, {
+      foreignKey: "professional_id",
+      as: "treatment_professionals",
+    });
+    this.hasMany(models.InsuranceProfessionals, {
+      foreignKey: "professional_id",
+      as: "insurance_professionals",
+    });
+    this.hasMany(models.InstitutionProfessionals, {
+      foreignKey: "professional_id",
+      as: "institution_professionals",
+    })
+    this.hasMany(models.PatientProfessionals, {
+      foreignKey: "professional_id",
+      as: "patient_professionals",
+    })
   }
 }
 

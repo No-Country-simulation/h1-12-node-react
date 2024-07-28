@@ -26,6 +26,7 @@ import { initSubCategory, SubCategory } from "./subcategory.js";
 import { initCategory, Category } from "./category.js";
 import { initJurisdiction, Jurisdiction } from "./jurisdiction.js";
 import { initNotification, Notification } from "./notification.js";
+import { initPatientProfessionals, PatientProfessionals } from "./patientprofessionals.js";
 const env = process.env.NODE_ENV || "development";
 const configEnv = config[env];
 
@@ -64,24 +65,28 @@ initSubCategory(sequelize);
 initCategory(sequelize);
 initJurisdiction(sequelize);
 initNotification(sequelize);
+initTreatmentProfessionals(sequelize);
+initPatientProfessionals(sequelize);
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User, Professional });
 Institution.associate({ User, Professional });
-Patient.associate({ User, HealthInsurance, Professional });
+Patient.associate({ User, HealthInsurance, Professional, Treatment, PatientProfessionals });
 Permission.associate({ Role });
-Professional.associate({ User, Speciality, Patient, HealthInsurance, Treatment, Institution, Jurisdiction });
+Professional.associate({ PatientProfessionals, User, Speciality, Patient, Institution, InstitutionProfessionals, Treatment, TreatmentProfessionals, HealthInsurance, InsuranceProfessionals, Jurisdiction });
 Role.associate({ User, Permission });
 RolesPermissions.associate({});
 Speciality.associate({ Professional });
 User.associate({ Role });
-Treatment.associate({ Patient, Pathology, Professional, Medication })
+Treatment.associate({ Patient, Pathology, Professional, TreatmentProfessionals, MedicationTreatments, Medication });
 Document.associate({ Treatment })
-Medication.associate({ Treatment })
+Medication.associate({ Treatment, MedicationTreatments })
 Intake.associate({ MedicationTreatments })
 Service.associate({ SubCategory, Category })
 SubCategory.associate({ Category })
 Notification.associate({ User })
+MedicationTreatments.associate({ Treatment, Medication, Intake })
+
 
 export {
   sequelize,

@@ -71,6 +71,7 @@ export default [
     { role_id: 1, permission_id: 69, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 1, permission_id: 70, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 1, permission_id: 71, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 72, createdAt: new Date(), updatedAt: new Date() },
 
 
     // Permisos del paciente
@@ -149,6 +150,7 @@ export default [
     { role_id: 3, permission_id: 69, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 3, permission_id: 70, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 3, permission_id: 71, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 72, createdAt: new Date(), updatedAt: new Date() },
 
     // Permisos de la obra social
     { role_id: 4, permission_id: 1, createdAt: new Date(), updatedAt: new Date() },

@@ -1,6 +1,17 @@
 import { Model, DataTypes } from "sequelize";
 
-export class TreatmentProfessionals extends Model {}
+export class TreatmentProfessionals extends Model {
+  static associate(models) {
+    this.belongsTo(models.Treatment, {
+      foreignKey: "treatment_id",
+      as: "treatment",
+    })
+    this.belongsTo(models.Professional, {
+      foreignKey: "professional_id",
+      as: "professional",
+    })
+  }
+}
 
 export const initTreatmentProfessionals = (sequelize) => {
     TreatmentProfessionals.init(

@@ -30,7 +30,7 @@ export class ProfessionalsService {
         return professional
     }
 
-    updateProfessional= async(uid, payload) => {
+    updateProfessional = async(uid, payload) => {
         if(!uid){
             throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }

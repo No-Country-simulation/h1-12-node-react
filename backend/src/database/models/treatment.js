@@ -10,17 +10,25 @@ export class Treatment extends Model {
       as: "pathology",
     });
     this.belongsToMany(models.Professional, {
-      through: "institution_treatments",
-      foreignKey: "institution_id",
-      otherKey: "treatment_id",
-      as: "treatments",
+      through: models.TreatmentProfessionals,
+      foreignKey: "treatment_id",
+      otherKey: "professional_id",
+      as: "professionals",
     });
     this.belongsToMany(models.Medication, {
-      through: "medication_treatments",
+      through: models.MedicationTreatments,
       foreignKey: "treatment_id",
       otherKey: "medication_id",
       as: "medications",
     })
+    this.hasMany(models.TreatmentProfessionals, {
+      foreignKey: "treatment_id",
+      as: "treatment_professionals"
+    });
+    this.hasMany(models.MedicationTreatments, {
+      foreignKey: "treatment_id",
+      as: "medication_treatments",
+    });
   }
 }
 
