@@ -205,10 +205,10 @@ export class UsersService {
     return deletedUser;
   };
 
-  getHistory = async (uid) => {
+  getHistory = async (pid) => {
     const user = await Patient.findOne(
       {
-        where: { user_id: uid },
+        where: { user_id: pid },
         include: [
           {
             model: User,
