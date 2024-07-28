@@ -1,25 +1,61 @@
 //LoginPage.jsx
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import justinaHeart from "../images/justinaHeart.svg";
 import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
   //autenticación
-  const { login } = useContext(AuthContext);
+  const { login, loginAttempts, isLocked } = useContext(AuthContext);
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    form: "",
+  });
+  //user interface
   const [showPassword, setShowPassword] = useState(false);
-  const [isTyped, setIsTyped] = useState(false);
-  // const [errors, setErrors] = useState({ username: "", password: "" });
-  // Maneja el envío del formulario y realiza la autenticación
+  const [isTyped, setIsTyped] = useState({
+    username: false,
+    password: false,
+  });
+  //validaciones
+  //
+  const navigate = useNavigate();
+
+  /////////////////////////////////////////////////////////////
+  console.log(loginAttempts);
+  console.log(isLocked);
+
+  useEffect(() => {
+    if (isLocked) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "Demasiados intentos fallidos. Por favor, intenta nuevamente más tarde.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "",
+      }));
+    }
+  }, [isLocked]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = credentials;
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      form: "",
+    }));
+
+    if (isLocked) return;
 
     if (username && password && !errors.username && !errors.password) {
       try {
@@ -28,7 +64,9 @@ export default function LoginPage() {
       } catch (error) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          form: "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+          form:
+            error.message ||
+            "Error al iniciar sesión. Por favor, verifica tus credenciales.",
         }));
       }
     } else {
@@ -37,15 +75,6 @@ export default function LoginPage() {
         form: "Por favor, completa todos los campos correctamente.",
       }));
     }
-  };
-
-  const navigate = useNavigate();
-
-  // Maneja los cambios en los campos de entrada y valida la entrada
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-    validateInput(name, value);
   };
 
   const validateInput = (name, value) => {
@@ -74,51 +103,20 @@ export default function LoginPage() {
 
     setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
   };
-
-  /*
-  const handleUsernameChange = (e) => {
-    const value = e.target.value.slice(0, 15); // Recortar si excede 15 caracteres
-
-    let errorMessage = "";
-    if (!value) {
-      errorMessage = "El usuario es requerido";
-    } else if (!/^[a-zA-Z0-9!#$%&()*+\-/?@[\\\]^_{|}]{4,15}$/.test(value)) {
-      errorMessage =
-        "El usuario debe ser alfanumérico y tener entre 4 y 15 caracteres";
-    }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      username: errorMessage,
-    }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+    validateInput(name, value);
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-
-    setIsTyped(value.length > 0);
-
-    let errorMessage = "";
-    if (!value) {
-      errorMessage = "La contraseña es requerida";
-    } else if (value.length < 8 || value.length > 15) {
-      errorMessage = "La contraseña debe tener entre 8 y 15 caracteres";
-    } else if (!/[a-z]/.test(value)) {
-      errorMessage = "La contraseña debe tener al menos una minúscula";
-    }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: errorMessage,
-    }));
-  };
-  
-*/
   // Alterna la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  /*const buttonClass =
+    loginAttempts > 5
+      ? "w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151] btn-disabled"
+      : "w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151]";*/
   return (
     <section className="flex justify-center items-center h-screen flex-col max-w-2xl p-6 ">
       <div className="flex flex-col gap-6 justify-center items-center max-w-xs w-full p-4">
@@ -164,7 +162,7 @@ export default function LoginPage() {
                 onChange={handleChange}
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
-                className="bg grow w-full max-w-xs truncate text-sm font-normal leading-5 text-gray-400"
+                className="bg grow w-full max-w-xs truncate border-none text-sm font-normal leading-5 text-gray-400"
               />
               {isTyped && (
                 <svg
@@ -203,18 +201,23 @@ export default function LoginPage() {
           </label>
           <button
             type="submit"
+            disabled={isLocked} // Deshabilitar el botón si se superan los intentos fallidos
             className="w-full btn btn-primary mt-4 rounded-lg border border-[#374151] bg-[#374151]"
           >
             Ingresar
           </button>
+          {errors.form && (
+            <div className="text-xs text-red-500 mt-1">{errors.form}</div>
+          )}
         </form>
 
         <div className="w-80 h-3.5 flex-col justify-center items-center gap-6 inline-flex">
           <div className="flex-col justify-center items-center gap-2 flex">
-            <div className="w-80 text-center">
+            <div className="flex w-full gap-1 text-center">
               <span className="text-stone-700 text-xs font-normal font-roboto">
                 ¿Olvidaste contraseña?
               </span>
+
               <span className="text-neutral-800 text-xs font-normal font-roboto"></span>
               <Link
                 to="/"

@@ -19,7 +19,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        {/* Agrega más rutas protegidas de la misma manera */}
       </Routes>
     </AuthProvider>
   );
