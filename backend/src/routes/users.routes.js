@@ -49,7 +49,7 @@ router.delete('/:uid',
     usersController.deleteUser
 )
 
-router.get('/history/:uid',
+router.get('/history/:pid',
     validationMiddleware([pidParam]),
     authenticationMiddleware,
     authorizationMiddleware(["get-patient-history"]),
