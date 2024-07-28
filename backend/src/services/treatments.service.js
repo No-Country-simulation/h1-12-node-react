@@ -1,6 +1,7 @@
-import { Treatment } from "../database/models/index.js"
+import { MedicationTreatments, Treatment } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
+import { MedicationsService } from "./medications.service.js"
 import { PathologiesService } from "./pathologies.service.js"
 import { PatientsService } from "./patients.service.js"
 
@@ -9,6 +10,7 @@ export class TreatmentsService {
     constructor(){
         this.pathologiesService = new PathologiesService()
         this.patientsService = new PatientsService()
+        this.medicationsService = new MedicationsService()
     }
 
     getAll = async () => {
@@ -63,6 +65,23 @@ export class TreatmentsService {
 
         const updatedTreatment = await treatment.save()
         return updatedTreatment
+    }
+
+    addMedicaton = async(tid, mid, payload) => {
+        const { start_date, finish_date, description, dosage, period } = payload
+        const treatment = await this.getById(tid)
+        const medication = await this.medicationsService.getById(mid)
+        const medication_treatment = await MedicationTreatments.create({
+            treatment_id: treatment.id,
+            medication_id: medication.id,
+            start_date,
+            finish_date,
+            description,
+            dosage,
+            period,
+            suspended: false
+        })
+        return medication_treatment
     }
 
     delete = async (tid) => {

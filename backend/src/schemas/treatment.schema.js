@@ -32,3 +32,34 @@ export const updateTreatmentSchema = z.object({
     finish_date: z.date().optional(),
   }),
 });
+
+export const addMedicationSchema = z.object({
+  body: z.object({
+    start_date:  z
+      .string()
+      .refine(
+        (value) => {
+          const date = new Date(value);
+          return !isNaN(date.getTime());
+        },
+        {
+          message: "Must be a valid date",
+        }
+      ),
+    finish_date:  z
+      .string()
+      .refine(
+        (value) => {
+          const date = new Date(value);
+          return !isNaN(date.getTime());
+        },
+        {
+          message: "Must be a valid date",
+        }
+      ),
+    description: z.string().optional(),
+    dosage:  z.string().optional(),
+    "pre-trasplant":  z.boolean(),
+    period: z.number().min(1)
+  })
+})
