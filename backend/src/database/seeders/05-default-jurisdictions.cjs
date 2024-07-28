@@ -6,10 +6,10 @@ module.exports = {
       const data = await import('../data-seed/jurisdictions-data.mjs');
       return data.default;
     })();
-    await queryInterface.bulkInsert('Jurisdictions', professionals, {});
+    await queryInterface.bulkInsert('jurisdictions', professionals, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Jurisdictions', null, {});
+    await queryInterface.bulkDelete('jurisdictions', null, {});
   }
 }
