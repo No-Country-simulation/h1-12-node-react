@@ -13,3 +13,5 @@ yarn-error.log*
 # Otros archivos generados localmente
 /build
 /dist
+.vercel
+.hintrc
