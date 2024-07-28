@@ -56,14 +56,16 @@
 
 ### Tecnologías Clave
 
-<div style="display: flex; gap: 20px; flex-wrap: wrap;">
-  <img src="https://img.icons8.com/color/48/000000/react-native.png" alt="React" title="React"/>
-  <img src="https://img.icons8.com/external-flat-juicy-fish/50/000000/external-sql-database-flat-flat-flat-juicy-fish.png" alt="SQL" title="SQL"/>
-  <img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript" title="JavaScript"/>
-  <img src="https://img.icons8.com/external-flat-juicy-fish/50/000000/external-css3-logo-flat-flat-flat-juicy-fish.png" alt="Tailwind CSS" title="Tailwind CSS"/>
-  <img src="https://img.icons8.com/ios-filled/50/000000/nodejs.png" alt="Node.js" title="Node.js"/>
-  <img src="https://img.icons8.com/ios-filled/50/000000/express-js.png" alt="Express" title="Express"/>
-</div>
+### Frontend
+- ![Static Badge](https://img.shields.io/badge/ReactJS-black?logo=REACT)
+- ![Static Badge](https://img.shields.io/badge/Tailwindcss-black?logo=Tailwindcss)
+
+### Backend
+- Express
+- MySQL
+
+### Diseño UX/UI
+- Figma
 
 ### Descripción
 
@@ -75,88 +77,128 @@
 - **Express:** Framework para Node.js que facilita la construcción de aplicaciones web.
 
 ## Integrantes del Proyecto
-
-<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-  <!-- Frontend -->
-  <div style="flex: 1 1 calc(25% - 20px); box-sizing: border-box;">
-    <div style="text-align: center;">
-      <img src="https://via.placeholder.com/150" alt="Foto del Integrante 1" style="border-radius: 50%;"/>
-      <h3>[Nombre del Integrante 1]</h3>
-      <p><strong>Rol:</strong> Desarrollador Frontend</p>
-      <div style="display: flex; justify-content: center; gap: 10px;">
-        <a href="https://linkedin.com/in/integrante1" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn"/>
+<!-- Frontend -->
+<table align='center'>
+  <tr>
+    <td align='center'>
+      <div>
+        <a href="https://github.com/aracely33" target="_blank" rel="author">
+          <img width="110" src="https://avatars.githubusercontent.com/u/33846439?v=4"/>
         </a>
-        <a href="https://github.com/integrante1" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="GitHub"/>
+        <a href="https://github.com/aracely33" target="_blank" rel="author">
+          <h4 style="margin-top: 1rem;">Aracely Cruz del Ángel</br><small>Front-End</small></h4>
         </a>
-        <a href="mailto:email1@example.com">
-          <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Correo"/>
+        <div style='display: flex; flex-direction: column'>
+        <a href="https://github.com/aracely33" target="_blank">
+          <img style='width:8rem' src="https://img.shields.io/static/v1?style=for-the-badge&message=GitHub&color=172B4D&logo=GitHub&logoColor=FFFFFF&label="/>
         </a>
+        <br>
+        <a href="https://www.linkedin.com/in/aracruzdelangel/" target="_blank">
+          <img style='width:8rem' src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+        </a>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Backend -->
-  <div style="flex: 1 1 calc(25% - 20px); box-sizing: border-box;">
-    <div style="text-align: center;">
-      <img src="https://via.placeholder.com/150" alt="Foto del Integrante 2" style="border-radius: 50%;"/>
-      <h3>[Nombre del Integrante 2]</h3>
-      <p><strong>Rol:</strong> Desarrollador Backend</p>
-      <div style="display: flex; justify-content: center; gap: 10px;">
-        <a href="https://linkedin.com/in/integrante2" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn"/>
+    </td>
+    <td align='center'>
+      <div>
+        <a href="https://github.com/JerooQuintana" target="_blank" rel="author">
+          <img width="110" src="https://media.licdn.com/dms/image/D4D03AQHRYfcHN1m0vg/profile-displayphoto-shrink_200_200/0/1699381232226?e=2147483647&v=beta&t=faZ3ulTbNLZTIj6scoc3Zb2u88zBQsPf6wrOrkSMzBo"/>
         </a>
-        <a href="https://github.com/integrante2" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="GitHub"/>
+        <a href="https://github.com/JerooQuintana" target="_blank" rel="author">
+          <h4 style="margin-top: 1rem;">Jeronimo Quintana</br><small>Front-End</small></h4>
         </a>
-        <a href="mailto:email2@example.com">
-          <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Correo"/>
-        </a>
+        <div style='display: flex; flex-direction: column'>
+          <a href="https://github.com/JerooQuintana" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/static/v1?style=for-the-badge&message=GitHub&color=172B4D&logo=GitHub&logoColor=FFFFFF&label="/>
+          </a>
+          <br>
+          <a href="https://www.linkedin.com/in/jeronimo-quintana-677246260/" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Diseñador -->
-  <div style="flex: 1 1 calc(25% - 20px); box-sizing: border-box;">
-    <div style="text-align: center;">
-      <img src="https://via.placeholder.com/150" alt="Foto del Integrante 3" style="border-radius: 50%;"/>
-      <h3>[Nombre del Integrante 3]</h3>
-      <p><strong>Rol:</strong> Diseñador UX/UI</p>
-      <div style="display: flex; justify-content: center; gap: 10px;">
-        <a href="https://linkedin.com/in/integrante3" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn"/>
+    </td>
+  </tr>
+  </table>
+<table align='center'>
+  <tr>
+    <td align='center'>
+      <div>
+        <a href="https://github.com/JuanNebbia" target="_blank" rel="author">
+          <img width="110" src="https://avatars.githubusercontent.com/u/94460133?v=4"/>
         </a>
-        <a href="https://github.com/integrante3" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="GitHub"/>
+        <a href="https://github.com/JuanNebbia" target="_blank" rel="author">
+          <h4 style="margin-top: 1rem;">Juan Nebbia</br><small>Back-End</small></h4>
         </a>
-        <a href="mailto:email3@example.com">
-          <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Correo"/>
-        </a>
+        <div style='display: flex; flex-direction: column'>
+          <a href="https://github.com/JuanNebbia" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/static/v1?style=for-the-badge&message=GitHub&color=172B4D&logo=GitHub&logoColor=FFFFFF&label="/>
+          </a>
+          <br>
+          <a href="https://www.linkedin.com/in/juan-nebbia/" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Especialista en BD -->
-  <div style="flex: 1 1 calc(25% - 20px); box-sizing: border-box;">
-    <div style="text-align: center;">
-      <img src="https://via.placeholder.com/150" alt="Foto del Integrante 4" style="border-radius: 50%;"/>
-      <h3>[Nombre del Integrante 4]</h3>
-      <p><strong>Rol:</strong> Especialista en Base de Datos</p>
-      <div style="display: flex; justify-content: center; gap: 10px;">
-        <a href="https://linkedin.com/in/integrante4" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn"/>
+    </td>
+    <td align='center'>
+      <div>
+        <a href="https://github.com/MixDevCode" target="_blank" rel="author">
+          <img width="110" src="https://media.licdn.com/dms/image/D4D03AQEp6lirZD0Ikw/profile-displayphoto-shrink_800_800/0/1712146422605?e=1727308800&v=beta&t=pi4we-DMsEMv0unnfjM5VYh5uiVnQsxSGZhdk2suZeo"/>
         </a>
-        <a href="https://github.com/integrante4" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="GitHub"/>
+        <a href="https://github.com/MixDevCode" target="_blank" rel="author">
+          <h4 style="margin-top: 1rem;">Lucas Scifo</br><small>Back-End</small></h4>
         </a>
-        <a href="mailto:email4@example.com">
-          <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Correo"/>
-        </a>
+        <div style='display: flex; flex-direction: column'>
+          <a href="https://github.com/MixDevCode" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/static/v1?style=for-the-badge&message=GitHub&color=172B4D&logo=GitHub&logoColor=FFFFFF&label="/>
+          </a>
+          <br>
+          <a href="https://www.linkedin.com/in/lucas-scifo/" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+    </td>
+  </tr>
+</table>
+<table align='center'>
+  <tr>
+    <td align='center'>
+      <div>
+        <a href="https://www.behance.net/analauraalaminoc" target="_blank" rel="author">
+          <img width="110" src="https://media.licdn.com/dms/image/D4D03AQH0KErFd9FbXw/profile-displayphoto-shrink_200_200/0/1696508671706?e=1727308800&v=beta&t=9R4E2fAkkkMF599N4eCCScxmlVykuG_8sELA4SzyQAA"/>
+        </a>
+        <a href="https://www.behance.net/analauraalaminoc" target="_blank" rel="author">
+          <h4 style="margin-top: 1rem;">Ana Laura Alamino</br><small>UX/UI</small></h4>
+        </a>
+        <div style='display: flex; flex-direction: column; width: 100%'>
+          <a href="https://www.behance.net/analauraalaminoc" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/badge/behance%20-%230067ff.svg?&style=for-the-badge&logo=behance&logoColor=white"/>
+          </a>
+          <br>
+          <a href="https://www.linkedin.com/in/ana-laura-alamino/" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+        </div>
+      </div>
+    </td>
+    <td align='center'>
+      <div>
+        <a href="https://www.linkedin.com/in/cintiaredondas/" target="_blank" rel="author">
+          <img width="110" src="https://ca.slack-edge.com/T02KS88FB0E-U05M8LJ4ARH-d46ec6e94096-512"/>
+        </a>
+        <a href="https://www.linkedin.com/in/cintiaredondas/" target="_blank" rel="author">
+          <h4 style="margin-top: 1rem;">Cintia Elizabeth Redondas</br><small>QA</small></h4>
+        </a>
+        <div style='display: flex; flex-direction: column'>
+          <a href="https://www.linkedin.com/in/cintiaredondas/" target="_blank">
+            <img style='width:8rem' src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+          </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
 
 ---
 
