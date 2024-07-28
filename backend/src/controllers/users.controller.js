@@ -1,5 +1,6 @@
 import { UsersService } from "../services/users.service.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
+import { HttpError } from "../utils/http-error.util.js"
 
 export class UsersController {
 
@@ -18,7 +19,6 @@ export class UsersController {
 
     getUserById = async (req, res, next) => {
         const { uid } = req.params
-        const payload = req.body
         try {
             const user = await this.usersService.getById(uid)
             res.status(HTTP_CODES.SUCCESS).send(user)
@@ -27,11 +27,25 @@ export class UsersController {
         }
     }
 
-    updateUserPassword = async (req, res, next) => {
+    updateUser = async(req, res, next) => {
         const { uid } = req.params
+        const payload = req.body
+        try {
+            if(req.file && req.file.path){
+                payload.image = req.file.path
+            }
+            const updatedUser = await this.usersService.update(uid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedUser)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    updateUserPassword = async (req, res, next) => {
+        const user = req.user 
         const { password }= req.body
         try {
-            const updatedUser = await this.usersService.updatePassword(uid, password)
+            const updatedUser = await this.usersService.updatePassword(user.id, password)
             res.status(HTTP_CODES.SUCCESS).send(updatedUser)
         } catch (error) {
             next(error)

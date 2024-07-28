@@ -49,6 +49,19 @@ export class PermissionsService {
         }
     }
 
+    update = async(rid, payload) => {
+        const { permission, roles_ids } = payload
+        const existingPermission = await this.getById(rid)
+        if(permission){
+            existingPermission.permission = permission
+        }
+        if(roles_ids && roles_ids.length){
+            existingPermission.roles_ids = roles_ids
+        }
+        const updatedPermission = await existingPermission.save()
+        return updatedPermission
+    }
+
     delete = async (pid) => {
         const permission = await this.getById(pid)
         const deletedPermission = await permission.destroy()

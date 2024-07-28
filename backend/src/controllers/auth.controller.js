@@ -1,4 +1,3 @@
-import { cookieConfig } from "../config/cookies.config.js";
 import { AuthService } from "../services/auth.service.js";
 import { MailsService } from "../services/mail.service.js";
 import { UsersService } from "../services/users.service.js";
@@ -29,17 +28,16 @@ export class AuthController {
   };
 
   register = async (req, res, next) => {
+    const payload = req.body;
     try {
-      const payload = req.body;
       const user = await this.authService.registerUser(payload);
-      await this.mailsService.newUserNotification(payload);
-      res.status(HTTP_CODES.CREATED).json(user);
+      await this.mailsService.newUserNotification(payload, user);
+      res.status(HTTP_CODES.CREATED).json({payload, user});
     } catch (error) {
       next(error);
     }
   };
 
-  // solo para hacer pruebas de autenticación
   currentUser = async (req, res, next) => {
     try {
       res.status(HTTP_CODES.SUCCESS).send(req.user);
@@ -47,4 +45,15 @@ export class AuthController {
       next(error);
     }
   };
+
+  recoverPassword = async (req, res, next) => {
+    const { email } = req.body
+    try {
+      const user = await this.usersService.getByEmail(email)
+      const emailSent = await this.mailsService.passwordRestoration(email, user)
+      res.status(HTTP_CODES.SUCCESS).send(emailSent);
+    } catch (error) {
+      next(error)
+    }
+  }
 }

@@ -36,6 +36,17 @@ export class RolesController {
         }
     }
 
+    updateRole = async (req, res, next) => {
+        const payload = req.body
+        const { rid } = req.params
+        try {
+            const updatedRole = await this.rolesService.update(rid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedRole)
+        } catch (error) {
+            next(error)
+        } 
+    }
+
     deleteRole = async (req, res, next) => {
         const { rid } = req.params
         try {

@@ -1,4 +1,4 @@
-import { Role } from "../database/models/role.js"
+import { Role } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
@@ -9,7 +9,7 @@ export class RolesService {
     }
 
     getById = async (rid) => {
-        const role = await Role.findByPk(+rid)
+        const role = await Role.findByPk(rid)
         if(!role){
             throw new HttpError('Role not found', HTTP_CODES.NOT_FOUND)
         }
@@ -35,6 +35,14 @@ export class RolesService {
         }
         const role = Role.create(newRole)
         return role
+    }
+
+    update = async(rid, payload) => {
+        const { role_name } = payload
+        const role = await this.getById(rid)
+        role.role_name = role_name
+        const updatedRole = await role.save()
+        return updatedRole
     }
 
     delete = async (rid) => {

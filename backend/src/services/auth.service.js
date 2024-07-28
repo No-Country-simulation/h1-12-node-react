@@ -1,17 +1,13 @@
-import { HealthInsurance } from "../database/models/healthinsurance.js"
-import { Institution } from "../database/models/institution.js"
-import { Patient } from "../database/models/patient.js"
-import { Professional } from "../database/models/professional.js"
-import { User } from "../database/models/user.js"
 import { createHash } from "../utils/bcrypt.util.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
-import { InstitutionsService } from "./institution.services.js"
+import { InstitutionsService } from "./institutions.service.js"
 import { InsurancesService } from "./insurances.service.js"
 import { PatientsService } from "./patients.service.js"
 import { ProfessionalsService } from "./professionals.service.js"
 import { RolesService } from "./roles.service.js"
 import { UsersService } from "./users.service.js"
+import { v4 } from "uuid"
 
 export class AuthService {
 
@@ -33,8 +29,8 @@ export class AuthService {
         if(existingUser){
             throw new HttpError('email already in use', HTTP_CODES.BAD_REQUEST)
         }
-        const username = email.substring(0, email.indexOf('@'))
-        const hashedPass = createHash(dni)
+        const username = email.substring(0, email.indexOf('@')).toUpperCase()
+        const hashedPass = createHash(v4())
         const storedRole = await this.rolesService.getByName(role)
         const user = await this.usersService.createUser({ email, username, password: hashedPass, first_name, last_name, dni, role_id: storedRole.id })
         const userData = user.dataValues

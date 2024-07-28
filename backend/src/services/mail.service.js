@@ -1,8 +1,10 @@
-import { EMAIL_PASS, EMAIL_ADDRESS } from "../config/env.config.js";
+import { EMAIL_ADDRESS, FRONT_LINK } from "../config/env.config.js";
 import { gmailTransport } from "../config/mail.config.js";
+import fs from "fs";
+import { generateAccessToken } from "../utils/jwt.util.js";
 
 export class MailsService {
-  newUserNotification = async (payload) => {
+  newUserNotification = async (payload, user) => {
     let roleLabel;
     switch (payload.role) {
       case 'patient':
@@ -21,33 +23,87 @@ export class MailsService {
         roleLabel = 'usuario'
         break;
     }
+
+    const token = generateAccessToken(user)
+    const link = `${FRONT_LINK}/profile?token=${token}`
+
+    let template = fs.readFileSync("src/mail-templates/welcome.template.html", "utf-8");
+
+    template = template
+      .replace(/{{roleLabel}}/g, roleLabel)
+      .replace(/{{email}}/g, payload.email)
+      .replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}` )
+      .replace(/{{link}}/g, link )
+      .replace(/{{front-link}}/g, FRONT_LINK)
+      .replace(/{{username}}/g, user.username)
+
     await gmailTransport.sendMail({
       from: `Justina io <${EMAIL_ADDRESS}>`,
       to: payload.email,
       subject: `Has sido registrado como ${roleLabel} en Justina io`,
-      html: `
-                <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Document</title>
-                    </head>
-                    <body>
-                        <div class="main-container">
-                            ${JSON.stringify(payload)}
-                        </div>
-                    </body>
-                </html>
-            `,
+      html: template,
+      attachments: [
+        {
+          filename: 'Justina.io.jpg',
+          path: 'src/mail-templates/assets/Justina.io.jpg',
+          cid: 'justina-logo'
+        }
+      ]
     });
   };
 
-  passwordRestoration = async () => {
+  passwordRestoration = async (email, user) => {
+    const token = generateAccessToken(user)
+    const link = `${FRONT_LINK}/reset-password?token=${token}`
+
+    let template = fs.readFileSync("src/mail-templates/password-recovering.template.html", "utf-8");
+    template = template
+      .replace(/{{full_name}}/g, `${user.first_name} ${user.last_name}` )
+      .replace(/{{email}}/g, email)
+      .replace(/{{link}}/g, link)
+      .replace(/{{front-link}}/g,  FRONT_LINK)
+      .replace(/{{username}}/g, user.username)
+
+    const emailSent = await gmailTransport.sendMail({
+      from: `Justina io <${EMAIL_ADDRESS}>`,
+      to: email,
+      subject: "Recuperación de contraseña",
+      html: template,
+      attachments: [
+        {
+          filename: 'Justina.io.jpg',
+          path: 'src/mail-templates/assets/Justina.io.jpg',
+          cid: 'justina-logo'
+        }
+      ]
+    });
+    return emailSent
+  };
+
+  newMailNotification = async (payload, user) => {
+
+    let template = fs.readFileSync("src/mail-templates/notification.template.html", "utf-8");
+
+    template = template
+      .replace(/{{email}}/g, payload.email)
+      .replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}`)
+      .replace(/{{message}}/g, payload.message)
+      .replace(/{{front-link}}/g, FRONT_LINK)
+      .replace(/{{username}}/g, user.username)
+
     await gmailTransport.sendMail({
-      from: "",
-      to: "",
-      subject: "",
-      html: "",
+      from: `Justina io <${EMAIL_ADDRESS}>`,
+      to: payload.email,
+      subject: `Nueva notificación de Justina io`,
+      html: template,
+      attachments: [
+        {
+          filename: 'Justina.io.jpg',
+          path: 'src/mail-templates/assets/Justina.io.jpg',
+          cid: 'justina-logo'
+        }
+      ]
     });
   };
+
 }

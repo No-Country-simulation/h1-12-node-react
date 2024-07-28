@@ -4,12 +4,15 @@ import cookieParser from 'cookie-parser'
 import errorMiddleware from './middlewares/error.middleware.js'
 import { PORT } from './config/env.config.js'
 import { sequelize } from './database/models/index.js'
+import { configureCloudinary } from './config/cloudinary.config.js'
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+
+configureCloudinary()
 
 //cors
 app.use((req, res, next) => {
