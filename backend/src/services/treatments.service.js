@@ -1,6 +1,7 @@
 import { MedicationTreatments, Treatment } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
+import { IntakesService } from "./intakes.service.js"
 import { MedicationsService } from "./medications.service.js"
 import { PathologiesService } from "./pathologies.service.js"
 import { PatientsService } from "./patients.service.js"
@@ -11,6 +12,7 @@ export class TreatmentsService {
         this.pathologiesService = new PathologiesService()
         this.patientsService = new PatientsService()
         this.medicationsService = new MedicationsService()
+        this.intakesService = new IntakesService()
     }
 
     getAll = async () => {
@@ -81,6 +83,17 @@ export class TreatmentsService {
             period,
             suspended: false
         })
+
+        const startDate = new Date(start_date);
+        const finishDate = new Date(finish_date);
+        const periodInMilliseconds = period * 60 * 60 * 1000;
+
+        for (let intakeTime = startDate; intakeTime <= finishDate; intakeTime = new Date(intakeTime.getTime() + periodInMilliseconds)) {
+            await this.intakesService.create({
+                medication_treatment_id: medication_treatment.id,
+                date: intakeTime,
+            });
+        }
         return medication_treatment
     }
 
