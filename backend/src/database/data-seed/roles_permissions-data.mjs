@@ -67,6 +67,10 @@ export default [
     { role_id: 1, permission_id: 65, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 1, permission_id: 66, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 1, permission_id: 67, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 68, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 69, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 70, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 1, permission_id: 71, createdAt: new Date(), updatedAt: new Date() },
 
 
     // Permisos del paciente
@@ -94,6 +98,9 @@ export default [
     { role_id: 2, permission_id: 60, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 2, permission_id: 61, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 2, permission_id: 63, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 2, permission_id: 68, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 2, permission_id: 70, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 2, permission_id: 71, createdAt: new Date(), updatedAt: new Date() },
 
 
     // Permisos del profesional
@@ -138,6 +145,10 @@ export default [
     { role_id: 3, permission_id: 65, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 3, permission_id: 66, createdAt: new Date(), updatedAt: new Date() },
     { role_id: 3, permission_id: 67, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 68, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 69, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 70, createdAt: new Date(), updatedAt: new Date() },
+    { role_id: 3, permission_id: 71, createdAt: new Date(), updatedAt: new Date() },
 
     // Permisos de la obra social
     { role_id: 4, permission_id: 1, createdAt: new Date(), updatedAt: new Date() },

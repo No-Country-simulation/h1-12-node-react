@@ -75,5 +75,10 @@ export default [
 
     { id: 65, permission: 'get-services', createdAt: new Date(), updatedAt: new Date()},
     { id: 66, permission: 'get-service', createdAt: new Date(), updatedAt: new Date() },
-    { id: 67, permission: 'get-jurisdictions', createdAt: new Date(), updatedAt: new Date() }
+    { id: 67, permission: 'get-jurisdictions', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 68, permission: 'get-notifications', createdAt: new Date(), updatedAt: new Date() },
+    { id: 69, permission: 'create-notification', createdAt: new Date(), updatedAt: new Date() },
+    { id: 70, permission: 'update-notification', createdAt: new Date(), updatedAt: new Date() },
+    { id: 71, permission: 'delete-notification', createdAt: new Date(), updatedAt: new Date() },
 ]

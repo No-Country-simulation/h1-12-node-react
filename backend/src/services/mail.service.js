@@ -79,4 +79,31 @@ export class MailsService {
     });
     return emailSent
   };
+
+  newMailNotification = async (payload, user) => {
+
+    let template = fs.readFileSync("src/mail-templates/notification.template.html", "utf-8");
+
+    template = template
+      .replace(/{{email}}/g, payload.email)
+      .replace(/{{full_name}}/g, `${payload.first_name} ${payload.last_name}`)
+      .replace(/{{message}}/g, payload.message)
+      .replace(/{{front-link}}/g, FRONT_LINK)
+      .replace(/{{username}}/g, user.username)
+
+    await gmailTransport.sendMail({
+      from: `Justina io <${EMAIL_ADDRESS}>`,
+      to: payload.email,
+      subject: `Nueva notificación de Justina io`,
+      html: template,
+      attachments: [
+        {
+          filename: 'Justina.io.jpg',
+          path: 'src/mail-templates/assets/Justina.io.jpg',
+          cid: 'justina-logo'
+        }
+      ]
+    });
+  };
+
 }
