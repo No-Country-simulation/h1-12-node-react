@@ -6,10 +6,10 @@ module.exports = {
       const data = await import('../data-seed/permissions-data.mjs');
       return data.default;
     })();
-    await queryInterface.bulkInsert('Permissions', permissions, {});
+    await queryInterface.bulkInsert('permissions', permissions, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Permissions', null, {});
+    await queryInterface.bulkDelete('permissions', null, {});
   }
 }

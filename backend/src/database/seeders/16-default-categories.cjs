@@ -6,10 +6,10 @@ module.exports = {
       const data = await import('../data-seed/categories-data.mjs');
       return data.default;
     })();
-    await queryInterface.bulkInsert('Categories', intakes, {});
+    await queryInterface.bulkInsert('categories', intakes, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Categories', null, {});
+    await queryInterface.bulkDelete('categories', null, {});
   }
 }

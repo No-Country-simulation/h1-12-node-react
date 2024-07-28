@@ -6,10 +6,10 @@ module.exports = {
       const data = await import('../data-seed/institutions-data.mjs');
       return data.default;
     })();
-    await queryInterface.bulkInsert('Institutions', institutions, {});
+    await queryInterface.bulkInsert('institutions', institutions, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Institutions', null, {});
+    await queryInterface.bulkDelete('institutions', null, {});
   }
 }
