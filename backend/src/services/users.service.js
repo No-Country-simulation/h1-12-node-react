@@ -206,9 +206,7 @@ export class UsersService {
   };
 
   getHistory = async (pid) => {
-    const user = await Patient.findOne(
-      {
-        where: { user_id: pid },
+    const user = await Patient.findByPk(+pid, {
         include: [
           {
             model: User,
