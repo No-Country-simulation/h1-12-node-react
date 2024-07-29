@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
   );
   const [isLocked, setIsLocked] = useState(false);
   const [lockTimeoutId, setLockTimeoutId] = useState(null);
-  console.log(lockTimeoutId);
+  // console.log(lockTimeoutId);
   // Función para manejar el login y almacenar el token
   const login = async (credentials) => {
     try {
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem("token", data.token);
         setLoginAttempts(0);
         localStorage.setItem("loginAttempts", 0);
-        navigate("/homeadmin");
+        navigate("/dashboard");
       } else {
         // Manejar error de autenticación aquí
         handleFailedLogin();
@@ -82,7 +82,7 @@ const AuthProvider = ({ children }) => {
         window.location.pathname === "/" ||
         window.location.pathname === "/login"
       ) {
-        navigate("/homeadmin");
+        navigate("/dashboard");
       }
     } else {
       navigate("/");
@@ -90,7 +90,7 @@ const AuthProvider = ({ children }) => {
   }, [navigate]);
 
   // Manejo de cierre de sesión al cerrar pestaña
-  useEffect(() => {
+  /* useEffect(() => {
     const handleBeforeUnload = (event) => {
       console.log("Evento beforeunload detectado");
       event.preventDefault();
@@ -112,7 +112,7 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("isClosing");
       logout();
     }
-  }, []);
+  }, []);*/
 
   // Manejo de sincronización entre pestañas
   useEffect(() => {
