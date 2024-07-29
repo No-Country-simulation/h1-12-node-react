@@ -12,6 +12,7 @@ import intakesRoutes from './intakes.routes.js'
 import servicesRoutes from './services.routes.js'
 import jurisdictionsRoutes from './jurisdictions.routes.js'
 import notificationsRoutes from './notifications.routes.js'
+import aiRoutes from './ai.routes.js'
 
 const router = Router()
 
@@ -28,6 +29,7 @@ router.use('/intakes', intakesRoutes)
 router.use('/services', servicesRoutes)
 router.use('/jurisdictions', jurisdictionsRoutes)
 router.use('/notifications', notificationsRoutes)
+router.use('/ai', aiRoutes)
 
 
 export default router
