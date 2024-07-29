@@ -19,18 +19,25 @@ router.get('/',
     usersController.getAllUsers
 )
 
-router.patch('/update-password', 
-    validationMiddleware([passwordSchema]),
-    authenticationMiddleware,
-    authorizationMiddleware(["update-user"]),
-    usersController.updateUserPassword
-)
-
 router.get('/:uid', 
     validationMiddleware([uidParam]),
     authenticationMiddleware,
     authorizationMiddleware(["get-user"]),
     usersController.getUserById
+)
+
+router.get('/:pid/statistics', 
+    validationMiddleware([pidParam]),
+    authenticationMiddleware,
+    authorizationMiddleware(["get-user"]),
+    usersController.getPatientStatistics
+)
+
+router.patch('/update-password', 
+    validationMiddleware([passwordSchema]),
+    authenticationMiddleware,
+    authorizationMiddleware(["update-user"]),
+    usersController.updateUserPassword
 )
 
 router.patch('/:uid', 

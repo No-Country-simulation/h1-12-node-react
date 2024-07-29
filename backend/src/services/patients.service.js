@@ -1,4 +1,4 @@
-import { Patient } from "../database/models/index.js"
+import { Consultation, Intake, MedicationTreatments, Patient, Treatment } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
@@ -8,11 +8,79 @@ export class PatientsService {
 
     getById = async (pid) => {
         const patient = await Patient.findByPk(pid)
-        console.log(patient)
         if(!patient){
             throw new HttpError('Patient not found', HTTP_CODES.NOT_FOUND)
         }
         return patient
+    }
+
+    getStatistics = async(pid) => {
+        await this.getById(pid)
+        const userConsultations = await Consultation.findAll({
+          where: {
+            patient_id: pid
+          }
+        })
+        const userIntakes = await Intake.findAll({
+            include: {
+                model: MedicationTreatments,
+                as: 'medication_treatment',
+                include: {
+                    model: Treatment,
+                    as: 'treatment',
+                    where: {
+                        patient_id: pid
+                    }
+                }
+            }
+        })
+        const consultations = {
+            created: 0,
+            accepted: 0,
+            denied: 0,
+            finished: 0,
+            total: userConsultations.length
+        }
+        for(let i = 0; i < userConsultations.length; i ++){
+            switch (userConsultations[i].dataValues.status) {
+                case 'created':
+                    consultations.created ++
+                    break;
+                case 'accepted':
+                    consultations.accepted ++
+                    break;
+                case 'denied':
+                    consultations.denied ++
+                    break;
+                case 'finished':
+                    consultations.finished ++
+                    break;
+                default:
+                    break;
+            }
+        }
+        const intakes = {
+            taken: 0,
+            pending: 0,
+            notTaken: 0,
+            total: userIntakes.length
+        }
+        for(let i = 0; i < userIntakes.length; i ++){
+            if(userIntakes[i].dataValues.taken){
+                intakes.taken ++
+            }else{
+                if(new Date(userIntakes[i].dataValues.date) > new Date()){
+                    intakes.pending ++
+                }else{
+                    intakes.notTaken ++
+                }
+            }
+        }
+        const patientStatistics = {
+            consultations,
+            intakes
+        }
+        return patientStatistics
     }
 
     findByUserId = async(uid) => {
