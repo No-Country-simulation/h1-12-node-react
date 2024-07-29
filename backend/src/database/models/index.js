@@ -27,6 +27,7 @@ import { initCategory, Category } from "./category.js";
 import { initJurisdiction, Jurisdiction } from "./jurisdiction.js";
 import { initNotification, Notification } from "./notification.js";
 import { initPatientProfessionals, PatientProfessionals } from "./patientprofessionals.js";
+import { Consultation, initConsultation } from "./consultation.js";
 const env = process.env.NODE_ENV || "development";
 const configEnv = config[env];
 
@@ -67,6 +68,7 @@ initJurisdiction(sequelize);
 initNotification(sequelize);
 initTreatmentProfessionals(sequelize);
 initPatientProfessionals(sequelize);
+initConsultation(sequelize)
 
 // Configurar las asociaciones
 HealthInsurance.associate({ User, Professional });
@@ -86,7 +88,7 @@ Service.associate({ SubCategory, Category })
 SubCategory.associate({ Category })
 Notification.associate({ User })
 MedicationTreatments.associate({ Treatment, Medication, Intake })
-
+Consultation.associate({ Patient, Professional })
 
 export {
   sequelize,
@@ -112,5 +114,6 @@ export {
   SubCategory,
   Category,
   Jurisdiction,
-  Notification
+  Notification,
+  Consultation
 };
