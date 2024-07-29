@@ -60,7 +60,7 @@ export default function LoginPage() {
     if (username && password && !errors.username && !errors.password) {
       try {
         await login({ username, password });
-        navigate("/homeadmin");
+        navigate("/dashboard");
       } catch (error) {
         setErrors((prevErrors) => ({
           ...prevErrors,

@@ -1,24 +1,47 @@
 //App.js
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomeAdmin from "./Pages/HomeAdmin";
+import Dashboard from "./Pages/Dashboard";
+import GenericForm from "./Components/GenericForm";
 import LoginPage from "./Pages/LoginPage";
+import HomeAdmin from "./Components/HomeAdmin";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./Components/PrivateRoute";
+import UiToolkit from "./Components/UiToolkit";
+import PatientFinishRegister from "./Pages/PatientFinishRegister";
+import ClinicalHistory from "./Pages/ClinicalHistory";
+import SearchPage from "./Pages/SearchPage";
+import PatientRegister from "./Pages/PatientRegister";
+import ProfessionalRegister from "./Pages/ProfessionalRegister";
 
 function App() {
   return (
     <AuthProvider>
       <Routes>
+        {/* Ruta pública de inicio de sesión */}
         <Route path="/" element={<LoginPage />} />
-        <Route
-          path="/homeadmin"
-          element={
-            <PrivateRoute>
-              <HomeAdmin />
-            </PrivateRoute>
-          }
-        />
+
+        {/* Rutas protegidas */}
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          {/* Ruta principal dentro de Dashboard */}
+          <Route element={<Dashboard />}>
+            <Route index element={<HomeAdmin />} /> {/* Ruta predeterminada */}
+            <Route path="homeadmin" element={<HomeAdmin />} />
+            <Route path="uitoolkit" element={<UiToolkit />} />
+            <Route path="finish-register" element={<PatientFinishRegister />} />
+            <Route path="clinical-history" element={<ClinicalHistory />} />
+            <Route path="search" element={<SearchPage />} />
+            <Route
+              path="register-health-provider"
+              element={<PatientRegister />}
+            />
+            <Route
+              path="register-professional"
+              element={<ProfessionalRegister />}
+            />
+            {/* Otras rutas secundarias */}
+          </Route>
+        </Route>
       </Routes>
     </AuthProvider>
   );
