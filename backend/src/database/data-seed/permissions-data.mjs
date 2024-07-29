@@ -82,5 +82,11 @@ export default [
     { id: 70, permission: 'update-notification', createdAt: new Date(), updatedAt: new Date() },
     { id: 71, permission: 'delete-notification', createdAt: new Date(), updatedAt: new Date() },
 
-    { id: 72, permission: 'get-patient-history', createdAt: new Date(), updatedAt: new Date() }
+    { id: 72, permission: 'get-patient-history', createdAt: new Date(), updatedAt: new Date() },
+
+    { id: 73, permission: 'get-consultations', createdAt: new Date(), updatedAt: new Date() },
+    { id: 74, permission: 'get-consultation', createdAt: new Date(), updatedAt: new Date() },
+    { id: 75, permission: 'create-consultation', createdAt: new Date(), updatedAt: new Date() },
+    { id: 76, permission: 'update-consultation', createdAt: new Date(), updatedAt: new Date() },
+    { id: 77, permission: 'delete-consultation', createdAt: new Date(), updatedAt: new Date() },
 ]
