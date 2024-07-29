@@ -1,4 +1,4 @@
-import { Patient } from "../database/models/patient.js"
+import { Patient } from "../database/models/index.js"
 import { HTTP_CODES } from "../utils/http-codes.util.js"
 import { HttpError } from "../utils/http-error.util.js"
 
@@ -6,14 +6,27 @@ export class PatientsService {
 
     constructor(){}
 
+    getById = async (pid) => {
+        const patient = await Patient.findByPk(pid)
+        console.log(patient)
+        if(!patient){
+            throw new HttpError('Patient not found', HTTP_CODES.NOT_FOUND)
+        }
+        return patient
+    }
+
+    findByUserId = async(uid) => {
+        const patient = await Patient.findOne({ where: { user_id: +uid } })
+        return patient
+    }
+
     createPatient = async(payload) => {
         const { user_id } = payload;
         if(!user_id){
-            throw new HttpError('missing data', HTTP_CODES.BAD_REQUEST)
+            throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }
         const newPatient = {
             user_id,
-            active_tratment: null,
             health_insurance_id: null,
             head_professional_id: null,
             sex: null,
@@ -22,5 +35,30 @@ export class PatientsService {
         }
         const patient = await Patient.create(newPatient)
         return patient
+    }
+
+    updatePatient = async(uid, payload) => {
+        if(!uid){
+            throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
+        }
+        const { sex, blood_factor, birthdate } = payload
+        if(!sex && !blood_factor && !birthdate){
+            return
+        }
+        const patient = await this.findByUserId(uid)
+        if(!patient){
+            throw new HttpError('Patient not found', HTTP_CODES.NOT_FOUND)
+        }
+        if(sex){
+            patient.sex = sex
+        }
+        if(blood_factor){
+            patient.blood_factor = blood_factor
+        }
+        if(birthdate){
+            patient.birthdate = new Date(birthdate)
+        }
+        const updatedPatient = await patient.save()
+        return updatedPatient
     }
 }

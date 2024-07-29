@@ -36,6 +36,17 @@ export class PermissionsController {
         }
     }
 
+    updatePermission = async (req, res, next) => {
+        const payload = req.body
+        const { pid } = req.params
+        try {
+            const updatedPermission = await this.permissionsService.update(pid, payload)
+            res.status(HTTP_CODES.SUCCESS).send(updatedPermission)
+        } catch (error) {
+            next(error)
+        } 
+    }
+
     deletePermission = async (req, res, next) => {
         const { pid } = req.params
         try {

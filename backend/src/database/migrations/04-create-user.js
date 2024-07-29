@@ -17,7 +17,7 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
+        onDelete: 'CASCADE'
       },
       email: {
         type: Sequelize.STRING,
@@ -60,9 +60,6 @@ module.exports = {
       },
       updated_pass: {
         type: Sequelize.BOOLEAN
-      },
-      birthdate: {
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
