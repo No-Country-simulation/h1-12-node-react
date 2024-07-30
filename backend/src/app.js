@@ -28,6 +28,10 @@ app.use((req, res, next) => {
 
 app.use('/api', appRoutes)
 
+app.get('/', (req, res) => {
+    res.send('Justina api running')
+})
+
 app.use(errorMiddleware)
 
 sequelize.authenticate()
