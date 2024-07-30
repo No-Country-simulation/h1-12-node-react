@@ -43,6 +43,7 @@ export class UsersService {
   getByUsername = async (username) => {
     const user = await User.findOne({
       where: { username: username.toUpperCase() },
+      include: [{ model: Role, as: "role" }],
     });
     if (!user) {
       throw new HttpError("User not found", HTTP_CODES.NOT_FOUND);
@@ -207,80 +208,79 @@ export class UsersService {
 
   getHistory = async (pid) => {
     const user = await Patient.findByPk(+pid, {
-        include: [
-          {
-            model: User,
-            as: "user",
-            attributes: {
-              exclude: ["password", "createdAt", "updatedAt", "updated_pass"],
-            }
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: {
+            exclude: ["password", "createdAt", "updatedAt", "updated_pass"],
           },
-          {
-            model: Treatment,
-            as: "treatments",
-            include: [
+        },
+        {
+          model: Treatment,
+          as: "treatments",
+          include: [
+            {
+              model: Pathology,
+              as: "pathology",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+            {
+              model: Professional,
+              as: "professionals",
+              through: { attributes: [] },
+            },
+            {
+              model: TreatmentProfessionals,
+              as: "treatment_professionals",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+            {
+              model: Medication,
+              as: "medications",
+              through: { attributes: [] },
+            },
+            {
+              model: MedicationTreatments,
+              as: "medication_treatments",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+              include: [
                 {
-                    model: Pathology,
-                    as: "pathology",
-                    attributes: {
-                      exclude: ["createdAt", "updatedAt"],
-                    },
+                  model: Intake,
+                  as: "intakes",
+                  attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                  },
                 },
-                {
-                    model: Professional,
-                    as: "professionals",
-                    through: { attributes: [] },
-                  },
-                  {
-                    model: TreatmentProfessionals,
-                    as: "treatment_professionals",
-                    attributes: {
-                      exclude: ["createdAt", "updatedAt"],
-                    },
-                  },
-                  {
-                    model: Medication,
-                    as: "medications",
-                    through: { attributes: [] },
-                  },
-                  {
-                    model: MedicationTreatments,
-                    as: "medication_treatments",
-                    attributes: {
-                      exclude: ["createdAt", "updatedAt"],
-                    },
-                    include: [
-                        {
-                            model: Intake,
-                            as: "intakes",
-                            attributes: {
-                              exclude: ["createdAt", "updatedAt"],
-                            },
-                        }
-                    ]
-                  }
-            ],
-            attributes: {
-              exclude: ["createdAt", "updatedAt"],
+              ],
             },
+          ],
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
           },
-          {
-            model: HealthInsurance,
-            as: "health_insurance",
-            attributes: {
-              exclude: ["createdAt", "updatedAt"],
-            },
+        },
+        {
+          model: HealthInsurance,
+          as: "health_insurance",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
           },
-          {
-            model: Professional,
-            as: "professionals",
-            attributes: {
-              exclude: ["createdAt", "updatedAt"],
-            },
-          }
-        ],
-      },
-    );
+        },
+        {
+          model: Professional,
+          as: "professionals",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
     if (!user) {
       throw new HttpError("Patient not found", HTTP_CODES.NOT_FOUND);
     }
