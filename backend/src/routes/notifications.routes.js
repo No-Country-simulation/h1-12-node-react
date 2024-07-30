@@ -17,22 +17,22 @@ router.get('/',
 
 router.post('/',
     validationMiddleware([createNotificationSchema]),
-    authorizationMiddleware(["create-notification"]),
     authenticationMiddleware,
+    authorizationMiddleware(["create-notification"]),
     notificationsController.createNotification
 )
 
 router.patch('/:nid',
     validationMiddleware([updateNotificationSchema, nidParam]),
-    authorizationMiddleware(["update-notification"]),
     authenticationMiddleware,
+    authorizationMiddleware(["update-notification"]),
     notificationsController.updateNotification
 )
 
 router.delete('/:nid',
     validationMiddleware([nidParam]),
-    authorizationMiddleware(["delete-notification"]),
     authenticationMiddleware,
+    authorizationMiddleware(["delete-notification"]),
     notificationsController.deleteNotification
 )
 
