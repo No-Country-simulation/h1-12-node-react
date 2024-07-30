@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import userAvatar from "../images/jose.png";
 import GenericForm from "./GenericForm";
 import SearchBar from "./SearchBar";
-import ModalComponent from "./ModalComponent";
+import ModalComponent from "./Modal";
+
 const data = ["Apple", "Banana", "Orange", "Grapes", "Mango"];
 
 export default class UiToolkit extends Component {

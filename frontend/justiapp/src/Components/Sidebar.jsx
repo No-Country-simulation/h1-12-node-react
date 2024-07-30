@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Avatar from "./Avatar";
 
 const Sidebar = ({ logout }) => (
-  <ul className="menu min-h-full bg-white flex max-sm:hidden max-w-56  pt-32   max-sm:pt-28">
+  <ul className="menu min-h-full bg-white flex justify-center max-sm:hidden max-w-56  pt-32   max-sm:pt-28">
     <li>
       <Link to="/">
         <svg
@@ -54,8 +54,12 @@ const Sidebar = ({ logout }) => (
       <Link to="/dashboard/pacient-dashboard">Paciente Dashboard</Link>
     </li>
     <li className="w-full">
+      <Link to="/dashboard/patient-treatment">Paciente Tratamiento</Link>
+    </li>
+    <li className="w-full">
       <Link to="/dashboard/clinical-history">historia Clinica</Link>
     </li>
+
     <li>
       <a>
         <svg

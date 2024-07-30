@@ -13,6 +13,8 @@ import ClinicalHistory from "./Pages/ClinicalHistory";
 import SearchPage from "./Pages/SearchPage";
 import PatientRegister from "./Pages/PatientRegister";
 import ProfessionalRegister from "./Pages/ProfessionalRegister";
+import DashboardPaciente from "./Components/DashboardPaciente";
+import TratamientoPaciente from "./Components/TratamientoPaciente";
 
 function App() {
   return (
@@ -31,10 +33,9 @@ function App() {
             <Route path="finish-register" element={<PatientFinishRegister />} />
             <Route path="clinical-history" element={<ClinicalHistory />} />
             <Route path="search" element={<SearchPage />} />
-            <Route
-              path="register-health-provider"
-              element={<PatientRegister />}
-            />
+            <Route path="register-patient" element={<PatientRegister />} />
+            <Route path="pacient-dashboard" element={<DashboardPaciente />} />
+            <Route path="patient-treatment" element={<TratamientoPaciente />} />
             <Route
               path="register-professional"
               element={<ProfessionalRegister />}

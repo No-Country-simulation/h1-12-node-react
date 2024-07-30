@@ -9,30 +9,6 @@ import { AuthContext } from "../context/AuthContext";
 import Sidebar from "../Components/Sidebar";
 import CardContainer from "../Components/CardContainer";
 
-const cardData = [
-  {
-    id: 1,
-    bgColor: "bg-mynaval",
-    title: "Registrar\nprofesional\nde la salud",
-    description: "Asegúrate de tener los datos",
-    link: "/regiter-professional",
-  },
-  {
-    id: 2,
-    bgColor: "bg-mygreen",
-    title: "Registrar\nprestador\nde salud",
-    description: "Asegúrate de tener los datos",
-    link: "/registeruser",
-  },
-
-  {
-    id: 3,
-    bgColor: "bg-sky00",
-    title: "Registrar\ninstitución\nde salud",
-    description: "Asegúrate de tener los datos",
-    link: "/registeruser",
-  },
-];
 const data = ["Apple", "Banana", "Orange", "Grapes", "Mango"];
 
 export default function Dashboard(props) {

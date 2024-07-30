@@ -26,6 +26,13 @@ const cardData = [
     description: "Asegúrate de tener los datos",
     link: "dashboard/register-health-institution",
   },
+  {
+    id: 4,
+    bgColor: "bg-red-500",
+    title: "Registrar\npaciente",
+    description: "Asegúrate de tener los datos",
+    link: "register-patient",
+  },
 ];
 
 export default function HomeAdmin() {
