@@ -15,32 +15,23 @@ import PatientRegister from "./Pages/PatientRegister";
 import ProfessionalRegister from "./Pages/ProfessionalRegister";
 import DashboardPaciente from "./Components/DashboardPaciente";
 import TratamientoPaciente from "./Components/TratamientoPaciente";
+import AgendaTurnos from "./Components/AgendaTurnos";
 
 function App() {
   return (
     <AuthProvider>
       <Routes>
-        {/* Ruta pública de inicio de sesión */}
         <Route path="/" element={<LoginPage />} />
-
-        {/* Rutas protegidas */}
-        <Route path="/dashboard" element={<PrivateRoute />}>
-          {/* Ruta principal dentro de Dashboard */}
-          <Route element={<Dashboard />}>
-            <Route index element={<HomeAdmin />} /> {/* Ruta predeterminada */}
-            <Route path="homeadmin" element={<HomeAdmin />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard*" element={<Dashboard />}>
+            <Route path="admin" element={<HomeAdmin />} />
             <Route path="uitoolkit" element={<UiToolkit />} />
-            <Route path="finish-register" element={<PatientFinishRegister />} />
-            <Route path="clinical-history" element={<ClinicalHistory />} />
-            <Route path="search" element={<SearchPage />} />
-            <Route path="register-patient" element={<PatientRegister />} />
-            <Route path="pacient-dashboard" element={<DashboardPaciente />} />
-            <Route path="patient-treatment" element={<TratamientoPaciente />} />
+            <Route path="patient" element={<DashboardPaciente />} />
             <Route
-              path="register-professional"
-              element={<ProfessionalRegister />}
+              path="patient-finish-register"
+              element={<PatientFinishRegister />}
             />
-            {/* Otras rutas secundarias */}
+            <Route path="clinical-history" element={<ClinicalHistory />} />
           </Route>
         </Route>
       </Routes>

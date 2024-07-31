@@ -6,14 +6,31 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ token: null });
+  const [auth, setAuth] = useState({ token: null, role: null });
   const navigate = useNavigate();
   const [loginAttempts, setLoginAttempts] = useState(
     parseInt(localStorage.getItem("loginAttempts")) || 0
   );
   const [isLocked, setIsLocked] = useState(false);
   const [lockTimeoutId, setLockTimeoutId] = useState(null);
-  // console.log(lockTimeoutId);
+
+  // Verificar si hay un token almacenado en localStorage al montar el componente
+  // Efecto para manejar redirección en caso de que el usuario ya esté autenticado
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (token && role) {
+      setAuth({ token, role });
+      console.log(`este es el role ${role}`);
+      // Solo redirigir si estamos en la ruta raíz o de login
+      if (window.location.pathname === "/") {
+        navigate(`/dashboard/${role}`);
+      }
+    }
+  }, [navigate, setAuth]);
+
   // Función para manejar el login y almacenar el token
   const login = async (credentials) => {
     try {
@@ -30,13 +47,14 @@ const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        setAuth({ token: data.token });
+        console.log(data);
+        setAuth({ token: data.token, role: data.user.role.role_name });
         localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.user.role.role_name);
         setLoginAttempts(0);
         localStorage.setItem("loginAttempts", 0);
-        navigate("/dashboard");
+        navigate(`/dashboard/${data.user.role.role_name}`);
       } else {
-        // Manejar error de autenticación aquí
         handleFailedLogin();
       }
     } catch (error) {
@@ -68,26 +86,11 @@ const AuthProvider = ({ children }) => {
   // Función para manejar el logout
   const logout = () => {
     console.log("cierre de sesión detectado");
-    setAuth({ token: null });
+    setAuth({ token: null, role: null });
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/");
   };
-
-  // Verificar si hay un token almacenado en localStorage al montar el componente
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuth({ token });
-      if (
-        window.location.pathname === "/" ||
-        window.location.pathname === "/login"
-      ) {
-        navigate("/dashboard");
-      }
-    } else {
-      navigate("/");
-    }
-  }, [navigate]);
 
   // Manejo de cierre de sesión al cerrar pestaña
   /* useEffect(() => {
@@ -117,10 +120,15 @@ const AuthProvider = ({ children }) => {
   // Manejo de sincronización entre pestañas
   useEffect(() => {
     const handleStorageChange = (event) => {
+      console.log(event.key, event.newValue);
       if (event.key === "token" && !event.newValue) {
         logout();
       } else if (event.key === "token" && event.newValue) {
-        setAuth({ token: event.newValue });
+        console.log("Token actualizado en otra pestaña:", event.newValue);
+        const newRole = localStorage.getItem("role");
+        console.log(`este es el role nuevo rol ${newRole}`);
+
+        setAuth({ token: event.newValue, role: newRole });
       }
     };
 

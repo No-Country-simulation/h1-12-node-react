@@ -24,12 +24,10 @@ export default class UiToolkit extends Component {
                   </Link>
                 </li>
                 <li class="w-full">
-                  <Link to="/dashboard/register-institution">
-                    Institución de salud
-                  </Link>
+                  <Link to="/">Institución de salud</Link>
                 </li>
                 <li class="w-full">
-                  <Link to="/dashboard/register-patient">Paciente</Link>
+                  <Link to="/">Paciente</Link>
                 </li>
               </ul>
             </details>
