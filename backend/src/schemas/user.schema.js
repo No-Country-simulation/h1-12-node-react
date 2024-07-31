@@ -35,7 +35,13 @@ export const updateUserSchema = z.object({
       .max(9, "DNI must contain less than 10 characters")
       .optional(),
     username: z.string().optional(),
-    phone: z.string().optional(),
+    phone: z.string().refine((phone) => {
+      // Expresión regular para validar el formato E.164
+      const phoneRegex = /^\+?[1-9]\d{3,14}$/;
+      return phoneRegex.test(phone);
+    }, {
+      message: "El número de teléfono debe cumplir con los estándares internacionales (E.164).",
+    }).optional(),
     province: z.string().optional(),
     locality: z.string().optional(),
     address: z.string().optional(),
