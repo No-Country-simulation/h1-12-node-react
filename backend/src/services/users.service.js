@@ -2,6 +2,7 @@ import {
   HealthInsurance,
   Intake,
   Medication,
+  Institution,
   MedicationTreatments,
   Pathology,
   Patient,
@@ -9,6 +10,7 @@ import {
   Role,
   Treatment,
   TreatmentProfessionals,
+  Speciality,
 } from "../database/models/index.js";
 import { User } from "../database/models/index.js";
 import { createHash } from "../utils/bcrypt.util.js";
@@ -28,12 +30,66 @@ export class UsersService {
   }
 
   getAll = async () => {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: [
+        {
+          model: Role,
+          as: "role",
+          attributes: ["role_name"],
+        },
+        {
+          model: Patient,
+          as: "patient_data",
+          attributes: ["id"],
+        },
+        {
+          model: Professional,
+          as: "professional_data",
+          attributes: ["id"],
+          include: [
+            {
+              model: Speciality,
+              as: "speciality",
+              attributes: ["speciality_name"],
+            },
+          ],
+        },
+        { model: HealthInsurance, as: "insurance_data", attributes: ["id"] },
+        { model: Institution, as: "institution_data", attributes: ["id"] },
+      ],
+    });
     return users;
   };
 
   getById = async (uid) => {
-    const user = await User.findByPk(+uid);
+    const user = await User.findByPk(+uid, {
+      include: [
+        {
+          model: Role,
+          as: "role",
+          attributes: ["role_name"],
+        },
+        {
+          model: Patient,
+          as: "patient_data",
+          attributes: ["id"],
+        },
+        {
+          model: Professional,
+          as: "professional_data",
+          attributes: ["id"],
+          include: [
+            {
+              model: Speciality,
+              as: "speciality",
+              attributes: ["speciality_name"],
+            },
+          ],
+        },
+        { model: HealthInsurance, as: "insurance_data", attributes: ["id"] },
+        { model: Institution, as: "institution_data", attributes: ["id"] },
+      ],
+    });
     if (!user) {
       throw new HttpError("User not found", HTTP_CODES.NOT_FOUND);
     }
@@ -43,7 +99,27 @@ export class UsersService {
   getByUsername = async (username) => {
     const user = await User.findOne({
       where: { username: username.toUpperCase() },
-      include: [{ model: Role, as: "role" }],
+      include: [
+        { model: Role, as: "role", attributes: ["role_name"] },
+        { model: Patient, as: "patient_data", attributes: ["id"] },
+        {
+          model: Professional,
+          as: "professional_data",
+          attributes: ["id"],
+          include: [
+            {
+              model: Speciality,
+              as: "speciality",
+              attributes: ["speciality_name"],
+            },
+          ],
+        },
+        { model: HealthInsurance, as: "insurance_data", attributes: ["id"] },
+        { model: Institution, as: "institution_data", attributes: ["id"] },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
     });
     if (!user) {
       throw new HttpError("User not found", HTTP_CODES.NOT_FOUND);

@@ -50,7 +50,6 @@ export class ProfessionalsService {
             await this.specialitiesService.getById(speciality_id)
             professional.speciality_id = speciality_id
         }
-        console.log(professional)
         const updatedProfessional = await professional.save()
         return updatedProfessional
     }

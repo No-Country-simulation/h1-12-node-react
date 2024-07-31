@@ -12,9 +12,9 @@ export class AiService {
         form.append('file', fs.createReadStream(req.file.path), req.file.originalname);
 
         const {data: response } = await axios.post('https://aquamarine.dcs.codes/s2t', form, {
-        headers: {
-            ...form.getHeaders(),
-        },
+            headers: {
+                ...form.getHeaders(),
+            },
         });
 
         const transcription = response.data.text;

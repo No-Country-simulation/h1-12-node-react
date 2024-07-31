@@ -20,6 +20,7 @@ export class AuthController {
       if (!isValidPassword(user, password)) {
         throw new HttpError("Bad credentials", HTTP_CODES.UNAUTHORIZED);
       }
+      user.password = undefined;
       const token = generateAccessToken(user);
       res.status(HTTP_CODES.SUCCESS).send({user, token});
     } catch (error) {

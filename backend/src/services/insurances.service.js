@@ -23,7 +23,7 @@ export class InsurancesService {
         return insurance
     }
 
-    updateInsurance= async(uid, payload) => {
+    updateInsurance = async(uid, payload) => {
         if(!uid){
             throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }

@@ -6,6 +6,22 @@ export class User extends Model {
       foreignKey: "role_id",
       as: "role",
     });
+    this.hasMany(models.Patient, {
+      foreignKey: "user_id",
+      as: "patient_data",
+    })
+    this.hasMany(models.Professional, {
+      foreignKey: "user_id",
+      as: "professional_data",
+    })
+    this.hasMany(models.HealthInsurance, {
+      foreignKey: "user_id",
+      as: "insurance_data",
+    })
+    this.hasMany(models.Institution, {
+      foreignKey: "user_id",
+      as: "institution_data",
+    })
   }
 }
 

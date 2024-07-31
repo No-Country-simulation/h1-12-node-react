@@ -24,7 +24,7 @@ export class InstitutionsService {
         return institution
     }
 
-    updateInstitution= async(uid, payload) => {
+    updateInstitution = async(uid, payload) => {
         if(!uid){
             throw new HttpError('Missing data', HTTP_CODES.BAD_REQUEST)
         }
