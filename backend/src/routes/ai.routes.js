@@ -29,7 +29,7 @@ router.post(
     upload.single('file'), 
     multerErrorMiddleware,
     authenticationMiddleware,
-    //authorizationMiddleware(["transcribe"]),
+    authorizationMiddleware(["transcribe"]),
     aiController.transcribe
 )
     

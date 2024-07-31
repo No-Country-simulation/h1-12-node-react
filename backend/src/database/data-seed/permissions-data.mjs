@@ -89,4 +89,5 @@ export default [
     { id: 75, permission: 'create-consultation', createdAt: new Date(), updatedAt: new Date() },
     { id: 76, permission: 'update-consultation', createdAt: new Date(), updatedAt: new Date() },
     { id: 77, permission: 'delete-consultation', createdAt: new Date(), updatedAt: new Date() },
+    { id: 78, permission: 'transcribe', createdAt: new Date(), updatedAt: new Date() },
 ]
