@@ -10,6 +10,10 @@ module.exports = {
       sky00: "#009BD7",
       mygreen: "#4C8460",
       mypink: "#A9257C",
+      "custom-gradient-start": "#004E79",
+      "custom-gradient-mid1": "#002279",
+      "custom-gradient-mid2": "#6F0079",
+      "custom-gradient-end": "#A9257C",
       ...colors,
     },
     extend: {

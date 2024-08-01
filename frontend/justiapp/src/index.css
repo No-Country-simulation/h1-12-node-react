@@ -14,6 +14,21 @@
 }
 
 
+.border-gradient {
+  border: 4px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(
+    90deg,
+    #004E79 85%,
+    #002279 85%,
+    #6F0079 85%,
+    #A9257C 85%
+  );
+}
+
+
+
 body, #root {
   display: flex;
   

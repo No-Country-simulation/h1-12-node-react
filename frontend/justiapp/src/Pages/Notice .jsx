@@ -1,6 +1,6 @@
 import React from "react";
 
-const MaintenanceNotice = () => {
+const Notice = () => {
   return (
     <div className="bg-gray-100">
       <div className="min-h-screen flex flex-col justify-center items-center">
@@ -20,4 +20,4 @@ const MaintenanceNotice = () => {
   );
 };
 
-export default MaintenanceNotice;
+export default Notice;

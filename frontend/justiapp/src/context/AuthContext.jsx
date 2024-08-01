@@ -20,6 +20,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
+    console.log(`este es el role ${role}`);
 
     if (token && role) {
       setAuth({ token, role });
@@ -47,6 +48,7 @@ const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log("llego la data");
         console.log(data);
         setAuth({ token: data.token, role: data.user.role.role_name });
         localStorage.setItem("token", data.token);
