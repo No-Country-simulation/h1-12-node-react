@@ -12,21 +12,21 @@ export const cidParam = z.object({
   }),
 });
 
+// Validación de la fecha según formato ISO
+const isoDateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[\+\-]\d{2}:\d{2})?$/;
+
 export const createConsultationSchema = z.object({
   body: z.object({
     patient_id: z.number().int().min(1),
     professional_id: z.number().int().min(1),
-    date: z
-      .string()
-      .refine(
-        (value) => {
-          const date = new Date(value);
-          return !isNaN(date.getTime());
-        },
-        {
-          message: "Must be a valid date",
-        }
-      ),
+    date: z.string().refine((val) => isoDateTimeRegex.test(val), {
+      message: "Formato de fecha y hora inválido. Use formato ISO (YYYY-MM-DDTHH:MM:SSZ)",
+    }).refine((val) => {
+      const date = new Date(val);
+      return !isNaN(date.getTime());
+    }, {
+      message: "Fecha y hora inválidas",
+    }),
     description: z.string().optional()
   }),
 });
