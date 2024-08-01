@@ -32,7 +32,7 @@ export const updateUserSchema = z.object({
     dni: z
       .string()
       .min(7, "DNI must contain at least 7 characters")
-      .max(9, "DNI must contain less than 10 characters")
+      .max(8, "DNI must contain less than 9 characters")
       .optional(),
     username: z.string().optional(),
     phone: z.string().refine((phone) => {
