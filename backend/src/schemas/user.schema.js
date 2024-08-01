@@ -62,12 +62,18 @@ export const updateUserSchema = z.object({
       )
       .optional(),
     registration_number: z
-    .string()
-    .regex(/^\d+$/, "REGISTRATION NUMBER must be a numeric string")
-    .refine((val) => {
-      const number = parseInt(val, 10);
-      return number >= 1;
-    }, "Treatment ID must be greater than or equal to 1").optional(),
+      .union([
+        z
+          .string()
+          .refine((val) => /^\d+$/.test(val) && val.length >= 4, {
+            message: "REGISTRATION NUMBER must be a numeric string with at least 4 digits",
+          }),
+        z
+          .number()
+          .refine((val) => val >= 1000, {
+            message: "REGISTRATION NUMBER must be a number with at least 4 digits",
+          }),
+      ]).optional(),
     speciality_id: z
     .string()
     .regex(/^\d+$/, "Speciality ID must be a numeric string")
