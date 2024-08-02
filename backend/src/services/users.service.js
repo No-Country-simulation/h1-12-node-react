@@ -223,8 +223,8 @@ export class UsersService {
     if (phone) {
       user.phone = phone;
     }
-    if (jurisdiction_id) {
-      user.jurisdiction_id = jurisdiction_id;
+    if (province_id) {
+      user.jurisdiction_id = province_id;
     }
     if (locality) {
       user.locality = locality;
