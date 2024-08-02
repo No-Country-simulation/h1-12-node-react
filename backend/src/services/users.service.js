@@ -11,6 +11,7 @@ import {
   Treatment,
   TreatmentProfessionals,
   Speciality,
+  Jurisdiction,
 } from "../database/models/index.js";
 import { User } from "../database/models/index.js";
 import { createHash } from "../utils/bcrypt.util.js";
@@ -32,6 +33,11 @@ export class UsersService {
   getAll = async () => {
     const users = await User.findAll({
       include: [
+        {
+          model: Jurisdiction,
+          as: "jurisdiction",
+          attributes: ["name"],
+        },
         {
           model: Role,
           as: "role",
@@ -64,6 +70,11 @@ export class UsersService {
   getById = async (uid) => {
     const user = await User.findByPk(+uid, {
       include: [
+        {
+          model: Jurisdiction,
+          as: "jurisdiction",
+          attributes: ["name"],
+        },
         {
           model: Role,
           as: "role",
@@ -100,6 +111,11 @@ export class UsersService {
     const user = await User.findOne({
       where: { username: username.toUpperCase() },
       include: [
+        {
+          model: Jurisdiction,
+          as: "jurisdiction",
+          attributes: ["name"],
+        },
         { model: Role, as: "role", attributes: ["role_name"] },
         { model: Patient, as: "patient_data", attributes: ["id"] },
         {
@@ -150,7 +166,7 @@ export class UsersService {
       phone: null,
       image: null,
       locality: null,
-      province: null,
+      jurisdiction_id: null,
       address: null,
     };
     const user = await User.create(newUser);
@@ -165,7 +181,7 @@ export class UsersService {
       dni,
       username,
       phone,
-      province,
+      jurisdiction_id,
       locality,
       address,
       sex,
@@ -207,8 +223,8 @@ export class UsersService {
     if (phone) {
       user.phone = phone;
     }
-    if (province) {
-      user.province = province;
+    if (jurisdiction_id) {
+      user.jurisdiction_id = jurisdiction_id;
     }
     if (locality) {
       user.locality = locality;
@@ -291,6 +307,13 @@ export class UsersService {
           attributes: {
             exclude: ["password", "createdAt", "updatedAt", "updated_pass"],
           },
+          include: [
+            {
+              model: Jurisdiction,
+              as: "jurisdiction",
+              attributes: ["name"],
+            }
+          ]
         },
         {
           model: Treatment,

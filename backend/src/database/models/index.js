@@ -79,7 +79,7 @@ Professional.associate({ PatientProfessionals, User, Speciality, Patient, Instit
 Role.associate({ User, Permission });
 RolesPermissions.associate({});
 Speciality.associate({ Professional });
-User.associate({ Role, Patient, Professional, HealthInsurance, Institution });
+User.associate({ Role, Patient, Professional, HealthInsurance, Institution, Jurisdiction });
 Treatment.associate({ Patient, Pathology, Professional, TreatmentProfessionals, MedicationTreatments, Medication });
 Document.associate({ Treatment })
 Medication.associate({ Treatment, MedicationTreatments })

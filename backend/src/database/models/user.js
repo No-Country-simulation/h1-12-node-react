@@ -22,6 +22,10 @@ export class User extends Model {
       foreignKey: "user_id",
       as: "institution_data",
     })
+    this.belongsTo(models.Jurisdiction, {
+      foreignKey: "jurisdiction_id",
+      as: "jurisdiction",
+    })
   }
 }
 
@@ -56,7 +60,7 @@ export const initUser = (sequelize) => {
       phone: DataTypes.STRING,
       dni: DataTypes.STRING,
       image: DataTypes.STRING,
-      province: DataTypes.STRING,
+      jurisdiction_id: DataTypes.INTEGER,
       locality: DataTypes.STRING,
       address: DataTypes.STRING,
       updated_pass: DataTypes.BOOLEAN,

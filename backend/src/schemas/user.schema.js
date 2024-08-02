@@ -47,7 +47,9 @@ export const updateUserSchema = z.object({
     }, {
       message: "El número de teléfono debe cumplir con los estándares internacionales (E.164).",
     }).optional(),
-    province: z.string().optional(),
+    jurisdiction_id: z
+      .string()
+      .regex(/^\d+$/, "Jurisdiction ID must be a numeric string"),
     locality:  z
       .string()
       .regex(/^[\p{L} .]{2,}$/u, "LOCALITY must contain only letters, spaces, accents, and periods, with at least 2 characters")

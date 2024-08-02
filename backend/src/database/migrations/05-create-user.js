@@ -44,8 +44,14 @@ module.exports = {
       image: {
         type: Sequelize.STRING
       },
-      province: {
-        type: Sequelize.STRING
+      jurisdiction_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'jurisdictions',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       username: {
         type: Sequelize.STRING,
