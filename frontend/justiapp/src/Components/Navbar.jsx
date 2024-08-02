@@ -29,7 +29,7 @@ export default function Navbar() {
       <div className="p-2 ">
         <div className="navbar max-w-6xl ">
           <div className="navbar-start">
-            <div className="max-sm:bg-mycustomblue bg-mygreen dropdown  dropdown-hover flex sm:hidden">
+            <div className=" dropdown  dropdown-hover">
               <div
                 tabIndex={0}
                 role="button"
@@ -47,13 +47,15 @@ export default function Navbar() {
                     Inicio
                   </Link>
                 </li>
-                <li>
-                  <img
-                    className="p-0  w-5 h-5"
-                    src={patientsBlueIcon}
-                    alt="Inicio"
-                  />
-                  <Link>Pacientes</Link>
+                <li className="w-full flex ">
+                  <Link>
+                    <img
+                      className="p-0  w-5 h-5"
+                      src={patientsBlueIcon}
+                      alt="Inicio"
+                    />
+                    Pacientes
+                  </Link>
                 </li>
                 <li>
                   <Link>
@@ -113,14 +115,14 @@ export default function Navbar() {
           </div>
           <div className="navbar-center"></div>
           <div className="navbar-end flex ">
-            <div className="relative  flex max-sm:hidden bg-red-500">
+            <div className="relative  flex ">
               <Avatar />
               <BellIndicator onClick={handleBellClick} />
             </div>
             <p className="text-[#004E79] flex flex-col font-sans text-base font-semibold leading-tight tracking-tight">
               {auth.user.first_name}
               <span className="text-[#565656] font-sans text-sm font-normal leading-tight">
-                {auth.user.professional_data[0].speciality.speciality_name}
+                {auth.user.role.role_name}
               </span>
             </p>
           </div>

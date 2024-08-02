@@ -87,7 +87,7 @@ const Sidebar = ({ logout }) => {
   console.log(links);
 
   return (
-    <ul className="hidden sm:flex bg-red-500 menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32 ">
+    <ul className="hidden md:flex md:visible menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32  ">
       {links.map((link) => (
         <li key={link.path} className="w-full p-0">
           <Link

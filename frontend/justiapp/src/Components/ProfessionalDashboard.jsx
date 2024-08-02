@@ -69,7 +69,7 @@ const ProfessionalDashboard = () => {
         </div>
       </div>
 
-      <div className="flex w-full bg-green-50 gap-8 justify-center ">
+      <div className="flex w-full gap-8 justify-center ">
         <Link className="btn w-1/3 px-4 py-3.5 bg-gradient-to-r from-[#004e79] via-[#002279] to-[#a9257c] rounded-lg flex justify-center items-center gap-2 ">
           <p className="Label text-white text-base font-semibold font-['Open Sans'] leading-tight tracking-tight">
             Pacientes
