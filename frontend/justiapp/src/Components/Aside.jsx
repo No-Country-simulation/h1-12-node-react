@@ -10,7 +10,7 @@ import logoutIcon from "../images/icons/logoutIcon.svg";
 
 // Directorio de íconos (ajusta la ruta según tu estructura de carpetas)
 
-const Sidebar = ({ logout }) => {
+const Aside = ({ logout }) => {
   const { auth } = useContext(AuthContext);
 
   const roleLinks = {
@@ -112,4 +112,4 @@ const Sidebar = ({ logout }) => {
   );
 };
 
-export default Sidebar;
+export default Aside;

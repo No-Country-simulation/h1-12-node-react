@@ -12,7 +12,6 @@ import BellIndicator from "./BellIndicator";
 import barIcon from "../images/barsButton.svg";
 import Avatar from "./Avatar";
 
-import Profile from "../images/Profile.svg";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {

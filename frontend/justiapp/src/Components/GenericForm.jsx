@@ -1,6 +1,5 @@
 //GeneicForm.jsx
 import React, { useState } from "react";
-import Modal from "./Modal";
 
 const TextInput = ({ label, placeholder, name, value, onChange }) => (
   <div className="TextInput self-stretch h-[62px] flex-col justify-start items-start gap-2 flex">

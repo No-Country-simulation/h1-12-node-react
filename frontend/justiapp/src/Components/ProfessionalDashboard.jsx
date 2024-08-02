@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Avatar from "../Components/Avatar";
 import CardContainer from "../Components/CardContainer";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";

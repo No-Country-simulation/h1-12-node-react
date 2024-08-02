@@ -1,7 +1,6 @@
 import React from "react";
 import CardContainer from "./CardContainer";
 import Avatar from "./Avatar";
-import SearchBar from "./SearchBar";
 
 const cardData = [
   {
