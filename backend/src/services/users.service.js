@@ -152,7 +152,7 @@ export class UsersService {
   };
 
   createUser = async (payload) => {
-    const { email, username, password, first_name, last_name, dni, role_id } =
+    const { email, username, password, first_name, last_name, dni, role_id, jurisdiction_id = 1 } =
       payload;
     const newUser = {
       email,
@@ -166,7 +166,7 @@ export class UsersService {
       phone: null,
       image: null,
       locality: null,
-      jurisdiction_id: null,
+      jurisdiction_id,
       address: null,
     };
     const user = await User.create(newUser);
