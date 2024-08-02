@@ -27,12 +27,17 @@ export const pidParam = z.object({
 
 export const updateUserSchema = z.object({
   body: z.object({
-    first_name: z.string().optional(),
-    last_name: z.string().optional(),
+    first_name: z
+      .string()
+      .regex(/^[\p{L} ]+$/u, "FIRST NAME must contain only letters and spaces")
+      .optional(),
+    last_name: z
+      .string()
+      .regex(/^[\p{L} ]+$/u, "LAST NAME must contain only letters and spaces")
+      .optional(),
     dni: z
       .string()
-      .min(7, "DNI must contain at least 7 characters")
-      .max(8, "DNI must contain less than 9 characters")
+      .regex(/^\d{7,8}$/, "DNI must be a numeric string of 7 or 8 digits")
       .optional(),
     username: z.string().optional(),
     phone: z.string().refine((phone) => {
@@ -43,8 +48,14 @@ export const updateUserSchema = z.object({
       message: "El número de teléfono debe cumplir con los estándares internacionales (E.164).",
     }).optional(),
     province: z.string().optional(),
-    locality: z.string().optional(),
-    address: z.string().optional(),
+    locality:  z
+      .string()
+      .regex(/^[\p{L} .]{2,}$/u, "LOCALITY must contain only letters, spaces, accents, and periods, with at least 2 characters")
+      .optional(),
+    address:  z
+      .string()
+      .regex(/^[\p{L} .]{2,}$/u, "ADDRESS must contain only letters, spaces, accents, and periods, with at least 2 characters")
+      .optional(),
     sex: z.string().optional(),
     blood_factor: z
       .enum(["a+", "a-", "ab+", "ab-", "b+", "b-", "0+", "0-"])
@@ -62,11 +73,11 @@ export const updateUserSchema = z.object({
       )
       .optional(),
     registration_number: z.union([
-      z.string().refine((val) => /^\d+$/.test(val) && val.length >= 1, {
-        message: "REGISTRATION NUMBER must be a numeric string with at least 1 digit",
+      z.string().refine((val) => /^\d{1,6}$/.test(val), {
+        message: "REGISTRATION NUMBER must be a numeric string with 1 to 6 digits",
       }),
-      z.number().refine((val) => val >= 0, {
-        message: "REGISTRATION NUMBER must be a number with at least 1 digit",
+      z.number().refine((val) => val >= 0 && val <= 999999, {
+        message: "REGISTRATION NUMBER must be a number with 1 to 6 digits",
       }),
     ]).optional(),
     speciality_id: z
