@@ -89,9 +89,9 @@ export const updateUserSchema = z.object({
       const number = parseInt(val, 10);
       return number >= 1;
     }, "Speciality ID must be greater than or equal to 1").optional(),
-    jurisdiction_id: z
+    province_id: z
     .string()
-    .regex(/^\d+$/, "JURISDICTION ID must be a numeric string")
+    .regex(/^\d+$/, "Province ID must be a numeric string")
     .refine((val) => {
       const number = parseInt(val, 10);
       return number >= 1;
