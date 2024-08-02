@@ -1,5 +1,5 @@
 import React from "react";
-import bell from "../images/bell-icon.svg";
+//import bell from "../images/bell-icon.svg";
 
 export default function BellIndicator({ onClick }) {
   return (
@@ -9,7 +9,7 @@ export default function BellIndicator({ onClick }) {
     >
       <div className=" indicator">
         <img
-          src={bell}
+          src="/images/bell-icon.svg"
           alt="bell notification icon"
           className="w-6 h-6 bg-mygreen"
         />

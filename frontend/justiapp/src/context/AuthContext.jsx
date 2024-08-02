@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
           body: JSON.stringify(credentials),
         }
       );
-
+      console.log(response.json);
       if (response.ok) {
         const data = await response.json();
         console.log("llego la data");

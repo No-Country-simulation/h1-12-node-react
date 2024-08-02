@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import userAvatar from "../images/jose.png";
+//import userAvatar from "../images/jose.png";
 import SearchBar from "./SearchBar";
 import ModalComponent from "./Modal";
 
@@ -89,7 +89,7 @@ export default class UiToolkit extends Component {
             >
               <img
                 alt="Tailwind CSS Navbar component"
-                src={userAvatar}
+                src="/images/jose.png"
                 className="w-10 h-10 rounded-full"
               />
             </div>

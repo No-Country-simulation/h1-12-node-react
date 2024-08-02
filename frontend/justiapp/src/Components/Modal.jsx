@@ -1,6 +1,6 @@
 // Modal.jsx
 import React from "react";
-import xCircle from "../images/x-circle.svg";
+//import xCircle from "../images/x-circle.svg";
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, children }) => {
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           onClick={onClose}
         >
-          <img src={xCircle} alt="close button" />
+          <img src="/images/x-circle.svg" alt="close button" />
         </button>
         {children}
       </div>

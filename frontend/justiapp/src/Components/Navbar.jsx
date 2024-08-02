@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import homeicon from "../images/icons/homeIcon.svg";
-import patientsBlueIcon from "../images/icons/patientsBlueIcon.svg";
-import logoutIcon from "../images/icons/logoutIcon.svg";
-import treatmentIcon from "../images/icons/treatmentIcon.svg";
-import profileIcon from "../images/icons/profileIcon.svg";
-import configIcon from "../images/icons/config.svg";
-import notificationIcon from "../images/icons/notificationIcon.svg";
-import Logo from "../images/logo.svg";
+//import homeicon from "/images/icons/homeIcon.svg";
+//import patientsBlueIcon from "../images/icons/patientsBlueIcon.svg";
+//import logoutIcon from "../images/icons/logoutIcon.svg";
+//import treatmentIcon from "../images/icons/treatmentIcon.svg";
+//import profileIcon from "../images/icons/profileIcon.svg";
+//import configIcon from "../images/icons/config.svg";
+//import notificationIcon from "../images/icons/notificationIcon.svg";
+//import Logo from "../images/logo.svg";
 import BellIndicator from "./BellIndicator";
-import barIcon from "../images/barsButton.svg";
+//import barIcon from "/images/barsButton.svg";
 import Avatar from "./Avatar";
 
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ export default function Navbar() {
                 role="button"
                 className="btn btn-ghost btn-circle"
               >
-                <img src={barIcon} alt="three barIcon" />
+                <img src="/images/barsButton.svg" alt="three barIcon" />
               </div>
               <ul
                 tabIndex={0}
@@ -42,7 +42,11 @@ export default function Navbar() {
               >
                 <li className="flex w-full  ">
                   <Link className="w-full flex p-2">
-                    <img className="p-0  w-5 h-5" src={homeicon} alt="Inicio" />
+                    <img
+                      className="p-0  w-5 h-5"
+                      src="/images/icons/homeIcon.svg"
+                      alt="Inicio"
+                    />
                     Inicio
                   </Link>
                 </li>
@@ -50,7 +54,7 @@ export default function Navbar() {
                   <Link>
                     <img
                       className="p-0  w-5 h-5"
-                      src={patientsBlueIcon}
+                      src="/images/icons/patientsBlueIcon.svg"
                       alt="Inicio"
                     />
                     Pacientes
@@ -60,7 +64,7 @@ export default function Navbar() {
                   <Link>
                     <img
                       className="p-0  w-5 h-5"
-                      src={treatmentIcon}
+                      src="/images/icons/treatmentIcon.svg"
                       alt="Inicio"
                     />
                     Tratamientos
@@ -70,7 +74,7 @@ export default function Navbar() {
                   <Link>
                     <img
                       className="p-0  w-5 h-5"
-                      src={configIcon}
+                      src="/images/icons/config.svg"
                       alt="Configuración"
                     />
                     Configuración
@@ -80,7 +84,7 @@ export default function Navbar() {
                   <Link>
                     <img
                       className="p-0  w-5 h-5"
-                      src={notificationIcon}
+                      src="/images/icons/notificationIcon.svg"
                       alt="Alertas"
                     />
                     Alertas
@@ -90,7 +94,7 @@ export default function Navbar() {
                   <Link>
                     <img
                       className="p-0  w-5 h-5"
-                      src={profileIcon}
+                      src="/images/icons/profileIcon.svg"
                       alt="Perfil"
                     />
                     Perfil
@@ -100,7 +104,7 @@ export default function Navbar() {
                   <button onClick={logout}>
                     <img
                       className="p-0  w-5 h-5"
-                      src={logoutIcon}
+                      src="/images/icons/logoutIcon.svg"
                       alt="cerrar sesión"
                     />
                     Cerrar sesión
@@ -109,7 +113,11 @@ export default function Navbar() {
               </ul>
             </div>
             <Link to="/" className=" flex btn btn-ghost text-xl ">
-              <img className="max-w-36   h-9" src={Logo} alt="Heart Logo" />
+              <img
+                className="max-w-36   h-9"
+                src="/images/logo.svg"
+                alt="Heart Logo"
+              />
             </Link>
           </div>
           <div className="navbar-center"></div>

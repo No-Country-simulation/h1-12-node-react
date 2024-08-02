@@ -1,5 +1,5 @@
 import React from "react";
-import userAvatar from "../images/jose.png";
+//import userAvatar from "../images/jose.png";
 
 export default function Avatar() {
   return (
@@ -23,7 +23,7 @@ export default function Avatar() {
         >
           <img
             alt="avatar"
-            src={userAvatar}
+            src="/images/jose.png"
             className="w-full h-full object-cover rounded-full"
           />
         </div>

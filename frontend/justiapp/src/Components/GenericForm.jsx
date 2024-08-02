@@ -97,6 +97,7 @@ const GenericForm = ({ title, subtitle, onFormSubmit }) => {
           <div className=" mt-6 flex justify-start items-center">
             <button
               type="submit"
+              onClick={closeModal}
               className="btn w-full  self-stretch px-4 py-3.5 bg-gradient-to-r from-[#004e79] via-[#002279] to-[#a9257c] rounded-lg border border-[#004e79] flex justify-center items-center gap-2"
             >
               <span className="Label text-gray-50 text-base font-bold font-['Lato'] leading-tight">

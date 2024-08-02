@@ -2,11 +2,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import homeIcon from "../images/icons/homeIcon.svg";
+
+/*import homeIcon from "images/icons/home.svg";
 import notificationIcon from "../images/icons/notificationIcon.svg";
 import profileIcon from "../images/icons/profileIcon.svg";
 import config from "../images/icons/config.svg";
-import logoutIcon from "../images/icons/logoutIcon.svg";
+import logoutIcon from "../images/icons/logoutIcon.svg";*/
 
 // Directorio de íconos (ajusta la ruta según tu estructura de carpetas)
 
@@ -24,22 +25,22 @@ const Aside = ({ logout }) => {
       {
         path: "patient",
         label: "Inicio",
-        icon: homeIcon,
+        icon: "/images/icons/home.svg",
       },
       {
         path: "patient/perfil",
         label: "Perfil",
-        icon: profileIcon,
+        icon: "/images/icons/profileIcon.svg",
       },
       {
         path: "patient/configuracion",
         label: "Configuración",
-        icon: config,
+        icon: "/images/icons/config.svg",
       },
       {
         path: "patient/notificaciones",
         label: "Notificaciones",
-        icon: notificationIcon,
+        icon: "/images/icons/notificationIcon.svg",
       },
 
       // Agrega más enlaces específicos para el paciente
@@ -49,32 +50,32 @@ const Aside = ({ logout }) => {
       {
         path: "professional",
         label: "Inicio",
-        icon: homeIcon,
+        icon: "/images/icons/home.svg",
       },
       {
         path: "professional/pacientes",
         label: "Pacientes",
-        icon: profileIcon,
+        icon: "",
       },
       {
         path: "professional/tratamientos",
         label: "Tratamientos",
-        icon: config,
+        icon: "",
       },
       {
         path: "professional/configuracion",
         label: "Configuración",
-        icon: config,
+        icon: "",
       },
       {
         path: "professional/alertas",
         label: "Alertas",
-        icon: notificationIcon,
+        icon: "",
       },
       {
         path: "professional/perfil",
         label: "Perfil",
-        icon: notificationIcon,
+        icon: "",
       },
 
       // Agrega más enlaces específicos para el paciente
@@ -87,7 +88,7 @@ const Aside = ({ logout }) => {
   console.log(links);
 
   return (
-    <ul className="hidden md:flex md:visible menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32  ">
+    <ul className=" menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32  ">
       {links.map((link) => (
         <li key={link.path} className="w-full p-0">
           <Link
@@ -104,7 +105,7 @@ const Aside = ({ logout }) => {
           onClick={logout}
           className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
         >
-          <img src={logoutIcon} alt="logout icon" />
+          <img src="/images/icons/logoutIcon.svg" alt="logout icon" />
           Logout
         </button>
       </li>

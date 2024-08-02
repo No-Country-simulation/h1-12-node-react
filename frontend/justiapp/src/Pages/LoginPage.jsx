@@ -1,7 +1,7 @@
 //LoginPage.jsx
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import justinaHeart from "../images/justinaHeart.svg";
+//import justinaHeart from "../images/justinaHeart.svg";
 import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
@@ -49,6 +49,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = credentials;
+    console.log(credentials);
 
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -119,7 +120,7 @@ export default function LoginPage() {
   return (
     <section className="flex justify-center items-center h-screen flex-col max-w-2xl p-6 ">
       <div className="flex flex-col gap-6 justify-center items-center max-w-xs w-full p-4">
-        <img className="w-2/3" src={justinaHeart} alt="logo" />
+        <img className="w-2/3" src="/images/justinaHeart.svg" alt="logo" />
         <div className="flex flex-col w-80 text-center">
           <h1 className="text-indigo-600 text-2xl font-black font-lato">
             Te damos la bienvenida
