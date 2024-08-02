@@ -1,3 +1,4 @@
+//tailwind.config.js
 const colors = require("tailwindcss/colors");
 /** @type {import('tailwindcss').Config} */
 
@@ -6,7 +7,7 @@ module.exports = {
   theme: {
     colors: {
       mycustomblue: "#5664C4",
-      mynaval: " #195678",
+      mynaval: "#195678",
       sky00: "#009BD7",
       mygreen: "#4C8460",
       mypink: "#A9257C",

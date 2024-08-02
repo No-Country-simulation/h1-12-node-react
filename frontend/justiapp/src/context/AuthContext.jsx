@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ token: null, role: null });
+  const [auth, setAuth] = useState({ token: null, role: null, user: null });
   const navigate = useNavigate();
   const [loginAttempts, setLoginAttempts] = useState(
     parseInt(localStorage.getItem("loginAttempts")) || 0
@@ -20,17 +20,19 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
-    console.log(`este es el role ${role}`);
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    if (token && role) {
-      setAuth({ token, role });
+    console.log(`el rol es: ${role}`);
+
+    if (token && role && user) {
+      setAuth({ token, role, user });
       console.log(`este es el role ${role}`);
       // Solo redirigir si estamos en la ruta raíz o de login
       if (window.location.pathname === "/") {
         navigate(`/dashboard/${role}`);
       }
     }
-  }, [navigate, setAuth]);
+  }, []);
 
   // Función para manejar el login y almacenar el token
   const login = async (credentials) => {
@@ -50,9 +52,14 @@ const AuthProvider = ({ children }) => {
         const data = await response.json();
         console.log("llego la data");
         console.log(data);
-        setAuth({ token: data.token, role: data.user.role.role_name });
+        setAuth({
+          token: data.token,
+          role: data.user.role.role_name,
+          user: data.user,
+        });
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.user.role.role_name);
+        localStorage.setItem("user", JSON.stringify(data.user));
         setLoginAttempts(0);
         localStorage.setItem("loginAttempts", 0);
         navigate(`/dashboard/${data.user.role.role_name}`);
@@ -88,9 +95,10 @@ const AuthProvider = ({ children }) => {
   // Función para manejar el logout
   const logout = () => {
     console.log("cierre de sesión detectado");
-    setAuth({ token: null, role: null });
+    setAuth({ token: null, role: null, user: null });
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("user");
     navigate("/");
   };
 
@@ -128,9 +136,10 @@ const AuthProvider = ({ children }) => {
       } else if (event.key === "token" && event.newValue) {
         console.log("Token actualizado en otra pestaña:", event.newValue);
         const newRole = localStorage.getItem("role");
+        const newUser = JSON.parse(localStorage.getItem("user"));
         console.log(`este es el role nuevo rol ${newRole}`);
 
-        setAuth({ token: event.newValue, role: newRole });
+        setAuth({ token: event.newValue, role: newRole, user: newUser });
       }
     };
 

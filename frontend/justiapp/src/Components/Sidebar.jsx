@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import homeIcon from "../images/icons/homeIcon.svg";
-import treatmentIcon from "../images/icons/treatmentIcon.svg";
 import notificationIcon from "../images/icons/notificationIcon.svg";
 import profileIcon from "../images/icons/profileIcon.svg";
 import config from "../images/icons/config.svg";
@@ -88,7 +87,7 @@ const Sidebar = ({ logout }) => {
   console.log(links);
 
   return (
-    <ul className="menu min-h-full bg-white flex justify-center gap-4 max-sm:hidden max-sm:bg-mypink max-w-56 pt-32 max-sm:pt-28">
+    <ul className="hidden sm:flex bg-red-500 menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32 ">
       {links.map((link) => (
         <li key={link.path} className="w-full p-0">
           <Link

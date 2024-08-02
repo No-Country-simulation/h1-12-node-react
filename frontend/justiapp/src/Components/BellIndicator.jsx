@@ -8,7 +8,11 @@ export default function BellIndicator({ onClick }) {
       onClick={onClick}
     >
       <div className=" indicator">
-        <img src={bell} alt="bell notification icon" className="w-6 h-6 " />
+        <img
+          src={bell}
+          alt="bell notification icon"
+          className="w-6 h-6 bg-mygreen"
+        />
         <span className="w-3 h-3 badge badge-xs indicator-item indicator-top indicator-end  badge-warning text-sm">
           1
         </span>
