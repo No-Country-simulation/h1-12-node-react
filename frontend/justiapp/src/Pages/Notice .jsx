@@ -1,22 +1,48 @@
 import React from "react";
+import "./RotatinGear.css";
 
 const Notice = () => {
   return (
-    <div className="bg-gray-100">
-      <div className="min-h-screen flex flex-col justify-center items-center">
-        <img
-          src="https://www.svgrepo.com/show/426192/cogs-settings.svg"
-          alt="Maintenance Logo"
-          className="mb-8 h-40"
-        />
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-gray-700 mb-4">
-          Site is under maintenance
-        </h1>
-        <p className="text-center text-gray-500 text-lg md:text-xl lg:text-2xl mb-8">
-          We're working hard to improve the user experience. Stay tuned!
-        </p>
+    <>
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage:
+            "url(https://plus.unsplash.com/premium_photo-1721225465446-02f5b991a37f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+        }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-neutral-content text-center">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">Comming soon</h1>
+            <div className="rotating-gear-container w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="500"
+                height="500"
+                viewBox="0 0 18 18"
+                fill="none"
+              >
+                <path
+                  d="M7.19496 2.95504C7.26277 2.54819 7.61477 2.25 8.02723 2.25H9.97271C10.3852 2.25 10.7372 2.54819 10.805 2.95504L10.9651 3.91582C11.0119 4.19636 11.1993 4.43003 11.4482 4.56777C11.5038 4.59856 11.5588 4.63038 11.6131 4.66318C11.8569 4.81038 12.1534 4.85615 12.4201 4.75624L13.3327 4.41433C13.719 4.26963 14.1532 4.42538 14.3594 4.78258L15.3322 6.46741C15.5384 6.82461 15.4562 7.27855 15.1377 7.5407L14.3845 8.16081C14.1651 8.34141 14.0563 8.62029 14.0616 8.9044C14.0622 8.93619 14.0625 8.96806 14.0625 9C14.0625 9.03193 14.0622 9.0638 14.0616 9.09559C14.0563 9.3797 14.1651 9.65858 14.3845 9.83918L15.1377 10.4593C15.4562 10.7214 15.5384 11.1754 15.3322 11.5326L14.3594 13.2174C14.1532 13.5746 13.719 13.7304 13.3327 13.5857L12.4201 13.2437C12.1534 13.1438 11.8569 13.1896 11.6131 13.3368C11.5588 13.3696 11.5038 13.4014 11.4482 13.4322C11.1993 13.57 11.0119 13.8036 10.9651 14.0842L10.805 15.045C10.7372 15.4518 10.3852 15.75 9.97271 15.75H8.02723C7.61477 15.75 7.26277 15.4518 7.19496 15.045L7.03483 14.0842C6.98808 13.8036 6.8006 13.57 6.55177 13.4322C6.49614 13.4014 6.44115 13.3696 6.38683 13.3368C6.14305 13.1896 5.84655 13.1439 5.57988 13.2438L4.66723 13.5857C4.28099 13.7304 3.84674 13.5746 3.64051 13.2174L2.66778 11.5326C2.46155 11.1754 2.54379 10.7215 2.86222 10.4593L3.61549 9.83919C3.83487 9.65859 3.94362 9.37971 3.93835 9.0956C3.93776 9.06381 3.93747 9.03194 3.93747 9C3.93747 8.96807 3.93776 8.9362 3.93835 8.90441C3.94361 8.6203 3.83487 8.34142 3.61549 8.16082L2.86222 7.54071C2.54379 7.27856 2.46155 6.82462 2.66778 6.46742L3.64051 4.78259C3.84674 4.42539 4.28098 4.26964 4.66723 4.41434L5.57987 4.75625C5.84654 4.85616 6.14304 4.81039 6.38682 4.66318C6.44114 4.63038 6.49614 4.59857 6.55177 4.56777C6.8006 4.43003 6.98808 4.19636 7.03483 3.91582L7.19496 2.95504Z"
+                  stroke="#004E79"
+                  stroke-width="1.125"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M11.2498 8.99994C11.2498 10.2426 10.2424 11.2499 8.9998 11.2499C7.75715 11.2499 6.7498 10.2426 6.7498 8.99994C6.7498 7.7573 7.75715 6.74994 8.9998 6.74994C10.2424 6.74994 11.2498 7.7573 11.2498 8.99994Z"
+                  stroke="#004E79"
+                  stroke-width="1.125"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -10,7 +10,10 @@ import UiToolkit from "./Components/UiToolkit";
 import DashboardPaciente from "./Components/DashboardPaciente";
 import ProfessionalDashboard from "./Components/ProfessionalDashboard";
 import AgendaTurnos from "./Components/AgendaTurnos";
+import PatientList from "./Pages/PatientList";
 import PatientNotifications from "./Pages/PatientNotifications";
+import CreateTreatment from "./Pages/CreateTreatment";
+import ProfessionalProfile from "./Pages/ProfessionalProfile";
 import Notice from "./Pages/Notice ";
 
 function App() {
@@ -30,12 +33,20 @@ function App() {
               element={<PatientNotifications />}
             />
             <Route path="professional" element={<ProfessionalDashboard />} />
-            <Route path="professional/pacientes" element={<AgendaTurnos />} />
-            <Route path="professional/tratamientos" element={<Notice />} />
+
+            <Route path="professional/agenda" element={<AgendaTurnos />} />
+            <Route
+              path="professional/tratamientos"
+              element={<CreateTreatment />}
+            />
+            <Route path="professional/pacientes" element={<PatientList />} />
 
             <Route path="professional/configuracion" element={<Notice />} />
             <Route path="professional/alertas" element={<Notice />} />
-            <Route path="professional/perfil" element={<Notice />} />
+            <Route
+              path="professional/perfil"
+              element={<ProfessionalProfile />}
+            />
           </Route>
         </Route>
       </Routes>
