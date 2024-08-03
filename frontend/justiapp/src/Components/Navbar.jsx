@@ -1,17 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-//import homeicon from "/images/icons/homeIcon.svg";
-//import patientsBlueIcon from "../images/icons/patientsBlueIcon.svg";
-//import logoutIcon from "../images/icons/logoutIcon.svg";
-//import treatmentIcon from "../images/icons/treatmentIcon.svg";
-//import profileIcon from "../images/icons/profileIcon.svg";
-//import configIcon from "../images/icons/config.svg";
-//import notificationIcon from "../images/icons/notificationIcon.svg";
-//import Logo from "../images/logo.svg";
 import BellIndicator from "./BellIndicator";
-//import barIcon from "/images/barsButton.svg";
 import Avatar from "./Avatar";
-
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -121,8 +111,8 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="navbar-center"></div>
-          <div className="navbar-end flex ">
-            <div className="relative  flex ">
+          <div className="navbar-end gap-6 flex ">
+            <div className="relative flex ">
               <Avatar />
               <BellIndicator onClick={handleBellClick} />
             </div>

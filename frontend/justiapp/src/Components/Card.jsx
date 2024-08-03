@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ bgColor, title, description, link }) => {
+const Card = ({ bgColor, title, description, link, cardIcon }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {

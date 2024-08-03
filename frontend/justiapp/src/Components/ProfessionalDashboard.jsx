@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import CardContainer from "../Components/CardContainer";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-
+import ProfessionalSchedule from "./ProfessionalSchedule";
+import AgendaTurnos from "./AgendaTurnos";
 const cardData = [
   {
     id: 1,
@@ -39,7 +40,7 @@ const ProfessionalDashboard = () => {
   const { auth } = useContext(AuthContext);
 
   return (
-    <div className="sm:max-w-6xl pt-10   w-11/12  sm:h-full flex flex-col gap-8 justify-center items-center bg-slate-100 rounded-none max-sm:rounded-xl shadow-lg">
+    <div className="sm:max-w-6xl pt-10  min-h-screen w-11/12  sm:h-full flex flex-col gap-8 justify-center items-center bg-slate-100 rounded-none max-sm:rounded-xl shadow-lg">
       <div
         className="w-11/12 p-5 border-gradient  rounded-xl border-2 flex flex-col justify-center items-start gap-4"
         style={{
@@ -70,6 +71,7 @@ const ProfessionalDashboard = () => {
 
       <div className="flex w-full gap-8 justify-center ">
         <Link className="btn w-1/3 px-4 py-3.5 bg-gradient-to-r from-[#004e79] via-[#002279] to-[#a9257c] rounded-lg flex justify-center items-center gap-2 ">
+          <img src="/images/icons/patientsWhiteIcon.svg" alt="patients icon" />
           <p className="Label text-white text-base font-semibold font-['Open Sans'] leading-tight tracking-tight">
             Pacientes
           </p>
@@ -105,7 +107,13 @@ const ProfessionalDashboard = () => {
         </Link>
       </div>
 
-      <CardContainer cardData={cardData} />
+      <CardContainer
+        cardData={cardData}
+        title="Pacientes en tratamiento"
+        titleStyles="text-[#004E79] text-center font-open-sans text-base font-semibold leading-5 tracking-tight"
+      />
+      <ProfessionalSchedule />
+      <AgendaTurnos />
     </div>
   );
 };

@@ -1,17 +1,16 @@
 import React from "react";
-//import bell from "../images/bell-icon.svg";
 
 export default function BellIndicator({ onClick }) {
   return (
     <button
-      className="btn btn-ghost p-0 absolute top-0 right-0 w-6 h-6"
+      className="m-0  btn btn-ghost z-10 p-0 absolute -right-8 w-14 h-14"
       onClick={onClick}
     >
-      <div className=" indicator">
+      <div className=" indicator w-full">
         <img
-          src="/images/bell-icon.svg"
+          src="/images/icons/bell.svg"
           alt="bell notification icon"
-          className="w-6 h-6 bg-mygreen"
+          className="w-10 h-10 "
         />
         <span className="w-3 h-3 badge badge-xs indicator-item indicator-top indicator-end  badge-warning text-sm">
           1

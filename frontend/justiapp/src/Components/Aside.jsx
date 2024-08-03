@@ -50,32 +50,32 @@ const Aside = ({ logout }) => {
       {
         path: "professional",
         label: "Inicio",
-        icon: "/images/icons/home.svg",
+        icon: "/images/icons/homeIcon.svg",
       },
       {
         path: "professional/pacientes",
         label: "Pacientes",
-        icon: "",
+        icon: "/images/icons/patientsBlueIcon.svg",
       },
       {
         path: "professional/tratamientos",
         label: "Tratamientos",
-        icon: "",
+        icon: "/images/icons/treatmentIcon.svg",
       },
       {
         path: "professional/configuracion",
         label: "Configuración",
-        icon: "",
+        icon: "/images/icons/config.svg",
       },
       {
         path: "professional/alertas",
         label: "Alertas",
-        icon: "",
+        icon: "/images/icons/notificationIcon.svg",
       },
       {
         path: "professional/perfil",
         label: "Perfil",
-        icon: "",
+        icon: "/images/icons/profileIcon.svg",
       },
 
       // Agrega más enlaces específicos para el paciente
@@ -88,13 +88,14 @@ const Aside = ({ logout }) => {
   console.log(links);
 
   return (
-    <ul className=" menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32  ">
+    <ul className="menu min-h-full z-1  justify-center gap-4   w-1/5 pt-32  ">
       {links.map((link) => (
         <li key={link.path} className="w-full p-0">
           <Link
             to={`/dashboard/${link.path}`}
             className="flex items-center p-0"
           >
+            {console.log(link.icon)}
             <img src={link.icon} alt={link.label} className="h-5 w-5" />
             <span className="ml-2">{link.label}</span>
           </Link>
