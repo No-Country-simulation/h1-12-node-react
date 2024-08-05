@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Card = ({ bgColor, title, description, link, cardIcon }) => {
   const navigate = useNavigate();
@@ -44,18 +44,20 @@ const Card = ({ bgColor, title, description, link, cardIcon }) => {
           </svg>
         </button>
       </div>
-      <div className="container  sm:flex">
-        <button className=" px-2 rounded-xl border border-white justify-center items-center inline-flex">
-          <div className="h-8 flex-col justify-center items-center inline-flex">
-            <div className="h-6 justify-start items-center inline-flex">
-              <div className="justify-start items-start gap-1 flex">
-                <span className=" text-center text-white text-base font-semibold font-['Open Sans'] leading-tight tracking-tight">
-                  Crear
-                </span>
+      <div className="container flex max-sm:hidden">
+        <Link to={link}>
+          <button className="btn btn-outline border-white border-2  btn-warning px-2 rounded-xl  justify-center items-center inline-flex">
+            <div className="h-8 flex-col justify-center items-center inline-flex">
+              <div className="h-6 justify-start items-center inline-flex">
+                <div className="justify-start items-start gap-1 flex">
+                  <span className=" text-center text-white text-base font-semibold font-['Open Sans'] leading-tight tracking-tight">
+                    Crear
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        </button>
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -54,9 +54,12 @@ const HuntingSearcher = ({ users }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="w- 11/12 justify-start items-center gap-4 inline-flex">
-        <div className="w-[598px] flex-col justify-start items-start inline-flex relative">
+    <form
+      className="flex    w-full justify-center items-center"
+      onSubmit={handleSubmit}
+    >
+      <div className="w-11/12  flex-wrap md:flex-nowrap justify-start items-center gap-4 inline-flex">
+        <div className="w-full md:w-1/2 flex-col justify-start items-start inline-flex relative">
           <div className="self-stretch justify-start items-start inline-flex">
             <div className="bg-gradient-to-r from-[#004e79] via-[#002279] to-[#a9257c] rounded-tl-[10px] rounded-bl-[10px] justify-center items-center gap-[7.47px] flex">
               <button
@@ -109,52 +112,54 @@ const HuntingSearcher = ({ users }) => {
             </div>
           )}
         </div>
-        <div className="px-4 py-3.5 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
-          <input
-            type="checkbox"
-            name="healthProfessional"
-            checked={categories.healthProfessional}
-            onChange={handleCategoryChange}
-            className="p-0.5 bg-white rounded-lg border border-[#004e79]"
-          />
-          <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
-            Prof. de la Salud
+        <div className="container w-1/2  flex max-md:hidden gap-1 flex-wrap">
+          <div className="p-2 w-1/3 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
+            <input
+              type="checkbox"
+              name="healthProfessional"
+              checked={categories.healthProfessional}
+              onChange={handleCategoryChange}
+              className="p-0.5 bg-white rounded-lg border border-[#004e79]"
+            />
+            <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
+              Prof. de la Salud
+            </div>
           </div>
-        </div>
-        <div className="px-4 py-3.5 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
-          <input
-            type="checkbox"
-            name="patient"
-            checked={categories.patient}
-            onChange={handleCategoryChange}
-            className="p-0.5 bg-white rounded-lg border border-[#004e79]"
-          />
-          <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
-            Paciente
+          <div className="p-2 w-1/3 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
+            <input
+              type="checkbox"
+              name="patient"
+              checked={categories.patient}
+              onChange={handleCategoryChange}
+              className="p-0.5 bg-white rounded-lg border border-[#004e79]"
+            />
+            <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
+              Paciente
+            </div>
           </div>
-        </div>
-        <div className="px-4 py-3.5 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
-          <input
-            type="checkbox"
-            name="provider"
-            checked={categories.provider}
-            onChange={handleCategoryChange}
-            className="p-0.5 bg-white rounded-lg border border-[#004e79]"
-          />
-          <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
-            Prestador
+          <div className="p-2 w-1/3 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
+            <input
+              type="checkbox"
+              name="provider"
+              checked={categories.provider}
+              onChange={handleCategoryChange}
+              className="p-0.5 bg-white rounded-lg border border-[#004e79]"
+            />
+            <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
+              Prestador
+            </div>
           </div>
-        </div>
-        <div className="px-4 py-3.5 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
-          <input
-            type="checkbox"
-            name="healthInstitution"
-            checked={categories.healthInstitution}
-            onChange={handleCategoryChange}
-            className="p-0.5 bg-white rounded-lg border border-[#004e79]"
-          />
-          <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
-            Inst. de Salud
+          <div className="p-2 w-1/3 bg-white rounded-lg border border-[#9b9fa6] justify-center items-center gap-2 flex">
+            <input
+              type="checkbox"
+              name="healthInstitution"
+              checked={categories.healthInstitution}
+              onChange={handleCategoryChange}
+              className="p-0.5 bg-white rounded-lg border border-[#004e79]"
+            />
+            <div className="text-[#004e79] text-xs font-normal font-['Open Sans'] leading-[15px]">
+              Inst. de Salud
+            </div>
           </div>
         </div>
       </div>

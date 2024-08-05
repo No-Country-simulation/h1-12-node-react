@@ -63,6 +63,11 @@ const Aside = ({ logout }) => {
         icon: "/images/icons/patientsBlueIcon.svg",
       },
       {
+        path: "professional/agenda",
+        label: "Agenda",
+        icon: "/images/icons/Agenda.svg",
+      },
+      {
         path: "professional/tratamientos",
         label: "Tratamientos",
         icon: "/images/icons/treatmentIcon.svg",

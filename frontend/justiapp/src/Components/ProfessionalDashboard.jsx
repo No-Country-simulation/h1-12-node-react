@@ -41,7 +41,7 @@ const ProfessionalDashboard = () => {
   const { auth } = useContext(AuthContext);
 
   return (
-    <div className="max-w-5xl  min-h-screen  sm:h-full flex gap-8 justify-center items-center bg-white rounded-none max-sm:rounded-xl shadow-lg">
+    <div className="w-11/12  min-h-screen  sm:h-full flex gap-8 justify-center items-center bg-white rounded-none max-sm:rounded-xl shadow-lg">
       <div className="flex w-1/2 gap-6  flex-col">
         <div
           className=" w-full p-5 border-gradient  rounded-xl border-2 flex flex-col justify-center items-start gap-4"

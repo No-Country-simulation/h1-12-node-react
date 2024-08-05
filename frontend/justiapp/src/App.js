@@ -18,6 +18,7 @@ import AdminHistorial from "./Pages/AdminHistorial";
 import ProfessionalRegister from "./Pages/ProfessionalRegister";
 import InstitutionRegister from "./Pages/InstitutionRegister";
 import VoiceRecorder from "./Components/VoiceRecorder";
+import HealthProviderRegister from "./Pages/HealthProviderRegister";
 
 function App() {
   return (
@@ -33,7 +34,10 @@ function App() {
               path="admin/regiter-professional"
               element={<ProfessionalRegister />}
             />
-            <Route path="admin/register-health-provider" element={<Notice />} />
+            <Route
+              path="admin/register-health-provider"
+              element={<HealthProviderRegister />}
+            />
             <Route
               path="admin/register-health-institution"
               element={<InstitutionRegister />}
