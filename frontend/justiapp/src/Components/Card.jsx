@@ -22,26 +22,41 @@ const Card = ({ bgColor, title, description, link, cardIcon }) => {
       <div className="text-white text-sm font-normal font-sans leading-none">
         {description}
       </div>
-      <button
-        onClick={handleClick}
-        className="btn btn-circle btn-xs border-none"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
+      <div className="container flex sm:hidden">
+        <button
+          onClick={handleClick}
+          className="btn btn-circle btn-xs border-none"
         >
-          <path
-            d="M12 9V15M15 12H9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-            stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill="#004E79"
+          >
+            <path
+              d="M12 9.86902V15.869M15 12.869H9M21 12.869C21 17.8396 16.9706 21.869 12 21.869C7.02944 21.869 3 17.8396 3 12.869C3 7.89846 7.02944 3.86902 12 3.86902C16.9706 3.86902 21 7.89846 21 12.869Z"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="container  sm:flex">
+        <button className=" px-2 rounded-xl border border-white justify-center items-center inline-flex">
+          <div className="h-8 flex-col justify-center items-center inline-flex">
+            <div className="h-6 justify-start items-center inline-flex">
+              <div className="justify-start items-start gap-1 flex">
+                <span className=" text-center text-white text-base font-semibold font-['Open Sans'] leading-tight tracking-tight">
+                  Crear
+                </span>
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
     </div>
   );
 };

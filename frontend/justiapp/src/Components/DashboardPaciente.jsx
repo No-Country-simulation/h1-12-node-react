@@ -57,7 +57,7 @@ const DashboardPaciente = () => {
   };
 
   return (
-    <div className="min-h-screen bg-green-400 p-8">
+    <div className="min-h-screenp-8">
       <div className="bg-white shadow-md rounded-lg p-4">
         <div className="flex items-center justify-between p-4 border border-blue-500 border-b-purple-500 border-r-purple-500 border-t-blue-500 rounded-lg mb-4 max-w-lg mx-auto">
           <div className="text-left ml-4 flex-1">

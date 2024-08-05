@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import Aside from "../Components/Aside";
 
 export default function Dashboard(props) {
-  const { logout } = useContext(AuthContext);
+  const { logout, auth } = useContext(AuthContext);
   console.log("Renderizando Dashboard");
 
   return (

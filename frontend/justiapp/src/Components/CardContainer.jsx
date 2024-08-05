@@ -4,12 +4,12 @@ import Card from "./Card";
 const CardContainer = ({
   title,
   cardData,
-  containerStyles = "bg-green-200",
+  containerStyles = "bg-white",
   titleColor = "text-black",
   titleStyles = "text-2xl",
 }) => (
   <div
-    className={`w-11/12 flex flex-col items-center p-4 gap-5 ${containerStyles}`}
+    className={`w-11/12 flex flex-col items-center rounded-xl p-4 gap-5 ${containerStyles}`}
   >
     {title && <h2 className={` ${titleStyles} `}>{title}</h2>}
     <div className="flex flex-wrap justify-center gap-5">

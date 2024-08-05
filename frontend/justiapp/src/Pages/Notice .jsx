@@ -14,7 +14,7 @@ const Notice = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-neutral-content text-center">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Comming soon</h1>
+            <h1 className="mb-5 text-5xl font-bold">Coming soon</h1>
             <div className="rotating-gear-container w-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

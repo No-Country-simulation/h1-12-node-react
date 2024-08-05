@@ -1,42 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardContainer from "./CardContainer";
 import Avatar from "./Avatar";
+import Button from "./Button";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import HuntingSearcher from "./HuntingSearcher";
 
 const cardData = [
   {
     id: 1,
-    bgColor: "bg-mynaval",
+    bgColor: "bg-[#004E79]",
     title: "Registrar\nprofesional\nde la salud",
     description: "Asegúrate de tener los datos",
-    link: "dashboard/regiter-professional",
+    link: "regiter-professional",
   },
   {
     id: 2,
-    bgColor: "bg-mygreen",
+    bgColor: "bg-[#004E79]",
     title: "Registrar\nprestador\nde salud",
     description: "Asegúrate de tener los datos",
-    link: "dashboard/register-health-provider",
+    link: "register-health-provider",
   },
 
   {
     id: 3,
-    bgColor: "bg-sky00",
+    bgColor: "bg-[#004E79]",
     title: "Registrar\ninstitución\nde salud",
     description: "Asegúrate de tener los datos",
-    link: "dashboard/register-health-institution",
-  },
-  {
-    id: 4,
-    bgColor: "bg-red-500",
-    title: "Registrar\npaciente",
-    description: "Asegúrate de tener los datos",
-    link: "register-patient",
+    link: "register-health-institution",
   },
 ];
 
+const users = [
+  { id: 1, name: "Juan Pérez", category: "healthProfessional" },
+  { id: 2, name: "María García", category: "patient" },
+  { id: 3, name: "Carlos López", category: "provider" },
+  { id: 4, name: "Ana Sánchez", category: "healthInstitution" },
+  { id: 5, name: "Lucía Torres", category: "healthProfessional" },
+  // Agrega más usuarios según sea necesario
+];
+
 export default function HomeAdmin() {
+  const { auth } = useContext(AuthContext);
   return (
-    <div className="sm:max-w-6xl pt-10   w-11/12  sm:h-full flex flex-col gap-8 justify-center items-center bg-slate-100 rounded-none max-sm:rounded-xl shadow-lg">
+    <div className="sm:max-w-6xl pt-10 min-h-screen w-11/12  sm:h-full flex flex-col gap-8 justify-center items-center bg-slate-100 rounded-none max-sm:rounded-xl shadow-lg">
       <div
         className="w-11/12 p-4 rounded-xl border-2 flex flex-col justify-center items-start gap-4"
         style={{
@@ -54,30 +61,39 @@ export default function HomeAdmin() {
             <div className="text-xl font-bold font-lato">
               <span className="text-fuchsia-900">¡Hola</span>
               <span className="text-gray-700"> </span>
-              <span className="text-fuchsia-900">José!</span>
+              <span className="text-fuchsia-900">{auth.user.first_name}</span>
             </div>
             <div className="opacity-80 text-gray-700 text-sm font-normal font-open-sans">
               ¿Qué querés hacer hoy?
             </div>
           </div>
-          <div className=" flex  justify-between gap-2">
-            <div class="container max-sm:hidden sm:max-w-6xl w-11/12 flex justify-between  items-center">
-              <button class=" btn btn-primary btn-xs border-none bg-sky-500 flex-1 rounded-lg flex justify-center items-center h-12">
-                <span class="text-center p-0 text-white text-sm font-normal font-sans leading-tight tracking-tight">
-                  Usuarios registrados
-                </span>
-              </button>
-            </div>
-          </div>
+          <Link
+            to="historial"
+            className="container w-2/6 max-sm:hidden flex justify-between gap-2"
+          >
+            <Button
+              label="Ver usuarios creados"
+              bgColor="bg-sky-500"
+              labelColor="text-white"
+              borderColor="border-none"
+              btnSize="btn-xs"
+            />
+          </Link>
         </div>
       </div>
-      <div class="container flex sm:hidden  sm:max-w-6xl w-1/2 justify-between  items-center">
-        <button className=" btn btn-primary btn-xs border-none bg-sky-500 flex-1 rounded-lg flex justify-center items-center h-12">
-          <span class="text-center p-0 text-white text-sm font-normal font-sans leading-tight tracking-tight">
-            Usuarios registrados
-          </span>
-        </button>
-      </div>
+      <HuntingSearcher users={users} />
+      <Link
+        to="historial"
+        className="container w-32 flex sm:hidden justify-between gap-2"
+      >
+        <Button
+          label="Ver usuarios creados"
+          bgColor="bg-sky-500"
+          labelColor="text-white"
+          borderColor="border-none"
+          btnSize="btn-xs"
+        />
+      </Link>
 
       <CardContainer cardData={cardData} />
     </div>

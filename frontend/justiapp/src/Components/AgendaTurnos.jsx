@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-//import 'tailwindcss/tailwind.css';
-//import 'daisyui/dist/full.css';
+import "tailwindcss/tailwind.css";
+import "daisyui/dist/full.css";
 
 const AgendaTurnos = () => {
   const [selectedDay, setSelectedDay] = useState(null);

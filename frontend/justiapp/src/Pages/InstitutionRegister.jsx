@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const ProfessionalRegister = () => {
+const InstitutionRegister = () => {
   const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    dni: "",
+    name: "",
+    address: "",
+    phone: "",
     email: "",
   });
 
@@ -32,7 +32,7 @@ const ProfessionalRegister = () => {
   return (
     <div className="w-full max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
       <div className="w-[338px] text-[#195678] text-2xl font-bold font-['Lato'] leading-7 mb-4">
-        Crea un profesional
+        Registrar una institución
         <br />
         de salud
       </div>
@@ -43,15 +43,15 @@ const ProfessionalRegister = () => {
         <div className="h-[62px] flex-col justify-start items-start gap-2 flex">
           <label
             className="text-[#004e79] text-sm font-normal font-['Open Sans'] leading-none"
-            htmlFor="nombre"
+            htmlFor="name"
           >
             Nombre
           </label>
           <input
             type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             placeholder="Escribe aquí"
             className="self-stretch h-11 px-6 py-5 bg-[#ebecee] rounded-lg border text-[#9b9fa6] text-sm font-normal font-['Open Sans'] leading-none"
@@ -60,15 +60,15 @@ const ProfessionalRegister = () => {
         <div className="h-[62px] flex-col justify-start items-start gap-2 flex">
           <label
             className="text-[#004e79] text-sm font-normal font-['Open Sans'] leading-none"
-            htmlFor="apellido"
+            htmlFor="address"
           >
-            Apellido
+            Dirección
           </label>
           <input
             type="text"
-            id="apellido"
-            name="apellido"
-            value={formData.apellido}
+            id="address"
+            name="address"
+            value={formData.address}
             onChange={handleChange}
             placeholder="Escribe aquí"
             className="self-stretch h-11 px-6 py-5 bg-[#ebecee] rounded-lg border text-[#9b9fa6] text-sm font-normal font-['Open Sans'] leading-none"
@@ -77,15 +77,15 @@ const ProfessionalRegister = () => {
         <div className="h-[62px] flex-col justify-start items-start gap-2 flex">
           <label
             className="text-[#004e79] text-sm font-normal font-['Open Sans'] leading-none"
-            htmlFor="dni"
+            htmlFor="phone"
           >
-            DNI
+            Teléfono
           </label>
           <input
             type="text"
-            id="dni"
-            name="dni"
-            value={formData.dni}
+            id="phone"
+            name="phone"
+            value={formData.phone}
             onChange={handleChange}
             placeholder="Escribe aquí"
             className="self-stretch h-11 px-6 py-5 bg-[#ebecee] rounded-lg border text-[#9b9fa6] text-sm font-normal font-['Open Sans'] leading-none"
@@ -123,11 +123,12 @@ const ProfessionalRegister = () => {
             <div className="w-8 h-8 relative" />
             <div className="self-stretch h-[104px] flex-col justify-start items-end gap-[7px] flex">
               <div className="self-stretch text-center text-gray-800 text-2xl font-bold font-['Lato'] leading-7">
-                ¡El usuario fue creado!
+                ¡La institución fue creada!
               </div>
               <div className="self-stretch h-[69px] p-2 justify-center items-center gap-2 inline-flex">
                 <div className="text-center text-gray-800 text-xl font-bold font-['Lato'] leading-normal">
-                  Enviaremos el usuario <br />y la contraseña al médico
+                  Enviaremos los detalles <br />
+                  al email proporcionado
                 </div>
               </div>
             </div>
@@ -144,4 +145,4 @@ const ProfessionalRegister = () => {
   );
 };
 
-export default ProfessionalRegister;
+export default InstitutionRegister;
