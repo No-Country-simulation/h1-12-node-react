@@ -27,22 +27,43 @@ export default function Navbar() {
       },
     ],
     patient: [
-      { path: "/patient", label: "Inicio", icon: "/images/icons/home.svg" },
       {
-        path: "/patient/perfil",
+        path: "patient",
+        label: "Inicio",
+        icon: "/images/icons/homeIcon.svg",
+      },
+      {
+        path: "patient/perfil",
         label: "Perfil",
         icon: "/images/icons/profileIcon.svg",
       },
       {
-        path: "/patient/configuracion",
-        label: "Configuración",
-        icon: "/images/icons/config.svg",
+        path: "patient/historial-clinico",
+        label: "Historial Clínico",
+        icon: "/images/icons/treatmentIcon.svg",
       },
       {
-        path: "/patient/notificaciones",
+        path: "patient/turno",
+        label: "Turno",
+        icon: "/images/icons/turno.svg",
+      },
+      {
+        path: "patient/agenda",
+        label: "Agenda",
+        icon: "/images/icons/Agenda.svg",
+      },
+      {
+        path: "patient/notificaciones",
         label: "Notificaciones",
         icon: "/images/icons/notificationIcon.svg",
       },
+      {
+        path: "patient/configuracion",
+        label: "Configuración",
+        icon: "/images/icons/config.svg",
+      },
+
+      // Agrega más enlaces específicos para el paciente
     ],
     professional: [
       {

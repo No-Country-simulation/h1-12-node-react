@@ -19,6 +19,9 @@ import ProfessionalRegister from "./Pages/ProfessionalRegister";
 import InstitutionRegister from "./Pages/InstitutionRegister";
 import VoiceRecorder from "./Components/VoiceRecorder";
 import HealthProviderRegister from "./Pages/HealthProviderRegister";
+import Turnos from "./Components/Turnos";
+import PatientHistory from "./Pages/PatientHistory";
+import PatientSchedule from "./Pages/PatientSchedule";
 
 function App() {
   return (
@@ -45,6 +48,7 @@ function App() {
             <Route path="patient" element={<DashboardPaciente />} />
             <Route path="patient/perfil" element={<Notice />} />
             <Route path="patient/configuracion" element={<Notice />} />
+            <Route path="patient/agenda" element={<PatientSchedule />} />
             <Route
               path="patient/notificaciones"
               element={<PatientNotifications />}
@@ -52,6 +56,11 @@ function App() {
             <Route path="professional" element={<ProfessionalDashboard />} />
 
             <Route path="professional/agenda" element={<AgendaTurnos />} />
+            <Route path="patient/turno" element={<Turnos />} />
+            <Route
+              path="patient/historial-clinico"
+              element={<PatientHistory />}
+            />
             <Route
               path="professional/tratamientos"
               element={<CreateTreatment />}

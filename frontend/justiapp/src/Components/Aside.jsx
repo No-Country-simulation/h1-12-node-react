@@ -30,7 +30,7 @@ const Aside = ({ logout }) => {
       {
         path: "patient",
         label: "Inicio",
-        icon: "/images/icons/home.svg",
+        icon: "/images/icons/homeIcon.svg",
       },
       {
         path: "patient/perfil",
@@ -38,14 +38,29 @@ const Aside = ({ logout }) => {
         icon: "/images/icons/profileIcon.svg",
       },
       {
-        path: "patient/configuracion",
-        label: "Configuración",
-        icon: "/images/icons/config.svg",
+        path: "patient/historial-clinico",
+        label: "Historial Clínico",
+        icon: "/images/icons/treatmentIcon.svg",
+      },
+      {
+        path: "patient/turno",
+        label: "Turno",
+        icon: "/images/icons/turno.svg",
+      },
+      {
+        path: "patient/agenda",
+        label: "Agenda",
+        icon: "/images/icons/Agenda.svg",
       },
       {
         path: "patient/notificaciones",
         label: "Notificaciones",
         icon: "/images/icons/notificationIcon.svg",
+      },
+      {
+        path: "patient/configuracion",
+        label: "Configuración",
+        icon: "/images/icons/config.svg",
       },
 
       // Agrega más enlaces específicos para el paciente
